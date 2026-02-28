@@ -10,7 +10,6 @@ import {
   type PresetKey,
 } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -35,7 +34,7 @@ interface CTASectionProps {
 }
 
 export function CTASection({
-  variant = "accent",
+  variant = "default",
   layout = "narrow",
   padding = "md",
   preset,
@@ -46,6 +45,11 @@ export function CTASection({
   className,
   id,
 }: CTASectionProps) {
+  // Determine text and button styling based on variant
+  const isDark = variant === "dark";
+  const isAccent = variant === "accent";
+  const isLight = variant === "default" || variant === "light";
+
   return (
     <Section
       variant={variant}
@@ -53,44 +57,96 @@ export function CTASection({
       padding={padding}
       preset={preset}
       stagger
-      className={className}
+      className={`relative overflow-hidden ${className ?? ""}`}
       id={id}
     >
-      <div className="text-center">
+      {/* Subtle radial gradient overlay for light variants */}
+      {isLight && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse at center, rgba(168,158,146,0.02) 0%, transparent 70%)",
+          }}
+          aria-hidden="true"
+        />
+      )}
+
+      <div className="relative text-center">
         {eyebrow && (
           <motion.span
             variants={fadeUp}
-            className="text-xs font-body uppercase tracking-[0.3em] opacity-80 mb-4 block"
+            className={`text-xs font-body uppercase tracking-[0.3em] mb-4 block ${
+              isLight ? "text-gold-light" : "opacity-80"
+            }`}
           >
             {eyebrow}
           </motion.span>
         )}
         <motion.h2
           variants={fadeUp}
-          className="font-display text-[clamp(2rem,4.5vw,3.4rem)] font-light leading-[1.12] mb-4"
+          className={`font-display text-[clamp(2rem,4.5vw,3.4rem)] font-light leading-[1.12] mb-4 ${
+            isLight ? "text-dark" : ""
+          }`}
         >
           {title}
         </motion.h2>
         {description && (
           <motion.p
             variants={fadeUp}
-            className="font-body text-base opacity-80 max-w-2xl mx-auto mb-10"
+            className={`font-body text-base max-w-2xl mx-auto mb-10 ${
+              isLight ? "text-taupe-dark" : "opacity-80"
+            }`}
           >
             {description}
           </motion.p>
         )}
         <motion.div variants={fadeUp}>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-current hover:bg-white/10"
-          >
-            <Link href={cta.href}>
-              {cta.label}
-              <ArrowRight className="size-4 ml-1" />
-            </Link>
-          </Button>
+          {isDark || isAccent ? (
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-current hover:bg-white/10"
+            >
+              <Link href={cta.href}>
+                {cta.label}
+                <svg
+                  className="size-4 ml-1"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </Link>
+            </Button>
+          ) : (
+            <Button
+              asChild
+              size="lg"
+              className="bg-accent text-warm-white hover:bg-accent/90 rounded-[var(--radius-sm)]"
+            >
+              <Link href={cta.href}>
+                {cta.label}
+                <svg
+                  className="size-4 ml-1"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </Link>
+            </Button>
+          )}
         </motion.div>
       </div>
     </Section>

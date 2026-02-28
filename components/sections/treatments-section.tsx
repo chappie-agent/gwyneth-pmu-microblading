@@ -9,15 +9,6 @@ import {
   type SectionPadding,
   type PresetKey,
 } from "@/components/layout/section";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { ArrowRight } from "lucide-react";
 import { treatments } from "@/data/treatments";
@@ -82,54 +73,86 @@ export function TreatmentsSection({
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {treatments.map((treatment, i) => (
           <motion.div key={treatment.slug} variants={staggerItem}>
-            <Card className="group relative overflow-hidden border-border/50 bg-background/50 backdrop-blur-sm transition-all duration-500 hover:shadow-lg hover:border-border">
-              <div className="overflow-hidden">
-                <ImagePlaceholder
-                  aspect="landscape"
-                  gradient={cardGradients[i % cardGradients.length]}
-                  label={treatment.name}
-                  className="transition-transform duration-700 group-hover:scale-105 rounded-none"
-                />
-              </div>
+            <Link
+              href={`/behandelingen/${treatment.slug}`}
+              className="group relative block h-[440px] lg:h-[520px] rounded-[var(--radius-lg)] overflow-hidden border border-transparent transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)]"
+            >
+              {/* Full-bleed background image */}
+              <ImagePlaceholder
+                aspect="portrait"
+                gradient={cardGradients[i % cardGradients.length]}
+                label=""
+                className="!absolute inset-0 !rounded-none w-full h-full !aspect-auto transition-transform duration-700 group-hover:scale-105"
+              />
 
-              <CardHeader className="pb-0">
-                <Badge variant="outline" className="w-fit mb-2 text-[10px] tracking-widest uppercase">
+              {/* Dark gradient overlay */}
+              <div
+                className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-100"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(42,40,39,0.75) 0%, transparent 65%)",
+                }}
+              />
+              {/* Darker overlay on hover */}
+              <div
+                className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(42,40,39,0.88) 0%, rgba(42,40,39,0.2) 70%)",
+                }}
+              />
+
+              {/* Content positioned at bottom */}
+              <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col">
+                {/* Label */}
+                <span className="text-[0.7rem] font-body uppercase tracking-[0.25em] text-gold-light mb-2">
                   {treatment.label}
-                </Badge>
-                <CardTitle className="font-display text-xl font-light">
-                  {treatment.name}
-                </CardTitle>
-                <p className="font-display text-lg text-accent">
-                  {treatment.priceLabel}
-                </p>
-              </CardHeader>
+                </span>
 
-              <CardContent>
-                <ul className="space-y-2">
+                {/* Treatment name */}
+                <h3 className="font-display text-[1.8rem] font-light leading-tight text-white mb-1">
+                  {treatment.name}
+                </h3>
+
+                {/* Price */}
+                <span className="font-body text-[1.1rem] text-accent-soft mb-2">
+                  Vanaf {treatment.priceLabel}
+                </span>
+
+                {/* USPs - hidden by default, revealed on hover */}
+                <ul className="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-out group-hover:max-h-[200px] group-hover:opacity-100 mt-2 space-y-1.5">
                   {treatment.usps.map((usp) => (
                     <li
                       key={usp}
-                      className="flex items-start gap-2 text-sm font-body text-muted-foreground"
+                      className="flex items-start gap-2 text-[0.82rem] font-body text-white/80"
                     >
-                      <span className="mt-2 h-1 w-1 rounded-full bg-accent shrink-0" />
+                      {/* Checkmark SVG in gold-light */}
+                      <svg
+                        className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-light"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M2.5 8.5l3.5 3.5 7.5-8" />
+                      </svg>
                       {usp}
                     </li>
                   ))}
                 </ul>
-              </CardContent>
 
-              <CardFooter>
-                <Button asChild variant="outline" className="w-full group/btn">
-                  <Link href={`/behandelingen/${treatment.slug}`}>
-                    Bekijk Behandeling
-                    <ArrowRight className="size-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
+                {/* "Meer Info" link - appears on hover with translateY */}
+                <span className="inline-flex items-center gap-1.5 mt-3 text-[0.78rem] font-body uppercase tracking-[0.2em] text-gold-light translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                  Meer Info
+                  <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+              </div>
+            </Link>
           </motion.div>
         ))}
       </div>

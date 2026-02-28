@@ -17,6 +17,7 @@ export default function Home() {
         variant="default"
         eyebrow="Permanente Make-up Specialist"
         title="Word elke dag wakker met perfect gevormde wenkbrauwen"
+        titleAccent="perfect gevormde"
         description="Verfijnde PMU die jouw natuurlijke schoonheid versterkt. Subtiel, persoonlijk, en op maat gemaakt voor jou."
         trustItems={["Gecertificeerd", "5.0 Google Reviews", "500+ klanten"]}
         primaryCta={{ label: "Plan Intake Gesprek", href: "/boeken" }}
@@ -27,12 +28,12 @@ export default function Home() {
       <ResultsSection variant="dark" padding="lg" />
       <ProcessSection variant="light" padding="xl" />
       <AboutSection />
-      <USPSection variant="sage" padding="lg" />
+      <USPSection variant="light" padding="lg" />
       <ReviewsSection variant="dark" padding="lg" />
       <PricingSection variant="default" padding="lg" />
       <FAQSection variant="light" layout="narrow" padding="lg" />
       <CTASection
-        variant="accent"
+        variant="default"
         padding="md"
         eyebrow="Klaar voor de Volgende Stap?"
         title="Word elke dag wakker met perfecte wenkbrauwen"

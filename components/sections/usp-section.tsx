@@ -37,7 +37,7 @@ interface USPSectionProps {
 }
 
 export function USPSection({
-  variant = "sage",
+  variant = "light",
   layout = "contained",
   padding = "lg",
   preset,
@@ -54,20 +54,26 @@ export function USPSection({
       className={className}
       id={id}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-[2rem]">
         {uspItems.map((item) => {
           const Icon = iconMap[item.icon] ?? Sparkles;
           return (
             <motion.div
               key={item.title}
               variants={staggerItem}
-              className="group rounded-[var(--radius-lg)] border border-border/50 bg-background/30 p-8 text-center transition-all duration-500 hover:shadow-md hover:bg-background/60"
+              className="group text-center p-[2rem_1.2rem] rounded-[var(--radius-md)] transition-colors duration-300 hover:bg-warm-white"
             >
-              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
-                <Icon className="size-5 text-accent" />
+              {/* Icon container: 48x48, no background */}
+              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center">
+                <Icon
+                  size={32}
+                  className="text-accent"
+                  strokeWidth={1}
+                  fill="none"
+                />
               </div>
-              <h3 className="font-display text-lg mb-2">{item.title}</h3>
-              <p className="font-body text-sm text-muted-foreground leading-relaxed">
+              <h3 className="font-display text-[1.1rem] mb-2">{item.title}</h3>
+              <p className="font-body text-[0.84rem] text-taupe-dark leading-[1.7]">
                 {item.description}
               </p>
             </motion.div>

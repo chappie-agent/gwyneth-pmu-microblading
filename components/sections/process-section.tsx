@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import {
   Section,
   type SectionVariant,
@@ -44,6 +45,9 @@ export function ProcessSection({
   className,
   id,
 }: ProcessSectionProps) {
+  const lineRef = useRef<HTMLDivElement>(null);
+  const isLineInView = useInView(lineRef, { once: true, margin: "-80px" });
+
   return (
     <Section
       variant={variant}
@@ -70,46 +74,33 @@ export function ProcessSection({
         )}
       </div>
 
-      {/* Desktop: horizontal timeline */}
-      <div className="hidden md:grid md:grid-cols-4 gap-8 relative">
-        {/* Connecting line */}
-        <div className="absolute top-6 left-[12.5%] right-[12.5%] h-px bg-border" />
-
-        {steps.map((step, i) => (
-          <motion.div key={step.title} variants={staggerItem} className="relative text-center">
-            {/* Step number circle */}
-            <div className="relative z-10 mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground">
-              <span className="font-display text-xl">{i + 1}</span>
-            </div>
-            <h3 className="font-display text-lg mb-2">{step.title}</h3>
-            <p className="font-body text-sm text-muted-foreground leading-relaxed">
-              {step.description}
-            </p>
-          </motion.div>
-        ))}
+      {/* Horizontal progress line */}
+      <div ref={lineRef} className="relative mb-10">
+        <div className="h-px bg-beige w-full" />
+        <motion.div
+          className="absolute top-0 left-0 h-px bg-accent"
+          initial={{ width: "0%" }}
+          animate={isLineInView ? { width: "100%" } : { width: "0%" }}
+          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+        />
       </div>
 
-      {/* Mobile: vertical timeline */}
-      <div className="md:hidden space-y-0">
+      {/* Steps grid: 4 columns on desktop, 2 on mobile */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-[2.5rem]">
         {steps.map((step, i) => (
-          <motion.div key={step.title} variants={staggerItem} className="relative flex gap-6">
-            {/* Vertical line + circle */}
-            <div className="flex flex-col items-center">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                <span className="font-display text-xl">{i + 1}</span>
-              </div>
-              {i < steps.length - 1 && (
-                <div className="w-px flex-1 bg-border mt-2" />
-              )}
-            </div>
-
-            {/* Content */}
-            <div className="pb-10">
-              <h3 className="font-display text-lg mb-1">{step.title}</h3>
-              <p className="font-body text-sm text-muted-foreground leading-relaxed">
-                {step.description}
-              </p>
-            </div>
+          <motion.div
+            key={step.title}
+            variants={staggerItem}
+            className="group text-center p-[1.5rem_1rem] rounded-[var(--radius-md)] transition-colors duration-300 hover:bg-cream"
+          >
+            {/* Large serif number */}
+            <span className="block font-display text-[2.8rem] leading-none text-accent opacity-20 group-hover:opacity-50 transition-opacity duration-300 mb-4">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <h4 className="font-display text-[1.25rem] mb-2">{step.title}</h4>
+            <p className="font-body text-[0.85rem] text-taupe-dark leading-relaxed">
+              {step.description}
+            </p>
           </motion.div>
         ))}
       </div>

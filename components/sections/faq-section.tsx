@@ -46,7 +46,7 @@ export function FAQSection({
   items,
   categories,
   eyebrow = "FAQ",
-  title = "Veelgestelde Vragen",
+  title = "Nog Vragen?",
   className,
   id,
 }: FAQSectionProps) {
@@ -76,14 +76,18 @@ export function FAQSection({
 
       {/* Simple item list */}
       {faqItems && (
-        <motion.div variants={staggerItem}>
-          <Accordion type="single" collapsible className="w-full">
+        <motion.div variants={staggerItem} className="max-w-[800px] mx-auto">
+          <Accordion type="single" collapsible className="w-full space-y-0">
             {faqItems.map((item, i) => (
-              <AccordionItem key={i} value={`item-${i}`}>
-                <AccordionTrigger className="font-display text-base text-left hover:no-underline">
+              <AccordionItem
+                key={i}
+                value={`item-${i}`}
+                className="border border-beige rounded-[var(--radius-md)] mb-[1.2rem] last:mb-0 px-4 data-[state=open]:border-accent-soft data-[state=open]:shadow-sm transition-all"
+              >
+                <AccordionTrigger className="font-display text-[0.95rem] text-dark text-left hover:no-underline hover:bg-cream/50 rounded-[var(--radius-md)] -mx-1 px-1 transition-colors">
                   {item.question}
                 </AccordionTrigger>
-                <AccordionContent className="font-body text-muted-foreground leading-relaxed">
+                <AccordionContent className="font-body text-[0.9rem] text-grey-warm leading-relaxed">
                   {item.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -94,17 +98,21 @@ export function FAQSection({
 
       {/* Grouped by category */}
       {categories && (
-        <div className="space-y-12">
+        <div className="space-y-12 max-w-[800px] mx-auto">
           {categories.map((category) => (
             <motion.div key={category.slug} variants={staggerItem}>
               <h3 className="font-display text-xl mb-6">{category.title}</h3>
-              <Accordion type="single" collapsible className="w-full">
+              <Accordion type="single" collapsible className="w-full space-y-0">
                 {category.items.map((item, i) => (
-                  <AccordionItem key={i} value={`${category.slug}-${i}`}>
-                    <AccordionTrigger className="font-display text-base text-left hover:no-underline">
+                  <AccordionItem
+                    key={i}
+                    value={`${category.slug}-${i}`}
+                    className="border border-beige rounded-[var(--radius-md)] mb-[1.2rem] last:mb-0 px-4 data-[state=open]:border-accent-soft data-[state=open]:shadow-sm transition-all"
+                  >
+                    <AccordionTrigger className="font-display text-[0.95rem] text-dark text-left hover:no-underline hover:bg-cream/50 rounded-[var(--radius-md)] -mx-1 px-1 transition-colors">
                       {item.question}
                     </AccordionTrigger>
-                    <AccordionContent className="font-body text-muted-foreground leading-relaxed">
+                    <AccordionContent className="font-body text-[0.9rem] text-grey-warm leading-relaxed">
                       {item.answer}
                     </AccordionContent>
                   </AccordionItem>
