@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { cormorantGaramond, jost } from "@/lib/fonts";
+import { Providers } from "@/components/providers";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,7 +21,11 @@ export default function RootLayout({
       <body
         className={`${cormorantGaramond.variable} ${jost.variable} antialiased`}
       >
-        {children}
+        <Providers>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
