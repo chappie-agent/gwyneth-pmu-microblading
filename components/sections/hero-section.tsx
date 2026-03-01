@@ -143,7 +143,7 @@ function ScrollIndicator() {
         className="h-8 w-px origin-top"
         style={{
           background:
-            "linear-gradient(to bottom, hsl(22 8% 55%), transparent)",
+            "linear-gradient(to bottom, hsl(32 29% 54%), transparent)",
         }}
         animate={{ scaleY: [0.4, 1, 0.4] }}
         transition={{
@@ -323,7 +323,7 @@ export function HeroSection({
             className="absolute inset-0 z-[1] dark:opacity-0 transition-opacity"
             style={{
               background:
-                "linear-gradient(to right, hsl(30 10% 92%) 0%, hsl(30 10% 92% / 0.6) 30%, transparent 70%)",
+                "linear-gradient(to right, hsl(31 20% 91%) 0%, hsl(31 20% 91% / 0.6) 30%, transparent 70%)",
             }}
           />
           {/* Dark mode: dark tint over entire image + gradient fade from left and bottom */}
@@ -331,8 +331,8 @@ export function HeroSection({
             className="absolute inset-0 z-[1] opacity-0 dark:opacity-100 transition-opacity"
             style={{
               background: [
-                "linear-gradient(to right, hsl(30 5% 11%) 0%, hsl(30 5% 11% / 0.9) 25%, hsl(30 5% 11% / 0.55) 65%, hsl(30 5% 11% / 0.45) 100%)",
-                "linear-gradient(to top, hsl(30 5% 11%) 0%, hsl(30 5% 11% / 0.6) 15%, transparent 40%)",
+                "linear-gradient(to right, hsl(25 10% 11%) 0%, hsl(25 10% 11% / 0.9) 25%, hsl(25 10% 11% / 0.55) 65%, hsl(25 10% 11% / 0.45) 100%)",
+                "linear-gradient(to top, hsl(25 10% 11%) 0%, hsl(25 10% 11% / 0.6) 15%, transparent 40%)",
               ].join(", "),
             }}
           />

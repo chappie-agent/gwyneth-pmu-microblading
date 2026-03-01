@@ -61,7 +61,7 @@ export function CTASection({
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse at center, rgba(168,158,146,0.02) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse at center, rgba(171,139,103,0.04) 0%, transparent 70%)",
           }}
           aria-hidden="true"
         />
@@ -99,7 +99,7 @@ export function CTASection({
         <motion.div variants={fadeUp}>
           <Link
             href={cta.href}
-            className="inline-flex items-center gap-[0.6rem] px-[2.4rem] py-4 bg-accent text-warm-white text-[0.73rem] font-body font-normal tracking-[0.2em] uppercase border-none rounded-[var(--radius-sm)] relative overflow-hidden transition-all duration-400 ease hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(148,138,130,0.22)]"
+            className="inline-flex items-center gap-[0.6rem] px-[2.4rem] py-4 bg-accent text-warm-white text-[0.73rem] font-body font-normal tracking-[0.2em] uppercase border-none rounded-[var(--radius-sm)] relative overflow-hidden transition-all duration-400 ease hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(171,139,103,0.25)]"
           >
             {cta.label}
             <svg

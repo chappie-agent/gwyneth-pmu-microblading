@@ -102,7 +102,7 @@ export function ReviewsSection({
             {/* Author section */}
             <div className="flex items-center gap-3 mt-auto">
               {/* Avatar with initials */}
-              <div className="w-10 h-10 rounded-full bg-[rgba(148,138,130,0.15)] flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-full bg-[rgba(171,139,103,0.15)] flex items-center justify-center shrink-0">
                 <span className="font-display text-[1rem] text-accent-light">
                   {getInitials(review.name)}
                 </span>
