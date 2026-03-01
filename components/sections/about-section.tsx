@@ -42,7 +42,7 @@ export function AboutSection({
         <div className="relative">
           {/* Decorative accent square */}
           <div
-            className="absolute -top-4 -left-4 w-[100px] h-[100px] border border-sage opacity-50 rounded-[var(--radius-sm)] z-[2] pointer-events-none"
+            className="absolute -top-4 -left-4 w-[100px] h-[100px] border border-sage dark:border-grey-warm opacity-50 rounded-[var(--radius-sm)] z-[2] pointer-events-none"
           />
           <motion.div
             className="relative overflow-hidden rounded-[var(--radius-lg)]"
@@ -73,12 +73,12 @@ export function AboutSection({
             Schoonheid is een kunstvorm
           </h2>
           <div className="space-y-6 mb-8 max-w-[440px]">
-            <p className="font-body text-[0.95rem] text-grey-warm leading-relaxed">
+            <p className="font-body text-[0.95rem] text-grey-warm dark:text-taupe leading-relaxed">
               Met passie en precisie creëer ik permanente make-up die naadloos aansluit bij jouw
               natuurlijke uitstraling. Elk gezicht vertelt een verhaal — ik help dat verhaal nog
               mooier te maken.
             </p>
-            <p className="font-body text-[0.95rem] text-grey-warm leading-relaxed">
+            <p className="font-body text-[0.95rem] text-grey-warm dark:text-taupe leading-relaxed">
               Na jarenlange ervaring en internationale masterclasses bied ik behandelingen van het
               hoogste niveau. Mijn studio is jouw plek van rust, vertrouwen en transformatie.
             </p>

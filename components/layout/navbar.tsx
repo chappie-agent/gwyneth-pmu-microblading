@@ -43,33 +43,33 @@ export function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex lg:items-center lg:gap-1">
-          <NavigationMenu>
+          <NavigationMenu viewport={false}>
             <NavigationMenuList>
               {mainNav.map((item) =>
                 item.children ? (
                   <NavigationMenuItem key={item.href}>
                     <NavigationMenuTrigger
                       className={cn(
-                        "font-body text-sm uppercase tracking-wide bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent",
+                        "font-body text-sm uppercase tracking-wide bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent hover:text-foreground focus:text-foreground data-[state=open]:text-foreground",
                         pathname.startsWith(item.href)
                           ? "text-accent"
-                          : "text-foreground/80 hover:text-foreground"
+                          : "text-foreground/80"
                       )}
                     >
                       {item.label}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-48 gap-1 p-2">
+                      <ul className="grid w-48 gap-1 p-3">
                         {item.children.map((child) => (
                           <li key={child.href}>
                             <NavigationMenuLink asChild>
                               <Link
                                 href={child.href}
                                 className={cn(
-                                  "block select-none rounded-md px-3 py-2 text-sm font-body transition-colors hover:bg-accent/10 hover:text-accent-foreground",
+                                  "block select-none rounded-[var(--radius-sm)] px-4 py-2.5 text-[0.82rem] font-body transition-colors",
                                   pathname === child.href
-                                    ? "text-accent font-medium"
-                                    : "text-foreground/80"
+                                    ? "bg-accent/10 text-accent font-medium hover:bg-accent/15"
+                                    : "text-foreground/80 hover:bg-accent/5 hover:text-accent"
                                 )}
                               >
                                 {child.label}

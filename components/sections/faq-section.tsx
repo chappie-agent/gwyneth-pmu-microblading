@@ -82,9 +82,9 @@ export function FAQSection({
               <AccordionItem
                 key={i}
                 value={`item-${i}`}
-                className="border border-beige rounded-[var(--radius-md)] mb-[1.2rem] last:mb-0 px-4 data-[state=open]:border-accent-soft data-[state=open]:shadow-sm transition-all"
+                className="border border-beige dark:border-grey-warm rounded-[var(--radius-md)] mb-[1.2rem] last:mb-0 last:border-b px-4 data-[state=open]:border-accent-soft data-[state=open]:shadow-sm transition-all"
               >
-                <AccordionTrigger className="font-display text-[0.95rem] text-dark text-left hover:no-underline hover:bg-cream/50 rounded-[var(--radius-md)] -mx-1 px-1 transition-colors">
+                <AccordionTrigger className="font-display text-[0.95rem] text-dark dark:text-cream text-left hover:no-underline hover:bg-cream/50 dark:hover:bg-charcoal/50 rounded-[var(--radius-md)] -mx-1 px-1 transition-colors">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="font-body text-[0.9rem] text-grey-warm leading-relaxed">
@@ -107,9 +107,9 @@ export function FAQSection({
                   <AccordionItem
                     key={i}
                     value={`${category.slug}-${i}`}
-                    className="border border-beige rounded-[var(--radius-md)] mb-[1.2rem] last:mb-0 px-4 data-[state=open]:border-accent-soft data-[state=open]:shadow-sm transition-all"
+                    className="border border-beige dark:border-grey-warm rounded-[var(--radius-md)] mb-[1.2rem] last:mb-0 last:border-b px-4 data-[state=open]:border-accent-soft data-[state=open]:shadow-sm transition-all"
                   >
-                    <AccordionTrigger className="font-display text-[0.95rem] text-dark text-left hover:no-underline hover:bg-cream/50 rounded-[var(--radius-md)] -mx-1 px-1 transition-colors">
+                    <AccordionTrigger className="font-display text-[0.95rem] text-dark dark:text-cream text-left hover:no-underline hover:bg-cream/50 dark:hover:bg-charcoal/50 rounded-[var(--radius-md)] -mx-1 px-1 transition-colors">
                       {item.question}
                     </AccordionTrigger>
                     <AccordionContent className="font-body text-[0.9rem] text-grey-warm leading-relaxed">

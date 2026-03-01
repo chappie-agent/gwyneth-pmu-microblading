@@ -14,12 +14,12 @@ export default function ResultatenPage() {
   return (
     <>
       <HeroSection
-        variant="dark"
+        variant="static"
         breadcrumb
         title="Echte Resultaten, Echte Vrouwen"
         description="Bekijk hoe permanente make-up het verschil maakt. Elke transformatie is uniek en aangepast."
       />
-      <ResultsSection showFilters variant="dark" padding="lg" />
+      <ResultsSection showFilters variant="default" padding="lg" />
       <ReviewsSection variant="default" padding="lg" />
       <CTASection
         variant="accent"

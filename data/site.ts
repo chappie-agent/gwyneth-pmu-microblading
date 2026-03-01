@@ -7,11 +7,11 @@ export const siteConfig = {
   heroDescription: "Verfijnde PMU die jouw natuurlijke schoonheid versterkt. Subtiel, persoonlijk, en op maat gemaakt voor jou.",
   contact: {
     address: {
-      street: "Voorbeeldstraat 12",
-      postalCode: "1234 AB",
-      city: "Amsterdam",
+      street: "Hekendorpstraat 54",
+      postalCode: "2727 CL",
+      city: "Zoetermeer",
       country: "Nederland",
-      full: "Voorbeeldstraat 12, 1234 AB Amsterdam",
+      full: "Hekendorpstraat 54, 2727 CL Zoetermeer",
     },
     phone: "+31 6 12 34 56 78",
     email: "info@gwynethpmu.nl",

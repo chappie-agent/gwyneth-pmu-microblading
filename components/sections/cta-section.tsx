@@ -9,7 +9,6 @@ import {
   type SectionPadding,
   type PresetKey,
 } from "@/components/layout/section";
-import { Button } from "@/components/ui/button";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -45,9 +44,6 @@ export function CTASection({
   className,
   id,
 }: CTASectionProps) {
-  // Determine text and button styling based on variant
-  const isDark = variant === "dark";
-  const isAccent = variant === "accent";
   const isLight = variant === "default" || variant === "light";
 
   return (
@@ -101,52 +97,24 @@ export function CTASection({
           </motion.p>
         )}
         <motion.div variants={fadeUp}>
-          {isDark || isAccent ? (
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-current hover:bg-white/10"
+          <Link
+            href={cta.href}
+            className="inline-flex items-center gap-[0.6rem] px-[2.4rem] py-4 bg-accent text-warm-white text-[0.73rem] font-body font-normal tracking-[0.2em] uppercase border-none rounded-[var(--radius-sm)] relative overflow-hidden transition-all duration-400 ease hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(148,138,130,0.22)]"
+          >
+            {cta.label}
+            <svg
+              className="size-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <Link href={cta.href}>
-                {cta.label}
-                <svg
-                  className="size-4 ml-1"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
-              </Link>
-            </Button>
-          ) : (
-            <Button
-              asChild
-              size="lg"
-              className="bg-accent text-warm-white hover:bg-accent/90 rounded-[var(--radius-sm)]"
-            >
-              <Link href={cta.href}>
-                {cta.label}
-                <svg
-                  className="size-4 ml-1"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
-              </Link>
-            </Button>
-          )}
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </Link>
         </motion.div>
       </div>
     </Section>

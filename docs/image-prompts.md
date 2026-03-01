@@ -4,7 +4,11 @@
 
 Include the following preamble with every prompt to maintain visual consistency:
 
-> **Style preamble:** Muted greige palette (#3B3936 shadows, #F8F7F6 highlights, #B0ACA8-#948A82 midtones). Cool-neutral undertones, desaturated but not cold. Soft diffused natural lighting, shallow depth of field. High-end editorial beauty aesthetic — Kinfolk meets Vogue Beauty. No heavy makeup, no harsh contrasts. Japandi-inspired minimal environments where applicable. Shot on medium format film with subtle grain.
+> **Style preamble (Light Mode):** Muted greige palette (#3B3936 shadows, #F8F7F6 highlights, #B0ACA8-#948A82 midtones). Cool-neutral undertones, desaturated but not cold. Soft diffused natural lighting, shallow depth of field. High-end editorial beauty aesthetic — Kinfolk meets Vogue Beauty. No heavy makeup, no harsh contrasts. Japandi-inspired minimal environments where applicable. Shot on medium format film with subtle grain.
+
+> **Style preamble (Dark Mode):** Deep charcoal-to-warm-black palette (#1A1918 shadows, #E8E6E3 highlights, #6B6560-#948A82 midtones). Moody, warm-toned chiaroscuro lighting with rich, velvety darks. Intimate, editorial beauty aesthetic — CR Fashion Book meets Cereal Magazine after dark. Skin is lit by a single warm key light (golden hour or candlelit quality) against deep, receding shadows. Environments feel cocooned and atmospheric — dark wood, charcoal linen, matte ceramic. Subtle warm grain, shot on medium format film pushed one stop. Highlights are creamy and soft, never blown.
+
+Use the **Light Mode** preamble as default. Use the **Dark Mode** preamble when generating alternative versions of the same image for dark theme contexts, or when an image will exclusively appear on dark backgrounds.
 
 ---
 

@@ -61,7 +61,7 @@ export function USPSection({
             <motion.div
               key={item.title}
               variants={staggerItem}
-              className="group text-center p-[2rem_1.2rem] rounded-[var(--radius-md)] transition-colors duration-300 hover:bg-warm-white"
+              className="group text-center p-[2rem_1.2rem] rounded-[var(--radius-md)] transition-colors duration-300 hover:bg-warm-white dark:hover:bg-charcoal"
             >
               {/* Icon container: 48x48, no background */}
               <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center">
@@ -73,7 +73,7 @@ export function USPSection({
                 />
               </div>
               <h3 className="font-display text-[1.1rem] mb-2">{item.title}</h3>
-              <p className="font-body text-[0.84rem] text-taupe-dark leading-[1.7]">
+              <p className="font-body text-[0.84rem] text-taupe-dark dark:text-taupe leading-[1.7]">
                 {item.description}
               </p>
             </motion.div>

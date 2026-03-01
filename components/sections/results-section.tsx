@@ -50,6 +50,7 @@ export function ResultsSection({
   id,
 }: ResultsSectionProps) {
   const [activeFilter, setActiveFilter] = useState("Alles");
+  const isDark = variant === "dark";
 
   return (
     <Section
@@ -62,13 +63,13 @@ export function ResultsSection({
       id={id}
     >
       <div className="text-center mb-16">
-        <span className="text-xs font-body uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
+        <span className={cn("text-xs font-body uppercase tracking-[0.3em] mb-4 block", isDark ? "text-taupe" : "text-muted-foreground")}>
           Resultaten
         </span>
         <h2 className="font-display text-[clamp(2rem,4.5vw,3.4rem)] font-light leading-[1.12] mb-4">
           Echte Resultaten, Echte Vrouwen
         </h2>
-        <p className="font-body text-base text-muted-foreground max-w-2xl mx-auto mb-12">
+        <p className={cn("font-body text-base max-w-2xl mx-auto mb-12", isDark ? "text-accent-soft" : "text-muted-foreground")}>
           Bekijk het verschil. Elke behandeling is uniek en afgestemd op de individuele klant.
         </p>
       </div>
@@ -83,7 +84,9 @@ export function ResultsSection({
                 "px-5 py-2 text-xs font-body uppercase tracking-widest rounded-full border transition-all duration-300",
                 activeFilter === filter
                   ? "bg-accent text-accent-foreground border-accent"
-                  : "bg-transparent text-muted-foreground border-border hover:border-accent/50"
+                  : isDark
+                    ? "bg-transparent text-taupe border-taupe/30 hover:border-accent/50"
+                    : "bg-transparent text-muted-foreground border-border hover:border-accent/50"
               )}
             >
               {filter}

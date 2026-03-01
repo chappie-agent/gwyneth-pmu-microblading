@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { BreadcrumbNav } from "@/components/layout/breadcrumb-nav";
 
@@ -40,11 +41,20 @@ const fadeIn = (delay: number) => ({
 });
 
 const variantStyles: Record<HeroVariant, string> = {
-  default: "bg-linen text-dark",
-  static: "bg-cream text-charcoal",
-  dark: "bg-charcoal text-cream",
-  accent: "bg-accent text-warm-white",
-  sage: "bg-sage-wash text-charcoal",
+  default: "bg-linen text-dark dark:bg-dark dark:text-cream",
+  static: "bg-cream text-charcoal dark:bg-charcoal dark:text-cream",
+  dark: "bg-charcoal text-cream dark:bg-dark dark:text-linen",
+  accent: "bg-accent text-warm-white dark:bg-accent-soft dark:text-dark",
+  sage: "bg-sage-wash text-charcoal dark:bg-grey-warm dark:text-cream",
+};
+
+/** Description text colors per variant — avoids muted-foreground clashing with bg */
+const descriptionStyles: Record<HeroVariant, string> = {
+  default: "text-taupe-dark dark:text-taupe",
+  static: "text-muted-foreground",
+  dark: "text-accent-soft dark:text-taupe",
+  accent: "text-warm-white/75 dark:text-dark/70",
+  sage: "text-muted-foreground",
 };
 
 /* Trust item icons — inline SVGs matching the original design */
@@ -201,7 +211,7 @@ export function HeroSection({
               variants={fadeIn(0.1)}
               initial="hidden"
               animate="visible"
-              className="font-display font-light leading-[1.12] text-[clamp(2.6rem,5.5vw,4.2rem)] text-dark"
+              className="font-display font-light leading-[1.12] text-[clamp(2.6rem,5.5vw,4.2rem)] text-dark dark:text-cream"
             >
               <TitleWithAccent title={title} accent={titleAccent} />
             </motion.h1>
@@ -212,7 +222,7 @@ export function HeroSection({
                 variants={fadeIn(0.2)}
                 initial="hidden"
                 animate="visible"
-                className="font-body text-[0.95rem] text-taupe-dark leading-relaxed max-w-xl"
+                className="font-body text-[0.95rem] text-taupe-dark dark:text-taupe leading-relaxed max-w-xl"
               >
                 {description}
               </motion.p>
@@ -229,7 +239,7 @@ export function HeroSection({
                 {trustItems.map((item) => (
                   <span
                     key={item}
-                    className="flex items-center gap-1.5 text-[0.72rem] uppercase tracking-[0.15em] text-grey-warm"
+                    className="flex items-center gap-1.5 text-[0.72rem] uppercase tracking-[0.15em] text-grey-warm dark:text-taupe"
                   >
                     <span className="text-accent">
                       {trustIcons[item] ?? null}
@@ -281,7 +291,7 @@ export function HeroSection({
                     href={secondaryCta.href}
                     className={cn(
                       "inline-flex items-center gap-2 px-7 py-3",
-                      "border border-taupe text-grey-warm",
+                      "border border-taupe text-grey-warm dark:border-grey-warm dark:text-taupe",
                       "text-[0.82rem] font-body tracking-[0.08em] uppercase",
                       "rounded-[var(--radius-sm)]",
                       "transition-colors hover:bg-taupe/10 hover:border-grey-warm"
@@ -300,17 +310,30 @@ export function HeroSection({
           className="absolute top-0 right-0 bottom-0 w-[55%] z-0 hidden md:block"
           style={{ y: backgroundY }}
         >
-          <ImagePlaceholder
-            aspect="hero"
-            gradient="warm"
-            className="!aspect-auto absolute inset-0 h-[120%] w-full rounded-none"
+          <Image
+            src="/hero-portrait.png"
+            alt="Permanente make-up resultaat — natuurlijke wenkbrauwen"
+            fill
+            priority
+            className="object-cover object-[calc(50%-150px)_center] h-[120%] w-full"
+            sizes="55vw"
           />
-          {/* Gradient overlay: fades from linen (left) to transparent (right) */}
+          {/* Light mode: linen gradient fade from left */}
           <div
-            className="absolute inset-0 z-[1]"
+            className="absolute inset-0 z-[1] dark:opacity-0 transition-opacity"
             style={{
               background:
                 "linear-gradient(to right, hsl(30 10% 92%) 0%, hsl(30 10% 92% / 0.6) 30%, transparent 70%)",
+            }}
+          />
+          {/* Dark mode: dark tint over entire image + gradient fade from left and bottom */}
+          <div
+            className="absolute inset-0 z-[1] opacity-0 dark:opacity-100 transition-opacity"
+            style={{
+              background: [
+                "linear-gradient(to right, hsl(30 5% 11%) 0%, hsl(30 5% 11% / 0.9) 25%, hsl(30 5% 11% / 0.55) 65%, hsl(30 5% 11% / 0.45) 100%)",
+                "linear-gradient(to top, hsl(30 5% 11%) 0%, hsl(30 5% 11% / 0.6) 15%, transparent 40%)",
+              ].join(", "),
             }}
           />
         </motion.div>
@@ -367,7 +390,7 @@ export function HeroSection({
               variants={fadeIn(0.2)}
               initial="hidden"
               animate="visible"
-              className="font-body text-lg max-w-xl leading-relaxed text-muted-foreground"
+              className={cn("font-body text-lg max-w-xl leading-relaxed", descriptionStyles[variant])}
             >
               {description}
             </motion.p>

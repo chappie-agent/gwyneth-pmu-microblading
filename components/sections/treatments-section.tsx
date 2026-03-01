@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Section,
@@ -9,18 +10,21 @@ import {
   type SectionPadding,
   type PresetKey,
 } from "@/components/layout/section";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { ArrowRight } from "lucide-react";
 import { treatments } from "@/data/treatments";
 
-const cardGradients = ["warm", "cool", "sage"] as const;
+const treatmentImages: Record<string, string> = {
+  microblading: "/microblading-behandeling.png",
+  "powder-brows": "/powder-brows-portrait.png",
+  "combi-brows": "/combi-brows-detail.png",
+};
 
 const staggerItem = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+    transition: { duration: 0.85, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
   },
 };
 
@@ -78,19 +82,20 @@ export function TreatmentsSection({
           <motion.div key={treatment.slug} variants={staggerItem}>
             <Link
               href={`/behandelingen/${treatment.slug}`}
-              className="group relative block h-[440px] lg:h-[520px] rounded-[var(--radius-lg)] overflow-hidden border border-transparent transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)]"
+              className="group relative block h-[440px] lg:h-[520px] rounded-[var(--radius-lg)] overflow-hidden border border-transparent transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
             >
               {/* Full-bleed background image */}
-              <ImagePlaceholder
-                aspect="portrait"
-                gradient={cardGradients[i % cardGradients.length]}
-                label=""
-                className="!absolute inset-0 !rounded-none w-full h-full !aspect-auto transition-transform duration-700 group-hover:scale-105"
+              <Image
+                src={treatmentImages[treatment.slug] ?? ""}
+                alt={treatment.name}
+                fill
+                className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.03]"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
 
               {/* Dark gradient overlay */}
               <div
-                className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-100"
+                className="absolute inset-0 transition-opacity duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:opacity-100"
                 style={{
                   background:
                     "linear-gradient(to top, rgba(42,40,39,0.75) 0%, transparent 65%)",
@@ -98,7 +103,7 @@ export function TreatmentsSection({
               />
               {/* Darker overlay on hover */}
               <div
-                className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                className="absolute inset-0 opacity-0 transition-opacity duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:opacity-100"
                 style={{
                   background:
                     "linear-gradient(to top, rgba(42,40,39,0.88) 0%, rgba(42,40,39,0.2) 70%)",
@@ -123,7 +128,7 @@ export function TreatmentsSection({
                 </span>
 
                 {/* USPs - hidden by default, revealed on hover */}
-                <ul className="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-out group-hover:max-h-[200px] group-hover:opacity-100 mt-2 space-y-1.5">
+                <ul className="max-h-0 opacity-0 overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:max-h-[200px] group-hover:opacity-100 mt-2 space-y-1.5">
                   {treatment.usps.map((usp) => (
                     <li
                       key={usp}
@@ -147,7 +152,7 @@ export function TreatmentsSection({
                 </ul>
 
                 {/* "Meer Info" link - appears on hover with translateY */}
-                <span className="inline-flex items-center gap-1.5 mt-3 text-[0.78rem] font-body uppercase tracking-[0.2em] text-gold-light translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="inline-flex items-center gap-1.5 mt-3 text-[0.78rem] font-body uppercase tracking-[0.2em] text-gold-light translate-y-3 opacity-0 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:translate-y-0 group-hover:opacity-100">
                   Meer Info
                   <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>

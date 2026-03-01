@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ContactSection } from "@/components/sections/contact-section";
+import { MapSection } from "@/components/sections/map-section";
 import { CTASection } from "@/components/sections/cta-section";
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function ContactPage() {
         description="Heb je vragen? Wil je een afspraak maken? Neem contact met ons op!"
       />
       <ContactSection variant="default" layout="split" padding="lg" />
+      <MapSection />
       <CTASection
         variant="accent"
         padding="md"

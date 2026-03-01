@@ -33,8 +33,9 @@ export default function Home() {
       <PricingSection variant="default" padding="lg" />
       <FAQSection variant="light" layout="narrow" padding="lg" />
       <CTASection
-        variant="default"
+        variant="dark"
         padding="md"
+        className="dark:bg-cream dark:text-charcoal"
         eyebrow="Klaar voor de Volgende Stap?"
         title="Word elke dag wakker met perfecte wenkbrauwen"
         description="Plan een vrijblijvend intake gesprek en ontdek wat PMU voor jou kan betekenen."

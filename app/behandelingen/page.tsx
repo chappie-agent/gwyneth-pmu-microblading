@@ -32,16 +32,21 @@ function ComparisonTable() {
       <div className="-mx-5 sm:mx-0 overflow-x-auto">
         <table className="w-full min-w-[600px] text-left border-collapse">
           <thead>
-            <tr className="border-b border-border">
-              <th className="px-4 py-4 text-xs font-body uppercase tracking-[0.2em] text-muted-foreground font-normal">
+            <tr className="border-b-2 border-accent/30 bg-accent/[0.04]">
+              <th className="px-4 py-5 text-xs font-body uppercase tracking-[0.2em] text-muted-foreground font-normal">
                 Kenmerk
               </th>
               {treatments.map((t) => (
                 <th
                   key={t.slug}
-                  className="px-4 py-4 font-display text-base font-light"
+                  className="px-4 py-5 font-display text-lg font-light tracking-wide"
                 >
                   {t.name}
+                  {t.featured && (
+                    <span className="ml-2 inline-block text-[10px] font-body uppercase tracking-[0.15em] text-accent font-medium align-middle">
+                      {t.featuredLabel}
+                    </span>
+                  )}
                 </th>
               ))}
             </tr>

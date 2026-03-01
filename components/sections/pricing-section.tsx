@@ -91,9 +91,9 @@ export function PricingSection({
           <motion.div key={tier.slug} variants={staggerItem}>
             <Card
               className={cn(
-                "h-full relative overflow-hidden border-border/50 transition-all duration-500",
+                "h-full relative overflow-hidden border-border/50 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)]",
                 tier.featured &&
-                  "border-accent/50 shadow-lg ring-1 ring-accent/20"
+                  "border-accent/50 shadow-lg ring-1 ring-accent/20 hover:shadow-[0_12px_40px_rgba(148,138,130,0.18)]"
               )}
             >
               {/* Accent top border for featured */}

@@ -76,7 +76,7 @@ export function ProcessSection({
 
       {/* Horizontal progress line */}
       <div ref={lineRef} className="relative mb-10">
-        <div className="h-px bg-beige w-full" />
+        <div className="h-px bg-beige dark:bg-grey-warm w-full" />
         <motion.div
           className="absolute top-0 left-0 h-px bg-accent"
           initial={{ width: "0%" }}
@@ -91,14 +91,14 @@ export function ProcessSection({
           <motion.div
             key={step.title}
             variants={staggerItem}
-            className="group text-center p-[1.5rem_1rem] rounded-[var(--radius-md)] transition-colors duration-300 hover:bg-cream"
+            className="group text-center p-[1.5rem_1rem] rounded-[var(--radius-md)] transition-colors duration-300 hover:bg-cream dark:hover:bg-charcoal"
           >
             {/* Large serif number */}
             <span className="block font-display text-[2.8rem] leading-none text-accent opacity-20 group-hover:opacity-50 transition-opacity duration-300 mb-4">
               {String(i + 1).padStart(2, "0")}
             </span>
             <h4 className="font-display text-[1.25rem] mb-2">{step.title}</h4>
-            <p className="font-body text-[0.85rem] text-taupe-dark leading-relaxed">
+            <p className="font-body text-[0.85rem] text-taupe-dark dark:text-taupe leading-relaxed">
               {step.description}
             </p>
           </motion.div>
