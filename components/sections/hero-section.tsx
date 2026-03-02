@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,16 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { BreadcrumbNav } from "@/components/layout/breadcrumb-nav";
+import { useNavbarTheme, type HeroBgType } from "@/contexts/navbar-theme";
+
+/** Map hero variant to the luminance category the navbar needs. */
+const variantToHeroBg: Record<HeroVariant, HeroBgType> = {
+  default: "light",
+  static: "light",
+  sage: "light",
+  dark: "dark",
+  accent: "accent",
+};
 
 type HeroVariant = "default" | "static" | "dark" | "accent" | "sage";
 
@@ -178,6 +188,14 @@ export function HeroSection({
     offset: ["start start", "end start"],
   });
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
+  /* Tell the navbar which colour scheme the hero uses so it can
+     pick text colours that never clash with the hero background. */
+  const { setHeroBg } = useNavbarTheme();
+  useEffect(() => {
+    setHeroBg(variantToHeroBg[variant]);
+    return () => setHeroBg("light"); // reset on unmount / page change
+  }, [variant, setHeroBg]);
 
   const isDefault = variant === "default";
 

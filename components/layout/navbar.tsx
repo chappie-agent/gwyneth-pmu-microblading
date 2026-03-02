@@ -16,10 +16,81 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { useNavbarTheme } from "@/contexts/navbar-theme";
+
+/**
+ * Return text-color classes for the navbar based on the hero background
+ * luminance. Only applied when the navbar is transparent (not scrolled).
+ *
+ * When scrolled the navbar gets its own `bg-background/80` so we fall back
+ * to the theme's default foreground colours and no override is needed.
+ *
+ * Three hero backgrounds are handled:
+ *  • "light"  – hero is cream / linen / sage (light bg)  → default dark text
+ *  • "dark"   – hero is charcoal / dark                  → cream / light text
+ *  • "accent" – hero is brand-accent gold                → warm-white text
+ *               In dark mode the accent hero becomes bg-accent-soft (light),
+ *               so the navbar flips to dark text.
+ */
+function useHeroAwareColors(scrolled: boolean) {
+  const { heroBg } = useNavbarTheme();
+
+  // When scrolled the navbar has its own bg — use default theme colours.
+  if (scrolled) {
+    return {
+      logo: "text-foreground",
+      subtitle: "text-muted-foreground",
+      link: "text-foreground/80",
+      linkActive: "text-accent",
+      linkHover: "hover:text-foreground",
+      triggerBase:
+        "bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent hover:text-foreground focus:text-foreground data-[state=open]:text-foreground",
+    };
+  }
+
+  switch (heroBg) {
+    case "dark":
+      return {
+        logo: "text-cream dark:text-cream",
+        subtitle: "text-cream/60 dark:text-cream/60",
+        link: "text-cream/80 dark:text-cream/80",
+        linkActive: "text-warm-white dark:text-cream",
+        linkHover: "hover:text-warm-white dark:hover:text-cream",
+        triggerBase:
+          "bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-cream/80 hover:text-warm-white focus:text-warm-white data-[state=open]:text-warm-white dark:text-cream/80 dark:hover:text-cream dark:focus:text-cream dark:data-[state=open]:text-cream",
+      };
+
+    case "accent":
+      // Light mode: accent bg → warm-white text; active uses warm-white (NOT accent!)
+      // Dark mode:  accent-soft bg (light) → dark text
+      return {
+        logo: "text-warm-white dark:text-charcoal",
+        subtitle: "text-warm-white/60 dark:text-charcoal/50",
+        link: "text-warm-white/85 dark:text-charcoal/80",
+        linkActive: "text-warm-white font-medium dark:text-charcoal dark:font-medium",
+        linkHover: "hover:text-warm-white dark:hover:text-charcoal",
+        triggerBase:
+          "bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-warm-white/85 hover:text-warm-white focus:text-warm-white data-[state=open]:text-warm-white dark:text-charcoal/80 dark:hover:text-charcoal dark:focus:text-charcoal dark:data-[state=open]:text-charcoal",
+      };
+
+    case "light":
+    default:
+      return {
+        logo: "text-foreground",
+        subtitle: "text-muted-foreground",
+        link: "text-foreground/80",
+        linkActive: "text-accent",
+        linkHover: "hover:text-foreground",
+        triggerBase:
+          "bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent hover:text-foreground focus:text-foreground data-[state=open]:text-foreground",
+      };
+  }
+}
 
 export function Navbar() {
   const scrolled = useScroll(50);
   const pathname = usePathname();
+  const colors = useHeroAwareColors(scrolled);
 
   return (
     <header
@@ -33,10 +104,20 @@ export function Navbar() {
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex flex-col">
-          <span className="font-display text-xl font-semibold tracking-wide text-foreground">
+          <span
+            className={cn(
+              "font-display text-xl font-semibold tracking-wide transition-colors duration-300",
+              colors.logo
+            )}
+          >
             Gwyneth PMU
           </span>
-          <span className="font-body text-xs uppercase tracking-widest text-muted-foreground">
+          <span
+            className={cn(
+              "font-body text-xs uppercase tracking-widest transition-colors duration-300",
+              colors.subtitle
+            )}
+          >
             Microblading
           </span>
         </Link>
@@ -50,10 +131,11 @@ export function Navbar() {
                   <NavigationMenuItem key={item.href}>
                     <NavigationMenuTrigger
                       className={cn(
-                        "font-body text-sm uppercase tracking-wide bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent hover:text-foreground focus:text-foreground data-[state=open]:text-foreground",
+                        "font-body text-sm uppercase tracking-wide transition-colors duration-300",
+                        colors.triggerBase,
                         pathname.startsWith(item.href)
-                          ? "text-accent"
-                          : "text-foreground/80"
+                          ? colors.linkActive
+                          : ""
                       )}
                     >
                       {item.label}
@@ -85,10 +167,11 @@ export function Navbar() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "font-body inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm uppercase tracking-wide transition-colors hover:text-foreground",
+                        "font-body inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm uppercase tracking-wide transition-colors duration-300",
+                        colors.linkHover,
                         pathname === item.href
-                          ? "text-accent"
-                          : "text-foreground/80"
+                          ? colors.linkActive
+                          : colors.link
                       )}
                     >
                       {item.label}
@@ -101,7 +184,7 @@ export function Navbar() {
         </div>
 
         {/* Right side: Theme Toggle + CTA + Mobile hamburger */}
-        <div className="flex items-center gap-2">
+        <div className={cn("flex items-center gap-2 transition-colors duration-300", colors.link)}>
           <ThemeToggle />
           <Button
             asChild
