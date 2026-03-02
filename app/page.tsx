@@ -24,7 +24,7 @@ export default function Home() {
         secondaryCta={{ label: "Bekijk Behandelingen", href: "/behandelingen" }}
         showScrollIndicator
       />
-      <TreatmentsSection variant="default" padding="lg" />
+      <TreatmentsSection variant="default" padding="lg" className="dark:bg-charcoal" />
       <ResultsSection variant="dark" padding="lg" />
       <ProcessSection variant="light" padding="xl" />
       <AboutSection />
