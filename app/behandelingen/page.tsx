@@ -13,6 +13,12 @@ import {
   comparisonLabels,
 } from "@/data/treatments";
 import { behandelingenFAQ } from "@/data/faq";
+import { sanityFetch } from "@/sanity/lib/live";
+import {
+  ALL_TREATMENTS_QUERY,
+  CORE_TREATMENTS_QUERY,
+  FAQ_BY_PAGE_QUERY,
+} from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Behandelingen — Gwyneth PMU",
@@ -20,7 +26,7 @@ export const metadata: Metadata = {
     "Permanente make-up en beauty behandelingen: Microblading, Powder Brows, Combi Brows, Eyeliner PMU, Lashlift en Brow Styling.",
 };
 
-function ComparisonTable() {
+function ComparisonTable({ coreItems }: { coreItems: typeof coreTreatments }) {
   const keys = Object.keys(comparisonLabels) as string[];
 
   return (
@@ -41,7 +47,7 @@ function ComparisonTable() {
               <th className="px-4 py-5 text-xs font-body uppercase tracking-[0.2em] text-muted-foreground font-normal">
                 Kenmerk
               </th>
-              {coreTreatments.map((t) => (
+              {coreItems.map((t) => (
                 <th
                   key={t.slug}
                   className="px-4 py-5 font-display text-lg font-light tracking-wide"
@@ -62,7 +68,7 @@ function ComparisonTable() {
                 <td className="px-4 py-4 text-sm font-body font-medium text-foreground">
                   {comparisonLabels[key]}
                 </td>
-                {coreTreatments.map((t) => (
+                {coreItems.map((t) => (
                   <td
                     key={t.slug}
                     className="px-4 py-4 text-sm font-body text-muted-foreground"
@@ -79,7 +85,16 @@ function ComparisonTable() {
   );
 }
 
-export default function BehandelingenPage() {
+export default async function BehandelingenPage() {
+  const { data: allTreatmentsData } = await sanityFetch({ query: ALL_TREATMENTS_QUERY });
+  const { data: coreData } = await sanityFetch({ query: CORE_TREATMENTS_QUERY });
+  const { data: faqData } = await sanityFetch({ query: FAQ_BY_PAGE_QUERY, params: { page: "behandelingen" } });
+
+  // Dual-source fallbacks
+  const allItems = allTreatmentsData?.length ? allTreatmentsData : treatments;
+  const coreItems = coreData?.length ? coreData : coreTreatments;
+  const faqItems = faqData?.length ? faqData : behandelingenFAQ;
+
   return (
     <>
       <HeroSection
@@ -90,16 +105,16 @@ export default function BehandelingenPage() {
       />
       <TreatmentsSection
         compact
-        items={treatments}
+        items={allItems}
         title="Alle Behandelingen"
         description="Ontdek ons volledige aanbod van permanente make-up en beauty behandelingen."
         eyebrow="Behandelingen"
       />
-      <ComparisonTable />
+      <ComparisonTable coreItems={coreItems} />
       <ProcessSection variant="default" padding="lg" steps={homeProcessSteps} />
       <ResultsSection variant="dark" padding="lg" />
       <FAQSection
-        items={behandelingenFAQ}
+        items={faqItems}
         variant="default"
         layout="narrow"
         padding="lg"

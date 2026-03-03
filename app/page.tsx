@@ -14,8 +14,29 @@ import { pricingTiers } from "@/data/pricing";
 import { homeFAQ } from "@/data/faq";
 import { reviews } from "@/data/reviews";
 import { siteConfig } from "@/data/site";
+import { sanityFetch } from "@/sanity/lib/live";
+import {
+  CORE_TREATMENTS_QUERY,
+  ALL_PRICING_QUERY,
+  FAQ_BY_PAGE_QUERY,
+  ALL_REVIEWS_QUERY,
+  SITE_SETTINGS_QUERY,
+} from "@/sanity/lib/queries";
 
-export default function Home() {
+export default async function Home() {
+  const { data: treatmentsData } = await sanityFetch({ query: CORE_TREATMENTS_QUERY });
+  const { data: pricingData } = await sanityFetch({ query: ALL_PRICING_QUERY });
+  const { data: faqData } = await sanityFetch({ query: FAQ_BY_PAGE_QUERY, params: { page: "home" } });
+  const { data: reviewsData } = await sanityFetch({ query: ALL_REVIEWS_QUERY });
+  const { data: settingsData } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
+
+  // Dual-source fallbacks: use Sanity data if available, otherwise fall back to static data
+  const treatmentsItems = treatmentsData?.length ? treatmentsData : coreTreatments;
+  const pricingItems = pricingData?.length ? pricingData : pricingTiers;
+  const faqItems = faqData?.length ? faqData : homeFAQ;
+  const reviewsItems = reviewsData?.length ? reviewsData : reviews;
+  const settings = settingsData ?? siteConfig;
+
   return (
     <>
       <HeroSection
@@ -29,14 +50,14 @@ export default function Home() {
         secondaryCta={{ label: "Bekijk Behandelingen", href: "/behandelingen" }}
         showScrollIndicator
       />
-      <TreatmentsSection variant="default" padding="lg" className="dark:bg-charcoal" items={coreTreatments} />
+      <TreatmentsSection variant="default" padding="lg" className="dark:bg-charcoal" items={treatmentsItems} />
       <ResultsSection variant="dark" padding="lg" />
       <ProcessSection variant="light" padding="xl" steps={homeProcessSteps} />
       <AboutSection />
       <USPSection variant="light" padding="lg" items={uspItems} />
-      <ReviewsSection variant="dark" padding="lg" reviews={reviews} />
-      <PricingSection variant="default" padding="lg" tiers={pricingTiers} />
-      <FAQSection variant="light" layout="narrow" padding="lg" items={homeFAQ} />
+      <ReviewsSection variant="dark" padding="lg" reviews={reviewsItems} />
+      <PricingSection variant="default" padding="lg" tiers={pricingItems} />
+      <FAQSection variant="light" layout="narrow" padding="lg" items={faqItems} />
       <CTASection
         variant="dark"
         padding="md"
@@ -46,7 +67,7 @@ export default function Home() {
         description="Plan een vrijblijvend intake gesprek en ontdek wat PMU voor jou kan betekenen."
         cta={{ label: "Plan Jouw Intake", href: "/boeken" }}
       />
-      <ContactSection variant="default" layout="split" padding="lg" siteConfig={siteConfig} />
+      <ContactSection variant="default" layout="split" padding="lg" siteConfig={settings} />
     </>
   );
 }

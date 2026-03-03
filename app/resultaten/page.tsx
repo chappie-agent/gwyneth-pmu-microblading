@@ -4,6 +4,8 @@ import { ResultsSection } from "@/components/sections/results-section";
 import { ReviewsSection } from "@/components/sections/reviews-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { reviews } from "@/data/reviews";
+import { sanityFetch } from "@/sanity/lib/live";
+import { ALL_REVIEWS_QUERY } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Resultaten — Gwyneth PMU",
@@ -11,7 +13,12 @@ export const metadata: Metadata = {
     "Bekijk echte resultaten van permanente make-up behandelingen.",
 };
 
-export default function ResultatenPage() {
+export default async function ResultatenPage() {
+  const { data: reviewsData } = await sanityFetch({ query: ALL_REVIEWS_QUERY });
+
+  // Dual-source fallback
+  const reviewsItems = reviewsData?.length ? reviewsData : reviews;
+
   return (
     <>
       <HeroSection
@@ -21,7 +28,7 @@ export default function ResultatenPage() {
         description="Bekijk hoe permanente make-up het verschil maakt. Elke transformatie is uniek en aangepast."
       />
       <ResultsSection showFilters variant="default" padding="lg" />
-      <ReviewsSection variant="default" padding="lg" reviews={reviews} />
+      <ReviewsSection variant="default" padding="lg" reviews={reviewsItems} />
       <CTASection
         variant="accent"
         padding="md"

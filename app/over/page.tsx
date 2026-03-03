@@ -4,6 +4,8 @@ import { AboutSection } from "@/components/sections/about-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { Section } from "@/components/layout/section";
 import { Card, CardContent } from "@/components/ui/card";
+import { sanityFetch } from "@/sanity/lib/live";
+import { PAGE_CONTENT_QUERY } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Over Mij — Gwyneth PMU",
@@ -62,14 +64,25 @@ function TrustCardsSection() {
   );
 }
 
-export default function OverPage() {
+export default async function OverPage() {
+  const { data: pageContent } = await sanityFetch({
+    query: PAGE_CONTENT_QUERY,
+    params: { pageId: "over" },
+  });
+
+  // Use Sanity page content for hero if available, otherwise use static defaults
+  const heroTitle = pageContent?.heroTitle ?? "Gwyneth \u2014 Permanente Make-up Specialist";
+  const heroDescription =
+    pageContent?.heroDescription ??
+    "Gepassioneerd over perfectie. Gespecialiseerd in natuurlijke schoonheid. Gecertificeerd in internationale standaarden.";
+
   return (
     <>
       <HeroSection
         variant="accent"
         breadcrumb
-        title="Gwyneth — Permanente Make-up Specialist"
-        description="Gepassioneerd over perfectie. Gespecialiseerd in natuurlijke schoonheid. Gecertificeerd in internationale standaarden."
+        title={heroTitle}
+        description={heroDescription}
       />
       <AboutSection />
       <TrustCardsSection />
