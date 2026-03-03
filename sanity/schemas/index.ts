@@ -5,6 +5,7 @@ import { review } from "./review";
 import { siteSettings } from "./siteSettings";
 import { navigation } from "./navigation";
 import { pageContent } from "./pageContent";
+import { resultGallery } from "./resultGallery";
 
 export const schemaTypes = [
   treatment,
@@ -14,4 +15,5 @@ export const schemaTypes = [
   siteSettings,
   navigation,
   pageContent,
+  resultGallery,
 ];

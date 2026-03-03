@@ -7,6 +7,8 @@ import {
   type SectionVariant,
   type SectionPadding,
 } from "@/components/layout/section";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 
 interface AboutSectionProps {
@@ -14,6 +16,9 @@ interface AboutSectionProps {
   padding?: SectionPadding;
   className?: string;
   id?: string;
+  /** Sanity image for the about portrait */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  aboutImage?: any;
 }
 
 export function AboutSection({
@@ -21,6 +26,7 @@ export function AboutSection({
   padding = "lg",
   className,
   id,
+  aboutImage,
 }: AboutSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
@@ -50,12 +56,22 @@ export function AboutSection({
             animate={isInView ? { clipPath: "inset(0 0% 0 0)" } : { clipPath: "inset(0 100% 0 0)" }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           >
-            <ImagePlaceholder
-              aspect="portrait"
-              gradient="warm"
-              label="Gwyneth"
-              className="w-full h-[580px] max-lg:h-[400px]"
-            />
+            {aboutImage ? (
+              <Image
+                src={urlFor(aboutImage).width(800).height(1000).quality(85).url()}
+                alt="Gwyneth — PMU specialist"
+                width={800}
+                height={1000}
+                className="w-full h-[580px] max-lg:h-[400px] object-cover"
+              />
+            ) : (
+              <ImagePlaceholder
+                aspect="portrait"
+                gradient="warm"
+                label="Gwyneth"
+                className="w-full h-[580px] max-lg:h-[400px]"
+              />
+            )}
           </motion.div>
         </div>
 

@@ -21,6 +21,7 @@ import {
   FAQ_BY_PAGE_QUERY,
   ALL_REVIEWS_QUERY,
   SITE_SETTINGS_QUERY,
+  RESULT_GALLERY_QUERY,
 } from "@/sanity/lib/queries";
 
 export default async function Home() {
@@ -29,6 +30,7 @@ export default async function Home() {
   const { data: faqData } = await sanityFetch({ query: FAQ_BY_PAGE_QUERY, params: { page: "home" } });
   const { data: reviewsData } = await sanityFetch({ query: ALL_REVIEWS_QUERY });
   const { data: settingsData } = await sanityFetch({ query: SITE_SETTINGS_QUERY });
+  const { data: galleryData } = await sanityFetch({ query: RESULT_GALLERY_QUERY });
 
   // Dual-source fallbacks: use Sanity data if available, otherwise fall back to static data
   const treatmentsItems = treatmentsData?.length ? treatmentsData : coreTreatments;
@@ -41,19 +43,24 @@ export default async function Home() {
     <>
       <HeroSection
         variant="default"
-        eyebrow="Permanente Make-up Specialist"
-        title="Word elke dag wakker met perfect gevormde wenkbrauwen"
-        titleAccent="perfect gevormde"
-        description="Verfijnde PMU die jouw natuurlijke schoonheid versterkt. Subtiel, persoonlijk, en op maat gemaakt voor jou."
-        trustItems={["Gecertificeerd", "5.0 Google Reviews", "500+ klanten"]}
+        eyebrow={settings.subtitle ?? "Permanente Make-up Specialist"}
+        title={settings.heroTitle ?? "Word elke dag wakker met perfect gevormde wenkbrauwen"}
+        titleAccent={settings.heroTitleAccent ?? "perfect gevormde"}
+        description={settings.heroDescription ?? "Verfijnde PMU die jouw natuurlijke schoonheid versterkt. Subtiel, persoonlijk, en op maat gemaakt voor jou."}
+        trustItems={
+          settings.trustItems?.map((item: any) =>
+            typeof item === "string" ? item : item.label ?? item.value
+          ) ?? ["Gecertificeerd", "5.0 Google Reviews", "500+ klanten"]
+        }
         primaryCta={{ label: "Plan Intake Gesprek", href: "/boeken" }}
         secondaryCta={{ label: "Bekijk Behandelingen", href: "/behandelingen" }}
+        heroImage={settings.heroImage}
         showScrollIndicator
       />
       <TreatmentsSection variant="default" padding="lg" className="dark:bg-charcoal" items={treatmentsItems} />
-      <ResultsSection variant="dark" padding="lg" />
+      <ResultsSection variant="dark" padding="lg" galleryItems={galleryData?.items} />
       <ProcessSection variant="light" padding="xl" steps={homeProcessSteps} />
-      <AboutSection />
+      <AboutSection aboutImage={settings.aboutImage} />
       <USPSection variant="light" padding="lg" items={uspItems} />
       <ReviewsSection variant="dark" padding="lg" reviews={reviewsItems} />
       <PricingSection variant="default" padding="lg" tiers={pricingItems} />

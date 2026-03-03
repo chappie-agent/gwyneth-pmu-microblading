@@ -9,17 +9,23 @@ import {
   type SectionPadding,
   type PresetKey,
 } from "@/components/layout/section";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { cn } from "@/lib/utils";
 
 const filterOptions = ["Alles", "Microblading", "Powder Brows", "Combi Brows"];
 
-const galleryItems = [
+/** Fallback placeholder items when no Sanity gallery data is available */
+const fallbackGalleryItems = [
   { label: "Microblading", gradient: "warm" as const, aspect: "portrait" as const },
   { label: "Lip Blush", gradient: "cool" as const, aspect: "landscape" as const },
   { label: "Lip Blush", gradient: "sage" as const, aspect: "landscape" as const },
   { label: "Healed Result", gradient: "gold" as const, aspect: "landscape" as const },
 ];
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+interface GalleryItem { image?: any; label?: string; layout?: string }
 
 const staggerItem = {
   hidden: { opacity: 0, y: 24 },
@@ -36,6 +42,8 @@ interface ResultsSectionProps {
   padding?: SectionPadding;
   preset?: PresetKey;
   showFilters?: boolean;
+  /** Gallery items from Sanity CMS */
+  galleryItems?: GalleryItem[];
   className?: string;
   id?: string;
 }
@@ -46,6 +54,7 @@ export function ResultsSection({
   padding = "lg",
   preset,
   showFilters = false,
+  galleryItems,
   className,
   id,
 }: ResultsSectionProps) {
@@ -100,42 +109,38 @@ export function ResultsSection({
         variants={staggerItem}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[200px] lg:auto-rows-[220px]"
       >
-        {/* Item 1: large, col-span-2 row-span-2 */}
-        <div className="sm:col-span-2 sm:row-span-2">
-          <ImagePlaceholder
-            aspect="portrait"
-            gradient={galleryItems[0].gradient}
-            label={galleryItems[0].label}
-            className="h-full w-full rounded-[var(--radius-lg)]"
-          />
-        </div>
-        {/* Item 2: col-span-2 row-span-1 */}
-        <div className="sm:col-span-2 sm:row-span-1">
-          <ImagePlaceholder
-            aspect="landscape"
-            gradient={galleryItems[1].gradient}
-            label={galleryItems[1].label}
-            className="h-full w-full rounded-[var(--radius-lg)]"
-          />
-        </div>
-        {/* Item 3: col-span-1 row-span-1 */}
-        <div className="sm:col-span-1 sm:row-span-1">
-          <ImagePlaceholder
-            aspect="square"
-            gradient={galleryItems[2].gradient}
-            label={galleryItems[2].label}
-            className="h-full w-full rounded-[var(--radius-lg)]"
-          />
-        </div>
-        {/* Item 4: col-span-1 row-span-1 */}
-        <div className="sm:col-span-1 sm:row-span-1">
-          <ImagePlaceholder
-            aspect="square"
-            gradient={galleryItems[3].gradient}
-            label={galleryItems[3].label}
-            className="h-full w-full rounded-[var(--radius-lg)]"
-          />
-        </div>
+        {(() => {
+          const items = galleryItems?.length ? galleryItems : null;
+          const gridConfig = [
+            { colSpan: "sm:col-span-2 sm:row-span-2", fallback: fallbackGalleryItems[0] },
+            { colSpan: "sm:col-span-2 sm:row-span-1", fallback: fallbackGalleryItems[1] },
+            { colSpan: "sm:col-span-1 sm:row-span-1", fallback: fallbackGalleryItems[2] },
+            { colSpan: "sm:col-span-1 sm:row-span-1", fallback: fallbackGalleryItems[3] },
+          ];
+          return gridConfig.map((cell, i) => {
+            const sanityItem = items?.[i];
+            return (
+              <div key={i} className={cell.colSpan}>
+                {sanityItem?.image ? (
+                  <Image
+                    src={urlFor(sanityItem.image).width(i === 0 ? 800 : 600).quality(80).url()}
+                    alt={sanityItem.label ?? `Resultaat ${i + 1}`}
+                    width={i === 0 ? 800 : 600}
+                    height={i === 0 ? 800 : 400}
+                    className="h-full w-full object-cover rounded-[var(--radius-lg)]"
+                  />
+                ) : (
+                  <ImagePlaceholder
+                    aspect={cell.fallback.aspect}
+                    gradient={cell.fallback.gradient}
+                    label={sanityItem?.label ?? cell.fallback.label}
+                    className="h-full w-full rounded-[var(--radius-lg)]"
+                  />
+                )}
+              </div>
+            );
+          });
+        })()}
       </motion.div>
     </Section>
   );

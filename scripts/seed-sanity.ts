@@ -216,7 +216,12 @@ async function seedSiteSettings() {
       facebook: siteConfig.social.facebook,
       tiktok: siteConfig.social.tiktok,
     },
-    trustItems: [...siteConfig.trustItems],
+    trustItems: siteConfig.trustItems.map((item, i) => ({
+      _type: "object",
+      _key: `trust${i}`,
+      label: item,
+      value: item.toUpperCase(),
+    })),
   };
 
   const result = await client.create(doc);

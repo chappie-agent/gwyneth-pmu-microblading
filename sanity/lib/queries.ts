@@ -119,7 +119,9 @@ export const ALL_REVIEWS_QUERY = defineQuery(`
 export const SITE_SETTINGS_QUERY = defineQuery(`
   *[_type == "siteSettings"][0] {
     businessName, tagline, subtitle, description,
-    heroTitle, heroDescription,
+    heroTitle, heroTitleAccent, heroDescription,
+    heroImage,
+    aboutImage,
     contact { address, phone, email },
     hours { weekdays, saturday },
     social { instagram, facebook, tiktok },
@@ -139,6 +141,14 @@ export const NAVIGATION_QUERY = defineQuery(`
       legal[] { label, href }
     },
     breadcrumbLabels[] { key, value }
+  }
+`);
+
+/* ── Result Gallery (singleton) ────────────────────── */
+
+export const RESULT_GALLERY_QUERY = defineQuery(`
+  *[_type == "resultGallery"][0] {
+    items[] { image, label, layout }
   }
 `);
 

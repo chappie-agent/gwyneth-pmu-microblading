@@ -13,12 +13,20 @@ import {
 } from "@/components/layout/section";
 import { ArrowRight } from "lucide-react";
 import type { Treatment } from "@/data/treatments";
+import { urlFor } from "@/sanity/lib/image";
 
-const treatmentImages: Record<string, string> = {
+/** Static fallback images for when no Sanity image is available */
+const fallbackImages: Record<string, string> = {
   microblading: "/microblading-behandeling.png",
   "powder-brows": "/powder-brows-portrait.png",
   "combi-brows": "/combi-brows-detail.png",
 };
+
+/** Resolve the image src for a treatment: Sanity image > static fallback > empty */
+function treatmentImageSrc(treatment: Treatment): string | null {
+  if (treatment.image) return urlFor(treatment.image).width(800).quality(80).url();
+  return fallbackImages[treatment.slug] ?? null;
+}
 
 /**
  * Hook: activates a "in-view" state on touch devices when the element
@@ -71,13 +79,26 @@ function TreatmentCard({ treatment }: { treatment: Treatment }) {
       className="group relative block h-[440px] lg:h-[520px] rounded-[var(--radius-lg)] overflow-hidden border border-transparent transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,0,0,0.12)] data-[in-view]:-translate-y-1 data-[in-view]:shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
     >
       {/* Full-bleed background image */}
-      <Image
-        src={treatmentImages[treatment.slug] ?? ""}
-        alt={treatment.name}
-        fill
-        className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.03] group-data-[in-view]:scale-[1.03]"
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-      />
+      {(() => {
+        const src = treatmentImageSrc(treatment);
+        return src ? (
+          <Image
+            src={src}
+            alt={treatment.name}
+            fill
+            className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.03] group-data-[in-view]:scale-[1.03]"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        ) : (
+          <div
+            className="absolute inset-0 transition-transform duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.03] group-data-[in-view]:scale-[1.03]"
+            style={{
+              background:
+                "linear-gradient(135deg, hsl(30 25% 78%) 0%, hsl(28 30% 62%) 50%, hsl(26 22% 48%) 100%)",
+            }}
+          />
+        );
+      })()}
 
       {/* Dark gradient overlay */}
       <div
@@ -149,7 +170,7 @@ function TreatmentCard({ treatment }: { treatment: Treatment }) {
 /* ─── Compact treatment card — half height, for overview page ─── */
 function CompactTreatmentCard({ treatment }: { treatment: Treatment }) {
   const { ref, active } = useScrollActivate<HTMLAnchorElement>();
-  const hasImage = !!treatmentImages[treatment.slug];
+  const imgSrc = treatmentImageSrc(treatment);
 
   return (
     <Link
@@ -159,9 +180,9 @@ function CompactTreatmentCard({ treatment }: { treatment: Treatment }) {
       className="group relative block h-[220px] lg:h-[260px] rounded-[var(--radius-lg)] overflow-hidden border border-transparent transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,0,0,0.12)] data-[in-view]:-translate-y-1 data-[in-view]:shadow-[0_8px_32px_rgba(0,0,0,0.12)]"
     >
       {/* Background: image or warm gradient */}
-      {hasImage ? (
+      {imgSrc ? (
         <Image
-          src={treatmentImages[treatment.slug]}
+          src={imgSrc}
           alt={treatment.name}
           fill
           className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.05] group-data-[in-view]:scale-[1.05]"

@@ -10,6 +10,26 @@ export const siteSettings = defineType({
     defineField({ name: "subtitle", title: "Ondertitel", type: "string" }),
     defineField({ name: "description", title: "Beschrijving", type: "text" }),
     defineField({ name: "heroTitle", title: "Hero Titel", type: "string" }),
+    defineField({
+      name: "heroTitleAccent",
+      title: "Hero Titel Accent",
+      type: "string",
+      description: "Welke woorden uit de Hero Titel cursief + accent kleur krijgen (bijv. 'perfect gevormde')",
+    }),
+    defineField({
+      name: "heroImage",
+      title: "Hero Afbeelding",
+      type: "image",
+      options: { hotspot: true },
+      description: "Portretfoto voor de homepage hero sectie (rechterhelft)",
+    }),
+    defineField({
+      name: "aboutImage",
+      title: "Over Mij Afbeelding",
+      type: "image",
+      options: { hotspot: true },
+      description: "Portretfoto voor de 'Over Mij' sectie",
+    }),
     defineField({ name: "heroDescription", title: "Hero Beschrijving", type: "text" }),
     defineField({
       name: "contact",

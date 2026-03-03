@@ -8,8 +8,10 @@ import { ResultsSection } from "@/components/sections/results-section";
 import { PricingSection } from "@/components/sections/pricing-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { CTASection } from "@/components/sections/cta-section";
+import Image from "next/image";
 import { Section } from "@/components/layout/section";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import { urlFor } from "@/sanity/lib/image";
 import { treatments } from "@/data/treatments";
 import { pricingTiers } from "@/data/pricing";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -19,6 +21,7 @@ import {
   TREATMENT_SLUGS_QUERY,
   PRICING_BY_SLUG_QUERY,
   ALL_PRICING_QUERY,
+  RESULT_GALLERY_QUERY,
 } from "@/sanity/lib/queries";
 
 type PageProps = { params: Promise<{ slug: string }> };
@@ -65,6 +68,9 @@ export default async function TreatmentPage({ params }: PageProps) {
   const { data: sanityPricing } = await sanityFetch({ query: ALL_PRICING_QUERY });
   const pricingItems = sanityPricing?.length ? sanityPricing : pricingTiers;
 
+  // Fetch gallery data for results section
+  const { data: galleryData } = await sanityFetch({ query: RESULT_GALLERY_QUERY });
+
   const isCore = (treatment.category ?? "core") === "core";
 
   return (
@@ -79,12 +85,22 @@ export default async function TreatmentPage({ params }: PageProps) {
 
       {/* What Is Section */}
       <Section variant="default" layout="split" padding="lg">
-        <ImagePlaceholder
-          aspect="portrait"
-          gradient="warm"
-          label={treatment.name}
-          className="w-full"
-        />
+        {treatment.image ? (
+          <Image
+            src={urlFor(treatment.image).width(700).height(900).quality(85).url()}
+            alt={treatment.name}
+            width={700}
+            height={900}
+            className="w-full rounded-[var(--radius-lg)] object-cover"
+          />
+        ) : (
+          <ImagePlaceholder
+            aspect="portrait"
+            gradient="warm"
+            label={treatment.name}
+            className="w-full"
+          />
+        )}
         <div>
           <span className="text-xs font-body uppercase tracking-[0.3em] text-muted-foreground mb-3 block">
             {treatment.whatIs.subtitle}
@@ -187,7 +203,7 @@ export default async function TreatmentPage({ params }: PageProps) {
       />
 
       {/* Results — only for core PMU treatments */}
-      {isCore && <ResultsSection variant="dark" padding="lg" />}
+      {isCore && <ResultsSection variant="dark" padding="lg" galleryItems={galleryData?.items} />}
 
       {/* Aftercare Timeline */}
       <Section variant="sage" padding="lg">

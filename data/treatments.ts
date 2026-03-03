@@ -30,6 +30,9 @@ export interface Treatment {
   featuredLabel?: string;
   /** Defaults to "core" when omitted */
   category?: TreatmentCategory;
+  /** Sanity image reference (from CMS) */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  image?: any;
   heroTitle: string;
   heroDescription: string;
   whatIs: {
