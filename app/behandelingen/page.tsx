@@ -9,6 +9,7 @@ import { Section } from "@/components/layout/section";
 import {
   treatments,
   coreTreatments,
+  homeProcessSteps,
   comparisonLabels,
 } from "@/data/treatments";
 import { behandelingenFAQ } from "@/data/faq";
@@ -95,7 +96,7 @@ export default function BehandelingenPage() {
         eyebrow="Behandelingen"
       />
       <ComparisonTable />
-      <ProcessSection variant="default" padding="lg" />
+      <ProcessSection variant="default" padding="lg" steps={homeProcessSteps} />
       <ResultsSection variant="dark" padding="lg" />
       <FAQSection
         items={behandelingenFAQ}

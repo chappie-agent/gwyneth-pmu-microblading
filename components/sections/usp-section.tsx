@@ -9,7 +9,6 @@ import {
   type PresetKey,
 } from "@/components/layout/section";
 import { Sparkles, ShieldCheck, Palette, Gem, type LucideIcon } from "lucide-react";
-import { uspItems } from "@/data/treatments";
 
 const iconMap: Record<string, LucideIcon> = {
   sparkles: Sparkles,
@@ -27,11 +26,19 @@ const staggerItem = {
   },
 };
 
+export interface USPItem {
+  title: string;
+  description: string;
+  icon: string;
+}
+
 interface USPSectionProps {
   variant?: SectionVariant;
   layout?: SectionLayout;
   padding?: SectionPadding;
   preset?: PresetKey;
+  /** USP items to display. */
+  items: USPItem[];
   className?: string;
   id?: string;
 }
@@ -41,6 +48,7 @@ export function USPSection({
   layout = "contained",
   padding = "lg",
   preset,
+  items,
   className,
   id,
 }: USPSectionProps) {
@@ -55,7 +63,7 @@ export function USPSection({
       id={id}
     >
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-[2rem]">
-        {uspItems.map((item) => {
+        {items.map((item) => {
           const Icon = iconMap[item.icon] ?? Sparkles;
           return (
             <motion.div

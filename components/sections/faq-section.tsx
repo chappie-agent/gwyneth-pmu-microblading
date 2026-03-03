@@ -14,7 +14,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { homeFAQ, type FAQItem, type FAQCategory } from "@/data/faq";
+import type { FAQItem, FAQCategory } from "@/data/faq";
 
 const staggerItem = {
   hidden: { opacity: 0, y: 24 },
@@ -51,7 +51,7 @@ export function FAQSection({
   id,
 }: FAQSectionProps) {
   // Determine which items to render
-  const faqItems = items ?? (categories ? undefined : homeFAQ);
+  const faqItems = categories ? undefined : items;
 
   return (
     <Section

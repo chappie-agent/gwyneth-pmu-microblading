@@ -10,6 +10,7 @@ import { CTASection } from "@/components/sections/cta-section";
 import { Section } from "@/components/layout/section";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { treatments } from "@/data/treatments";
+import { pricingTiers } from "@/data/pricing";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -246,7 +247,7 @@ export default async function TreatmentPage({ params }: PageProps) {
       </Section>
 
       {/* Pricing */}
-      <PricingSection variant="default" padding="lg" single={treatment.slug} />
+      <PricingSection variant="default" padding="lg" tiers={pricingTiers} single={treatment.slug} />
 
       {/* What&apos;s Included */}
       <Section variant="light" padding="lg">

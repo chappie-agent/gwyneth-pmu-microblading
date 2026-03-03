@@ -10,7 +10,25 @@ import {
 } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import { siteConfig } from "@/data/site";
+interface SiteConfig {
+  contact: {
+    address: {
+      street: string;
+      postalCode: string;
+      city: string;
+    };
+    phone: string;
+    email: string;
+  };
+  hours: {
+    weekdays: string;
+    saturday: string;
+  };
+  social: {
+    instagram: string;
+    facebook: string;
+  };
+}
 
 const staggerItem = {
   hidden: { opacity: 0, y: 24 },
@@ -26,6 +44,8 @@ interface ContactSectionProps {
   layout?: SectionLayout;
   padding?: SectionPadding;
   preset?: PresetKey;
+  /** Site configuration for contact details. */
+  siteConfig: SiteConfig;
   className?: string;
   id?: string;
 }
@@ -35,6 +55,7 @@ export function ContactSection({
   layout = "split",
   padding = "lg",
   preset,
+  siteConfig,
   className,
   id,
 }: ContactSectionProps) {

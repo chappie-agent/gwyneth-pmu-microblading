@@ -20,7 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Check } from "lucide-react";
-import { pricingTiers } from "@/data/pricing";
+import type { PricingTier } from "@/data/pricing";
 import { cn } from "@/lib/utils";
 
 const staggerItem = {
@@ -37,6 +37,8 @@ interface PricingSectionProps {
   layout?: SectionLayout;
   padding?: SectionPadding;
   preset?: PresetKey;
+  /** Pricing tiers to display. */
+  tiers: PricingTier[];
   single?: string;
   showIncludes?: boolean;
   className?: string;
@@ -48,14 +50,15 @@ export function PricingSection({
   layout = "contained",
   padding = "lg",
   preset,
+  tiers: allTiers,
   single,
   showIncludes = true,
   className,
   id,
 }: PricingSectionProps) {
   const tiers = single
-    ? pricingTiers.filter((t) => t.slug === single)
-    : pricingTiers;
+    ? allTiers.filter((t) => t.slug === single)
+    : allTiers;
 
   return (
     <Section

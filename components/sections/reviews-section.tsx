@@ -8,7 +8,7 @@ import {
   type SectionPadding,
   type PresetKey,
 } from "@/components/layout/section";
-import { reviews } from "@/data/reviews";
+import type { Review } from "@/data/reviews";
 
 const staggerItem = {
   hidden: { opacity: 0, y: 30 },
@@ -24,6 +24,8 @@ interface ReviewsSectionProps {
   layout?: SectionLayout;
   padding?: SectionPadding;
   preset?: PresetKey;
+  /** Reviews to display. */
+  reviews: Review[];
   className?: string;
   id?: string;
 }
@@ -41,6 +43,7 @@ export function ReviewsSection({
   layout = "contained",
   padding = "lg",
   preset,
+  reviews,
   className,
   id,
 }: ReviewsSectionProps) {

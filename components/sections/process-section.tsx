@@ -9,7 +9,7 @@ import {
   type SectionPadding,
   type PresetKey,
 } from "@/components/layout/section";
-import { homeProcessSteps, type TreatmentStep } from "@/data/treatments";
+import type { TreatmentStep } from "@/data/treatments";
 
 const staggerItem = {
   hidden: { opacity: 0, y: 24 },
@@ -25,7 +25,7 @@ interface ProcessSectionProps {
   layout?: SectionLayout;
   padding?: SectionPadding;
   preset?: PresetKey;
-  steps?: TreatmentStep[];
+  steps: TreatmentStep[];
   eyebrow?: string;
   title?: string;
   description?: string;
@@ -38,7 +38,7 @@ export function ProcessSection({
   layout = "contained",
   padding = "lg",
   preset,
-  steps = homeProcessSteps,
+  steps,
   eyebrow = "Werkwijze",
   title = "Van Consult Tot Resultaat",
   description = "Elke stap is zorgvuldig doordacht voor een ontspannen ervaring en perfect eindresultaat.",

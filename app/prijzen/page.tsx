@@ -4,7 +4,7 @@ import { PricingSection } from "@/components/sections/pricing-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { Section } from "@/components/layout/section";
-import { whatsIncluded } from "@/data/pricing";
+import { pricingTiers, whatsIncluded } from "@/data/pricing";
 import { paymentFAQ } from "@/data/faq";
 import { Check } from "lucide-react";
 
@@ -119,7 +119,7 @@ export default function PrijzenPage() {
         title="Transparante Prijzen"
         description="Geen verborgen kosten. Alles is inbegrepen. Hier zie je precies waar je geld naar gaat."
       />
-      <PricingSection variant="default" padding="lg" />
+      <PricingSection variant="default" padding="lg" tiers={pricingTiers} />
       <WhatsIncludedSection />
       <FAQSection
         items={paymentFAQ}

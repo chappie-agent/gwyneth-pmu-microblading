@@ -9,6 +9,11 @@ import { PricingSection } from "@/components/sections/pricing-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { ContactSection } from "@/components/sections/contact-section";
+import { coreTreatments, homeProcessSteps, uspItems } from "@/data/treatments";
+import { pricingTiers } from "@/data/pricing";
+import { homeFAQ } from "@/data/faq";
+import { reviews } from "@/data/reviews";
+import { siteConfig } from "@/data/site";
 
 export default function Home() {
   return (
@@ -24,14 +29,14 @@ export default function Home() {
         secondaryCta={{ label: "Bekijk Behandelingen", href: "/behandelingen" }}
         showScrollIndicator
       />
-      <TreatmentsSection variant="default" padding="lg" className="dark:bg-charcoal" />
+      <TreatmentsSection variant="default" padding="lg" className="dark:bg-charcoal" items={coreTreatments} />
       <ResultsSection variant="dark" padding="lg" />
-      <ProcessSection variant="light" padding="xl" />
+      <ProcessSection variant="light" padding="xl" steps={homeProcessSteps} />
       <AboutSection />
-      <USPSection variant="light" padding="lg" />
-      <ReviewsSection variant="dark" padding="lg" />
-      <PricingSection variant="default" padding="lg" />
-      <FAQSection variant="light" layout="narrow" padding="lg" />
+      <USPSection variant="light" padding="lg" items={uspItems} />
+      <ReviewsSection variant="dark" padding="lg" reviews={reviews} />
+      <PricingSection variant="default" padding="lg" tiers={pricingTiers} />
+      <FAQSection variant="light" layout="narrow" padding="lg" items={homeFAQ} />
       <CTASection
         variant="dark"
         padding="md"
@@ -41,7 +46,7 @@ export default function Home() {
         description="Plan een vrijblijvend intake gesprek en ontdek wat PMU voor jou kan betekenen."
         cta={{ label: "Plan Jouw Intake", href: "/boeken" }}
       />
-      <ContactSection variant="default" layout="split" padding="lg" />
+      <ContactSection variant="default" layout="split" padding="lg" siteConfig={siteConfig} />
     </>
   );
 }

@@ -12,7 +12,7 @@ import {
   type PresetKey,
 } from "@/components/layout/section";
 import { ArrowRight } from "lucide-react";
-import { coreTreatments, type Treatment } from "@/data/treatments";
+import type { Treatment } from "@/data/treatments";
 
 const treatmentImages: Record<string, string> = {
   microblading: "/microblading-behandeling.png",
@@ -231,8 +231,8 @@ interface TreatmentsSectionProps {
   description?: string;
   /** When true, cards are rendered at half height (for overview pages) */
   compact?: boolean;
-  /** Custom list of treatments to render. Defaults to coreTreatments. */
-  items?: Treatment[];
+  /** List of treatments to render. */
+  items: Treatment[];
   className?: string;
   id?: string;
 }
@@ -250,7 +250,6 @@ export function TreatmentsSection({
   className,
   id,
 }: TreatmentsSectionProps) {
-  const displayTreatments = items ?? coreTreatments;
   const CardComponent = compact ? CompactTreatmentCard : TreatmentCard;
 
   return (
@@ -280,7 +279,7 @@ export function TreatmentsSection({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {displayTreatments.map((treatment) => (
+        {items.map((treatment) => (
           <motion.div key={treatment.slug} variants={staggerItem}>
             <CardComponent treatment={treatment} />
           </motion.div>

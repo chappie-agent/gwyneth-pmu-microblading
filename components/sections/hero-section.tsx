@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { BreadcrumbNav } from "@/components/layout/breadcrumb-nav";
+import { breadcrumbLabels as defaultBreadcrumbLabels } from "@/data/navigation";
 import { useNavbarTheme, type HeroBgType } from "@/contexts/navbar-theme";
 
 /** Map hero variant to the luminance category the navbar needs. */
@@ -35,6 +36,7 @@ interface HeroSectionProps {
   secondaryCta?: { label: string; href: string };
   showScrollIndicator?: boolean;
   breadcrumb?: boolean;
+  breadcrumbLabels?: Record<string, string>;
 }
 
 const fadeIn = (delay: number) => ({
@@ -181,6 +183,7 @@ export function HeroSection({
   secondaryCta,
   showScrollIndicator = false,
   breadcrumb = false,
+  breadcrumbLabels = defaultBreadcrumbLabels,
 }: HeroSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -373,7 +376,7 @@ export function HeroSection({
     >
       {/* Content */}
       <Container className="relative z-10">
-        {breadcrumb && <BreadcrumbNav />}
+        {breadcrumb && <BreadcrumbNav breadcrumbLabels={breadcrumbLabels} />}
 
         <div className="flex flex-col gap-6 items-start">
           {/* Eyebrow */}
