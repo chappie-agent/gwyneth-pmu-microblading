@@ -5,8 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { mainNav } from "@/data/navigation";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import type { NavItem } from "@/types/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -15,7 +15,11 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
-export function MobileNav() {
+interface MobileNavProps {
+  mainNav: NavItem[];
+}
+
+export function MobileNav({ mainNav }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const [behandelingenOpen, setBehandelingenOpen] = useState(false);
   const pathname = usePathname();

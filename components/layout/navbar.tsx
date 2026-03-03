@@ -4,9 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useScroll } from "@/hooks/use-scroll";
-import { mainNav } from "@/data/navigation";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import type { NavItem } from "@/types/navigation";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -87,7 +87,11 @@ function useHeroAwareColors(scrolled: boolean) {
   }
 }
 
-export function Navbar() {
+interface NavbarProps {
+  mainNav: NavItem[];
+}
+
+export function Navbar({ mainNav }: NavbarProps) {
   const scrolled = useScroll(50);
   const pathname = usePathname();
   const colors = useHeroAwareColors(scrolled);
@@ -194,7 +198,7 @@ export function Navbar() {
             <Link href="/boeken">Boek Nu</Link>
           </Button>
           <div className="lg:hidden">
-            <MobileNav />
+            <MobileNav mainNav={mainNav} />
           </div>
         </div>
       </nav>

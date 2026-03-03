@@ -2,10 +2,14 @@ import Link from "next/link";
 import { Phone, Mail, Instagram, Facebook } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Separator } from "@/components/ui/separator";
-import { footerNav } from "@/data/navigation";
-import { siteConfig } from "@/data/site";
+import type { FooterNav, SiteConfig } from "@/types/navigation";
 
-export function Footer() {
+interface FooterProps {
+  footerNav: FooterNav;
+  siteConfig: SiteConfig;
+}
+
+export function Footer({ footerNav, siteConfig }: FooterProps) {
   return (
     <footer className="bg-charcoal text-cream dark:bg-dark">
       {/* Main footer content */}

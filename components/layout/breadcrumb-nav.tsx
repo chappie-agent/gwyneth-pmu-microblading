@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronRight } from "lucide-react";
-import { breadcrumbLabels } from "@/data/navigation";
 
-export function BreadcrumbNav() {
+interface BreadcrumbNavProps {
+  breadcrumbLabels?: Record<string, string>;
+}
+
+export function BreadcrumbNav({ breadcrumbLabels = {} }: BreadcrumbNavProps) {
   const pathname = usePathname();
 
   // Don't render on homepage
