@@ -24,11 +24,12 @@ export const SanityLive = live.SanityLive;
  * This allows pages to fall back to static data when the Sanity token
  * is invalid or the Content Lake is unreachable.
  */
-export async function sanityFetch<T = unknown>(
+export async function sanityFetch(
   ...args: Parameters<typeof live.sanityFetch>
-): Promise<{ data: T | null }> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): Promise<{ data: any }> {
   try {
-    return await live.sanityFetch<T>(...args);
+    return await live.sanityFetch(...args);
   } catch {
     return { data: null };
   }

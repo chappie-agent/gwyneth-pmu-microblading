@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Check, X, Clock } from "lucide-react";
+import { PortableText } from "@portabletext/react";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ProcessSection } from "@/components/sections/process-section";
 import { ResultsSection } from "@/components/sections/results-section";
@@ -91,15 +92,15 @@ export default async function TreatmentPage({ params }: PageProps) {
           <h2 className="font-display text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-[1.12] mb-6">
             {treatment.whatIs.title}
           </h2>
-          <div className="space-y-4 mb-8">
-            {treatment.whatIs.content.map((paragraph: string, i: number) => (
-              <p
-                key={i}
-                className="font-body text-base text-muted-foreground leading-relaxed"
-              >
-                {paragraph}
-              </p>
-            ))}
+          <div className="space-y-4 mb-8 font-body text-base text-muted-foreground leading-relaxed">
+            {Array.isArray(treatment.whatIs.content) &&
+            typeof treatment.whatIs.content[0] === "string" ? (
+              treatment.whatIs.content.map((paragraph: string, i: number) => (
+                <p key={i}>{paragraph}</p>
+              ))
+            ) : (
+              <PortableText value={treatment.whatIs.content as any} />
+            )}
           </div>
           <ul className="space-y-3">
             {treatment.whatIs.benefits.map((benefit: string) => (
