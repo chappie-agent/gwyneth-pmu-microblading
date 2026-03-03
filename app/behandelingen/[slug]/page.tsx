@@ -34,6 +34,8 @@ export default async function TreatmentPage({ params }: PageProps) {
   const treatment = treatments.find((t) => t.slug === slug);
   if (!treatment) notFound();
 
+  const isCore = (treatment.category ?? "core") === "core";
+
   return (
     <>
       {/* Hero */}
@@ -153,8 +155,8 @@ export default async function TreatmentPage({ params }: PageProps) {
         description={`Van intake tot eindresultaat — zo verloopt jouw ${treatment.name.toLowerCase()} behandeling.`}
       />
 
-      {/* Results */}
-      <ResultsSection variant="dark" padding="lg" />
+      {/* Results — only for core PMU treatments */}
+      {isCore && <ResultsSection variant="dark" padding="lg" />}
 
       {/* Aftercare Timeline */}
       <Section variant="sage" padding="lg">
@@ -246,10 +248,33 @@ export default async function TreatmentPage({ params }: PageProps) {
       {/* Pricing */}
       <PricingSection variant="default" padding="lg" single={treatment.slug} />
 
+      {/* What&apos;s Included */}
+      <Section variant="light" padding="lg">
+        <div className="text-center mb-12">
+          <span className="text-xs font-body uppercase tracking-[0.3em] text-muted-foreground mb-4 block">
+            Inbegrepen
+          </span>
+          <h2 className="font-display text-[clamp(1.6rem,3vw,2.4rem)] font-light leading-[1.12] mb-4">
+            Wat Is Inbegrepen?
+          </h2>
+        </div>
+        <ul className="max-w-md mx-auto space-y-3">
+          {treatment.includes.map((item) => (
+            <li
+              key={item}
+              className="flex items-start gap-3 text-sm font-body"
+            >
+              <Check className="size-4 text-accent mt-0.5 shrink-0" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
       {/* FAQ */}
       <FAQSection
         items={treatment.faq}
-        variant="light"
+        variant="default"
         layout="narrow"
         padding="lg"
         title={`${treatment.name} FAQ`}

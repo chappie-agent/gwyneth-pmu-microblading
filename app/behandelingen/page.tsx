@@ -6,13 +6,17 @@ import { ResultsSection } from "@/components/sections/results-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { Section } from "@/components/layout/section";
-import { treatments, comparisonLabels } from "@/data/treatments";
+import {
+  treatments,
+  coreTreatments,
+  comparisonLabels,
+} from "@/data/treatments";
 import { behandelingenFAQ } from "@/data/faq";
 
 export const metadata: Metadata = {
   title: "Behandelingen — Gwyneth PMU",
   description:
-    "Drie gespecialiseerde PMU technieken: Microblading, Powder Brows, en Combi Brows.",
+    "Permanente make-up en beauty behandelingen: Microblading, Powder Brows, Combi Brows, Eyeliner PMU, Lashlift en Brow Styling.",
 };
 
 function ComparisonTable() {
@@ -36,7 +40,7 @@ function ComparisonTable() {
               <th className="px-4 py-5 text-xs font-body uppercase tracking-[0.2em] text-muted-foreground font-normal">
                 Kenmerk
               </th>
-              {treatments.map((t) => (
+              {coreTreatments.map((t) => (
                 <th
                   key={t.slug}
                   className="px-4 py-5 font-display text-lg font-light tracking-wide"
@@ -57,12 +61,12 @@ function ComparisonTable() {
                 <td className="px-4 py-4 text-sm font-body font-medium text-foreground">
                   {comparisonLabels[key]}
                 </td>
-                {treatments.map((t) => (
+                {coreTreatments.map((t) => (
                   <td
                     key={t.slug}
                     className="px-4 py-4 text-sm font-body text-muted-foreground"
                   >
-                    {t.comparison[key]}
+                    {t.comparison?.[key] ?? "\u2014"}
                   </td>
                 ))}
               </tr>
@@ -80,10 +84,16 @@ export default function BehandelingenPage() {
       <HeroSection
         variant="static"
         breadcrumb
-        title="Permanente Make-up Behandelingen"
-        description="Drie gespecialiseerde technieken voor jouw perfecte look. Ontdek het verschil en kies wat bij jou past."
+        title="Onze Behandelingen"
+        description="Van permanente make-up tot beauty treatments \u2014 ontdek welke behandeling bij jou past."
       />
-      <TreatmentsSection />
+      <TreatmentsSection
+        compact
+        items={treatments}
+        title="Alle Behandelingen"
+        description="Ontdek ons volledige aanbod van permanente make-up en beauty behandelingen."
+        eyebrow="Behandelingen"
+      />
       <ComparisonTable />
       <ProcessSection variant="default" padding="lg" />
       <ResultsSection variant="dark" padding="lg" />
@@ -97,7 +107,7 @@ export default function BehandelingenPage() {
         variant="accent"
         padding="md"
         title="Laten We Jouw Perfecte Look Cre\u00EBren"
-        description="Boek een vrijblijvend consult en ontdek welke techniek het beste bij jou past."
+        description="Boek een vrijblijvend consult en ontdek welke behandeling het beste bij jou past."
         cta={{ label: "Plan Jouw Intake", href: "/boeken" }}
       />
     </>

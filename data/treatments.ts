@@ -13,6 +13,12 @@ export interface FAQItem {
   answer: string;
 }
 
+/**
+ * "core"        – Main PMU brow treatments shown on the homepage
+ * "additional"  – Extra services only shown on the Behandelingen page
+ */
+export type TreatmentCategory = "core" | "additional";
+
 export interface Treatment {
   slug: string;
   name: string;
@@ -22,6 +28,8 @@ export interface Treatment {
   priceLabel: string;
   featured?: boolean;
   featuredLabel?: string;
+  /** Defaults to "core" when omitted */
+  category?: TreatmentCategory;
   heroTitle: string;
   heroDescription: string;
   whatIs: {
@@ -46,7 +54,8 @@ export interface Treatment {
   };
   faq: FAQItem[];
   includes: string[];
-  comparison: Record<string, string>;
+  /** Optional – only core brow treatments have comparison data */
+  comparison?: Record<string, string>;
   usps: string[];
 }
 
@@ -101,7 +110,7 @@ export const treatments: Treatment[] = [
       { title: "Intake", description: "We bespreken je wensen, gezichtsvorm, huidtype, en verwachte kleur. Geen druk, zuiver informatief." },
       { title: "Mapping", description: "Met precisie tekenen we jouw perfecte vorm. Dit doen we totdat je 100% tevreden bent." },
       { title: "Verdoving", description: "Topicale verdovende cr\u00E8me zorgt voor minimaal ongemak tijdens de behandeling." },
-      { title: "Behandeling", description: "Voorzichtige haartjes worden aangebracht met een handmatig instrument. Dit duurt ongeveer 1-1,5 uur." },
+      { title: "Behandeling", description: "Voorzichtige haartjes worden aangebracht met een handmatig instrument. De behandeling duurt circa 2 uur." },
     ],
     aftercare: {
       title: "Het Genezingsproces \u2014 Dag 1-14",
@@ -143,10 +152,10 @@ export const treatments: Treatment[] = [
     includes: [
       "Gratis intake consult (30 min)",
       "Vorm & kleur mapping",
-      "Volledige behandeling (2-3 uur)",
+      "Volledige behandeling (ca. 2 uur)",
       "Premium pigmenten & materialen",
       "Aftercare balm & instructies",
-      "Gratis touch-up (4-6 weken)",
+      "Nabehandeling na 6 weken inbegrepen",
     ],
     comparison: {
       techniek: "Handmatige haartjes",
@@ -216,7 +225,7 @@ export const treatments: Treatment[] = [
       { title: "Consult", description: "We bespreken je voorkeur, gezichtsvorm, en gewenste kleur. Alles op jouw tempo." },
       { title: "Mapping", description: "Precisie tekenen totdat je vorm perfect is. Je feedback is essentieel." },
       { title: "Verdoving", description: "Topicale verdovende cr\u00E8me zorgt voor maximaal comfort." },
-      { title: "Shading", description: "Zachte schaduwing wordt aangebracht met precisie-apparatuur. Ongeveer 2-3 uur." },
+      { title: "Shading", description: "Zachte schaduwing wordt aangebracht met precisie-apparatuur. De behandeling duurt circa 2 uur." },
     ],
     aftercare: {
       title: "Genezing & Nazorg \u2014 Dag 1-21",
@@ -258,10 +267,10 @@ export const treatments: Treatment[] = [
     includes: [
       "Gratis intake consult",
       "Vorm & kleur mapping",
-      "Volledige behandeling (2-3 uur)",
+      "Volledige behandeling (ca. 2 uur)",
       "Premium pigmenten",
       "Aftercare balm & richtlijnen",
-      "Gratis touch-up (4-6 weken)",
+      "Nabehandeling na 6 weken inbegrepen",
     ],
     comparison: {
       techniek: "Zachte schaduwing",
@@ -330,7 +339,7 @@ export const treatments: Treatment[] = [
       { title: "Intake", description: "We bespreken jouw voorkeur en wat je ervan verwacht. Alles staat open voor discussie." },
       { title: "Mapping", description: "Precisie tekening totdat jij 100% tevreden bent met de vorm." },
       { title: "Verdoving", description: "Topicale verdovende cr\u00E8me voor maximaal comfort." },
-      { title: "Beide Technieken", description: "Eerst microblading hairtjes, dan powder shading. Dit duurt 3-3,5 uur." },
+      { title: "Beide Technieken", description: "Eerst microblading hairtjes, dan powder shading. De behandeling duurt circa 2,5 uur." },
     ],
     aftercare: {
       title: "Genezing Voor Combi Brows",
@@ -364,7 +373,7 @@ export const treatments: Treatment[] = [
     },
     faq: [
       { question: "Waarom kiezen voor combi in plaats van \u00E9\u00E9n techniek?", answer: "Combi brows geven je het beste van beide werelden: natuurlijke hairtjes van microblading PLUS volle definitie van powder. Het resultaat is meer dimensionaal en duurt langer." },
-      { question: "Hoe lang duurt een combi-behandeling?", answer: "Combi brows duren ongeveer 3-3,5 uur vanwege beide technieken. Dit geeft ons veel tijd om perfecte resultaten te cre\u00EBren." },
+      { question: "Hoe lang duurt een combi-behandeling?", answer: "Combi brows duren ongeveer 2,5 uur vanwege beide technieken. Dit geeft ons de tijd om perfecte resultaten te cre\u00EBren." },
       { question: "Is combi brows geschikt voor alle huidtypes?", answer: "Ja! Dit is eigenlijk een groot voordeel van combi brows. Het werkt goed voor alle huidtypes, omdat we beide technieken flexibel kunnen aanpassen." },
       { question: "Hoe lang blijft combi brows?", answer: "Combi brows houdt doorgaans 1-2 jaar. Met jaarlijkse touch-ups blijft het resultaat perfect." },
       { question: "Wat gebeurt er als ik niet tevreden ben?", answer: "De touch-up na 4-6 weken is gratis en is speciaal bedoeld voor aanpassingen. Dit is jouw kans om kleine wijzigingen aan te brengen." },
@@ -372,10 +381,10 @@ export const treatments: Treatment[] = [
     includes: [
       "Gratis uitgebreid consult",
       "Vorm & kleur mapping",
-      "Microblading + Powder",
+      "Volledige behandeling (ca. 2,5 uur)",
       "Premium pigmenten",
       "Complete aftercare kit",
-      "Gratis touch-up",
+      "Nabehandeling na 6 weken inbegrepen",
     ],
     comparison: {
       techniek: "Beide technieken",
@@ -393,7 +402,313 @@ export const treatments: Treatment[] = [
       "Meest veelzijdige optie",
     ],
   },
+  /* ──────────────────────────────────────────────────────────────────
+     ADDITIONAL SERVICES — shown on Behandelingen page, NOT on homepage
+     ────────────────────────────────────────────────────────────────── */
+  {
+    slug: "eyeliner",
+    name: "Eyeliner PMU",
+    label: "Permanente Make-up",
+    tagline: "Gedefinieerde ogen, elke dag",
+    price: 200,
+    priceLabel: "\u20AC200",
+    category: "additional",
+    heroTitle: "Permanente Eyeliner \u2014 Altijd Gedefinieerd",
+    heroDescription: "Wake up with perfectly defined eyes. Permanente eyeliner bespaart je dagelijkse make-up routine en geeft een subtiele, natuurlijke definitie.",
+    whatIs: {
+      title: "Wat is Eyeliner PMU?",
+      subtitle: "Moeiteloos Gedefinieerde Ogen",
+      content: [
+        "Eyeliner PMU is een permanente make-up techniek waarbij pigment wordt aangebracht langs de wimperrand. Het resultaat is een subtiele, natuurlijke definitie die je ogen laat opvallen \u2014 zonder dat je dagelijks eyeliner hoeft aan te brengen.",
+        "Of je nu kiest voor een fijne lashline (tussen de wimpers) of een zachtere eyeliner look, het resultaat is altijd elegant en tijdbesparend. Perfect voor wie elke dag wakker wil worden met prachtig gedefinieerde ogen.",
+      ],
+      benefits: [
+        "Dagelijks tijd besparen",
+        "Subtiele, natuurlijke definitie",
+        "Waterproof \u2014 geen uitlopen of smudgen",
+        "Perfect voor gevoelige ogen",
+        "Langdurig resultaat (1-3 jaar)",
+        "Geen irritatie door dagelijkse make-up",
+        "Zelfvertrouwen boost",
+        "Geschikt voor alle oogvormen",
+      ],
+    },
+    suitability: {
+      ideal: [
+        "Mensen die dagelijks eyeliner dragen",
+        "Wie moeite heeft met aanbrengen eyeliner",
+        "Actieve levensstijl (sport, zwemmen)",
+        "Gevoelige ogen of contactlensdragers",
+        "Wie een subtiele definitie wil",
+        "Dunne of lichte wimpers",
+      ],
+      caution: [
+        "Actieve ooginfecties",
+        "Recent oogoperatie (< 6 maanden)",
+        "Zwangerschap",
+        "Bepaalde oogmedicatie",
+        "Zeer gevoelige huid rond ogen",
+        "Allergie voor PMU-pigmenten",
+      ],
+      note: "Twijfel je of eyeliner PMU geschikt is voor jou? Boek een vrijblijvend consult!",
+    },
+    process: [
+      { title: "Consult", description: "We bespreken je wensen: fijne lashline of zachtere eyeliner? Welke stijl past bij jou?" },
+      { title: "Tekenen", description: "We tekenen de gewenste lijn zodat je vooraf het resultaat kunt zien en goedkeuren." },
+      { title: "Verdoving", description: "Topicale verdovende cr\u00E8me zorgt voor comfort rond het gevoelige ooggebied." },
+      { title: "Behandeling", description: "Met precisie wordt het pigment aangebracht langs de wimperrand. De behandeling duurt circa 1,5 uur." },
+    ],
+    aftercare: {
+      title: "Nazorg Eyeliner PMU \u2014 Dag 1-10",
+      duration: "10 dagen",
+      description: "De huid rond de ogen is gevoelig en geneest snel. Volg deze richtlijnen voor het beste resultaat.",
+      timeline: [
+        { title: "Dag 1 \u2014 Direct Na Behandeling", description: "Lichte zwelling en roodheid rond de ogen is normaal. De kleur ziet er intenser uit dan het eindresultaat." },
+        { title: "Dag 2-3 \u2014 Zwelling Neemt Af", description: "De zwelling vermindert snel. Je ogen kunnen tranen. Vermijd aanraken en water in het ooggebied." },
+        { title: "Dag 4-7 \u2014 Genezing & Schilfering", description: "Lichte schilfering is normaal. De kleur wordt zachter. Niet krabben of wrijven!" },
+        { title: "Dag 8-10 \u2014 Resultaat Zichtbaar", description: "De huid is grotendeels genezen. Het subtiele, definitieve resultaat wordt zichtbaar." },
+      ],
+      dos: [
+        "Houd het ooggebied schoon en droog",
+        "Gebruik de verstrekte aftercare gel",
+        "Draag een zonnebril bij felle zon",
+        "Sleep op je rug (eerste nachten)",
+        "Wees voorzichtig bij het wassen",
+      ],
+      donts: [
+        "Vermijd water op het ooggebied (7 dagen)",
+        "Geen oogmake-up (10 dagen)",
+        "Geen contactlenzen (eerste 3 dagen)",
+        "Niet krabben of wrijven",
+        "Geen zwemmen of sauna",
+        "Geen mascara of eyeliner",
+      ],
+    },
+    faq: [
+      { question: "Doet eyeliner PMU pijn?", answer: "Met de verdovende cr\u00E8me voel je weinig tot niets. Het ooggebied is gevoelig, maar de meeste cli\u00EBnten ervaren het als zeer draaglijk." },
+      { question: "Heb ik een nabehandeling nodig?", answer: "Niet iedereen heeft een nabehandeling nodig. Bij sommige klanten pakt het pigment direct goed. Mocht een nabehandeling gewenst zijn, dan kan deze apart worden ingepland." },
+      { question: "Hoe lang houdt eyeliner PMU?", answer: "Eyeliner PMU houdt gemiddeld 1-3 jaar, afhankelijk van je huidtype en levensstijl. Met een optionele touch-up blijft het resultaat fris." },
+      { question: "Kan ik kiezen hoe dik de lijn wordt?", answer: "Absoluut! Van een subtiele lashline (onzichtbaar tussen de wimpers) tot een zachtere eyeliner look \u2014 alles is mogelijk en wordt vooraf getekend." },
+      { question: "Wat kost een nabehandeling?", answer: "De prijs van \u20AC200 is exclusief een eventuele nabehandeling. Niet iedereen heeft er een nodig, maar mocht het gewenst zijn, dan bespreken we de kosten tijdens het consult." },
+    ],
+    includes: [
+      "Vrijblijvend consult",
+      "Vorm tekening & goedkeuring",
+      "Volledige behandeling (ca. 1,5 uur)",
+      "Premium pigmenten",
+      "Aftercare gel & instructies",
+    ],
+    usps: [
+      "Subtiele, natuurlijke definitie",
+      "Dagelijks tijd besparen",
+      "Waterproof resultaat",
+      "Geschikt voor alle oogvormen",
+    ],
+  },
+  {
+    slug: "lashlift",
+    name: "Lashlift",
+    label: "Wimperbehandeling",
+    tagline: "Natuurlijk gekrulde wimpers",
+    price: 55,
+    priceLabel: "\u20AC55",
+    category: "additional",
+    heroTitle: "Lashlift \u2014 Natuurlijk Gekrulde Wimpers",
+    heroDescription: "Laat je eigen wimpers optimaal tot hun recht komen. Een lashlift geeft een prachtige krul en lift zonder extensions.",
+    whatIs: {
+      title: "Wat is een Lashlift?",
+      subtitle: "Jouw Wimpers, Maar Beter",
+      content: [
+        "Een lashlift is een behandeling die je eigen natuurlijke wimpers omhoog krult en lift vanaf de wortel. Het resultaat? Wimpers die langer, voller en meer open lijken \u2014 zonder extensions of dagelijkse wimperkruller.",
+        "De behandeling is volledig veilig, duurt slechts 45-60 minuten, en het resultaat houdt 6-8 weken aan. Perfect als je een natuurlijke look verkiest boven dramatische wimperextensions.",
+      ],
+      benefits: [
+        "Geen dagelijkse wimperkruller nodig",
+        "Natuurlijk, open blik",
+        "Geen onderhoud nodig",
+        "Veilig voor je eigen wimpers",
+        "Resultaat 6-8 weken",
+        "Combineert goed met wimperverf",
+        "Snelle behandeling (45-60 min)",
+        "Geen extensions nodig",
+      ],
+    },
+    suitability: {
+      ideal: [
+        "Rechte of naar beneden groeiende wimpers",
+        "Voorkeur voor natuurlijke look",
+        "Wie extensions te intensief vindt",
+        "Actieve levensstijl",
+        "Gevoelige ogen",
+        "Als basis voor mascara",
+      ],
+      caution: [
+        "Zeer korte wimpers",
+        "Actieve ooginfecties",
+        "Recent chemische behandeling wimpers",
+        "Zwangerschap (resultaat kan vari\u00EBren)",
+        "Allergie voor liftproducten",
+        "Beschadigde wimpers",
+      ],
+      note: "Een lashlift werkt het best bij wimpers met enige lengte. Tijdens het consult bekijken we samen of het bij jou past!",
+    },
+    process: [
+      { title: "Voorbereiding", description: "We reinigen je wimpers en brengen een beschermend schildje aan op je ooglid." },
+      { title: "Lifting", description: "Je wimpers worden zorgvuldig op het schildje geplaatst en het liftproduct wordt aangebracht." },
+      { title: "Setting", description: "Een fixerend product zorgt ervoor dat de krul permanent wordt vastgezet." },
+      { title: "Afwerking", description: "Optioneel een wimperverf voor extra definitie. Totale behandeltijd: 45-60 minuten." },
+    ],
+    aftercare: {
+      title: "Nazorg Lashlift \u2014 Eerste 24-48 Uur",
+      duration: "24-48 uur",
+      description: "De nazorg van een lashlift is eenvoudig. De eerste 24-48 uur zijn het belangrijkst.",
+      timeline: [
+        { title: "Eerste 24 Uur", description: "Houd je wimpers volledig droog. Vermijd stoom, zweet en vochtige omgevingen." },
+        { title: "24-48 Uur", description: "Nog steeds voorzichtig met water. Geen mascara of oogmake-up gebruiken." },
+        { title: "Na 48 Uur", description: "Je kunt weer normaal je gezicht wassen en make-up gebruiken. De krul blijft 6-8 weken mooi." },
+      ],
+      dos: [
+        "Houd wimpers droog (eerste 24 uur)",
+        "Gebruik een wimperborstel om vorm te behouden",
+        "Gebruik eventueel een voedend wimperserum",
+        "Geniet van je mooie krul!",
+      ],
+      donts: [
+        "Geen water op wimpers (24 uur)",
+        "Geen mascara (48 uur)",
+        "Geen wimperkruller gebruiken",
+        "Niet wrijven in je ogen",
+        "Geen sauna of stoom (24 uur)",
+      ],
+    },
+    faq: [
+      { question: "Hoe lang duurt het resultaat?", answer: "Een lashlift houdt gemiddeld 6-8 weken aan, afhankelijk van je natuurlijke wimpergroei-cyclus." },
+      { question: "Is een lashlift schadelijk?", answer: "Nee, een professionele lashlift is veilig voor je wimpers. We gebruiken hoogwaardige producten die speciaal ontwikkeld zijn voor de gevoelige oogzone." },
+      { question: "Kan ik nog mascara gebruiken?", answer: "Ja! Na 48 uur kun je gewoon mascara gebruiken. Veel klanten vinden dat ze het zelfs niet meer nodig hebben door de mooie lift." },
+      { question: "Hoeveel kost een lashlift?", answer: "Een lashlift kost \u20AC55. Neem gerust contact op als je meer wilt weten!" },
+      { question: "Kan ik dit combineren met wimperverf?", answer: "Absoluut! Een lashlift in combinatie met wimperverf geeft het meest intense resultaat. Dit kan in dezelfde behandeling." },
+    ],
+    includes: [
+      "Reiniging & voorbereiding",
+      "Professionele liftbehandeling",
+      "Setting & fixering",
+      "Optioneel wimperverf",
+      "Nazorginstructies",
+    ],
+    usps: [
+      "Natuurlijk gekrulde wimpers",
+      "Geen onderhoud nodig",
+      "Resultaat 6-8 weken",
+      "Snelle behandeling (45-60 min)",
+    ],
+  },
+  {
+    slug: "brow-styling",
+    name: "Brow Styling",
+    label: "Wenkbrauw Styling",
+    tagline: "Laminatie, verven & epileren",
+    price: 60,
+    priceLabel: "\u20AC60",
+    category: "additional",
+    heroTitle: "Brow Styling \u2014 Perfect Gestylde Wenkbrauwen",
+    heroDescription: "Browlamination, verven en epileren in \u00E9\u00E9n behandeling. Geef je wenkbrauwen de perfecte vorm en kleur zonder permanente make-up.",
+    whatIs: {
+      title: "Wat is Brow Styling?",
+      subtitle: "De Niet-Permanente Optie",
+      content: [
+        "Brow styling is een alles-in-\u00E9\u00E9n wenkbrauwbehandeling die browlamination, verven en epileren combineert. Het resultaat is volle, perfect gevormde wenkbrauwen die er gestyled uitzien \u2014 zonder permanente make-up.",
+        "Bij browlamination worden je eigen wenkbrauwharen zacht gemaakt en in de gewenste richting geplaatst. In combinatie met verven en epileren cre\u00EBer je een verzorgde, volle look die 4-6 weken aanhoudt.",
+      ],
+      benefits: [
+        "Vollere, gedefinieerde wenkbrauwen",
+        "Geen permanente ingreep",
+        "Combineert laminatie, verf & epilatie",
+        "Resultaat 4-6 weken",
+        "Ideaal als kennismaking",
+        "Natuurlijke look",
+        "Snelle behandeling (45-60 min)",
+        "Geen genezingstijd nodig",
+      ],
+    },
+    suitability: {
+      ideal: [
+        "Wie PMU nog een stap te ver vindt",
+        "Onhandige of dunne wenkbrauwharen",
+        "Wenkbrauwen die alle kanten op groeien",
+        "Wie meer volume en definitie wil",
+        "Als voorbereiding of kennismaking voor PMU",
+        "Regelmatig onderhoud van wenkbrauwen",
+      ],
+      caution: [
+        "Allergie voor laminatie- of verfproducten",
+        "Actieve huidaandoeningen in het gebied",
+        "Zeer beschadigde wenkbrauwharen",
+        "Zwangerschap (resultaat kan vari\u00EBren)",
+        "Recent chemische peeling",
+        "Open wondjes in wenkbrauwgebied",
+      ],
+      note: "Brow styling is perfect als je nog niet klaar bent voor PMU, maar wel prachtige wenkbrauwen wilt. Boek gerust een afspraak!",
+    },
+    process: [
+      { title: "Analyse", description: "We bekijken je wenkbrauwen en bespreken de gewenste vorm, kleur en stijl." },
+      { title: "Laminatie", description: "Je wenkbrauwharen worden zacht gemaakt en in de gewenste richting geplaatst voor een volle look." },
+      { title: "Verven", description: "De perfecte kleur wordt gekozen en aangebracht voor optimale definitie." },
+      { title: "Epileren & Finish", description: "Overtollige haartjes worden verwijderd voor een strakke, nette vorm. Totale behandeltijd: 45-60 minuten." },
+    ],
+    aftercare: {
+      title: "Nazorg Brow Styling \u2014 Eerste 24 Uur",
+      duration: "24 uur",
+      description: "De nazorg is eenvoudig. Houd je wenkbrauwen de eerste 24 uur droog voor het beste resultaat.",
+      timeline: [
+        { title: "Eerste 24 Uur", description: "Houd je wenkbrauwen droog. Vermijd water, stoom en zweet in het gezicht." },
+        { title: "Na 24 Uur", description: "Je kunt weer normaal je gezicht wassen. Gebruik eventueel een voedende brow gel." },
+        { title: "Week 1-6", description: "Geniet van je gestylde wenkbrauwen! Het resultaat houdt 4-6 weken aan." },
+      ],
+      dos: [
+        "Houd wenkbrauwen droog (24 uur)",
+        "Borstel ze dagelijks met een spoolie",
+        "Gebruik optioneel een voedende brow gel",
+        "Boek tijdig je volgende afspraak",
+      ],
+      donts: [
+        "Geen water op wenkbrauwen (24 uur)",
+        "Niet wrijven of krabben",
+        "Geen olie-gebaseerde producten (24 uur)",
+        "Geen sauna of stoom (24 uur)",
+      ],
+    },
+    faq: [
+      { question: "Hoe lang houdt brow styling?", answer: "Het resultaat van brow styling houdt gemiddeld 4-6 weken aan. Daarna kun je de behandeling herhalen voor continu mooie wenkbrauwen." },
+      { question: "Is browlamination schadelijk?", answer: "Nee, browlamination is veilig wanneer het door een professional wordt uitgevoerd. We gebruiken hoogwaardige producten die je haartjes voeden." },
+      { question: "Is dit een alternatief voor PMU?", answer: "Brow styling is een mooie niet-permanente optie. Het is ook een ideale manier om te ontdekken of je blij bent met vollere wenkbrauwen, voordat je eventueel voor PMU kiest." },
+      { question: "Hoeveel kost brow styling?", answer: "Brow styling kost \u20AC60. Neem gerust contact op als je meer wilt weten!" },
+      { question: "Wat is het verschil met PMU?", answer: "PMU brengt pigment aan in de huid voor een langdurig resultaat (1-3 jaar). Brow styling werkt met je eigen haartjes en houdt 4-6 weken aan. Beide hebben hun voordelen!" },
+    ],
+    includes: [
+      "Wenkbrauw analyse & advies",
+      "Browlamination behandeling",
+      "Verven in de perfecte kleur",
+      "Epileren voor strakke vorm",
+      "Nazorginstructies",
+    ],
+    usps: [
+      "Laminatie, verven & epileren",
+      "Geen permanente ingreep",
+      "Resultaat 4-6 weken",
+      "Ideale kennismaking",
+    ],
+  },
 ];
+
+/** Core PMU brow treatments — shown on homepage */
+export const coreTreatments = treatments.filter(
+  (t) => (t.category ?? "core") === "core"
+);
+
+/** Additional services — only on Behandelingen page */
+export const additionalServices = treatments.filter(
+  (t) => t.category === "additional"
+);
 
 // Comparison table labels
 export const comparisonLabels: Record<string, string> = {

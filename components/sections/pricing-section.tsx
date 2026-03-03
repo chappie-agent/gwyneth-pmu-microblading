@@ -75,16 +75,18 @@ export function PricingSection({
           Transparante Tarieven
         </h2>
         <p className="font-body text-base text-muted-foreground max-w-2xl mx-auto mb-12">
-          Geen verborgen kosten. Inclusief consult, behandeling en gratis nabehandeling.
+          Geen verborgen kosten. Inclusief consult, behandeling en alle materialen.
         </p>
       </div>
 
       <div
         className={cn(
-          "grid gap-8",
+          "grid gap-6",
           single
             ? "grid-cols-1 max-w-md mx-auto"
-            : "grid-cols-1 md:grid-cols-3"
+            : tiers.length <= 3
+              ? "grid-cols-1 md:grid-cols-3"
+              : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
         )}
       >
         {tiers.map((tier) => (
@@ -118,7 +120,9 @@ export function PricingSection({
                     {tier.priceLabel}
                   </span>
                   <span className="block text-xs text-muted-foreground mt-1 font-body">
-                    (incl. touch-up)
+                    {tier.includes.some((i) => i.toLowerCase().includes("nabehandeling"))
+                      ? "(incl. nabehandeling)"
+                      : ""}
                   </span>
                 </div>
               </CardHeader>
