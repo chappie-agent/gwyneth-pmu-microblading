@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.5.3",
     "@portabletext/react": "^6.0.2",
+    "@react-email/components": "^1.0.8",
     "@sanity/image-url": "^2.0.3",
     "@sanity/visual-editing": "^5.2.1",
     "class-variance-authority": "^0.7.1",
@@ -22,8 +24,10 @@
     "radix-ui": "^1.4.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "resend": "^6.9.3",
     "sanity": "^5.12.0",
-    "tailwind-merge": "^3.5.0"
+    "tailwind-merge": "^3.5.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

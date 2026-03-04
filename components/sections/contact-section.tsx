@@ -1,5 +1,6 @@
 "use client";
 
+import { useActionState } from "react";
 import { motion } from "framer-motion";
 import {
   Section,
@@ -9,7 +10,9 @@ import {
   type PresetKey,
 } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, CheckCircle } from "lucide-react";
+import { sendContactEmail, type ContactFormState } from "@/actions/contact";
+
 interface SiteConfig {
   contact: {
     address: {
@@ -59,6 +62,11 @@ export function ContactSection({
   className,
   id,
 }: ContactSectionProps) {
+  const [state, formAction, isPending] = useActionState<ContactFormState, FormData>(
+    sendContactEmail,
+    { success: false }
+  );
+
   return (
     <Section
       variant={variant}
@@ -171,86 +179,123 @@ export function ContactSection({
 
       {/* Right: Contact form */}
       <motion.div variants={staggerItem}>
-        <form
-          onSubmit={(e) => e.preventDefault()}
-          className="space-y-5 rounded-[var(--radius-lg)] border border-border/50 bg-background/50 p-8"
-        >
-          {/* Naam */}
-          <div>
-            <label htmlFor="contact-naam" className="block text-xs font-body uppercase tracking-widest text-muted-foreground mb-2">
-              Naam
-            </label>
-            <input
-              id="contact-naam"
-              type="text"
-              placeholder="Jouw naam"
-              className="w-full rounded-[var(--radius-md)] border border-border bg-transparent px-4 py-3 text-sm font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
-            />
+        {state.success ? (
+          <div className="flex flex-col items-center justify-center text-center space-y-4 rounded-[var(--radius-lg)] border border-border/50 bg-background/50 p-8 min-h-[400px]">
+            <CheckCircle className="size-12 text-accent" />
+            <h3 className="font-display text-2xl font-light">Bericht Verstuurd!</h3>
+            <p className="font-body text-sm text-muted-foreground">
+              Bedankt! We nemen zo snel mogelijk contact met je op.
+            </p>
           </div>
+        ) : (
+          <form
+            action={formAction}
+            className="space-y-5 rounded-[var(--radius-lg)] border border-border/50 bg-background/50 p-8"
+          >
+            {/* Naam */}
+            <div>
+              <label htmlFor="contact-naam" className="block text-xs font-body uppercase tracking-widest text-muted-foreground mb-2">
+                Naam
+              </label>
+              <input
+                id="contact-naam"
+                name="naam"
+                type="text"
+                required
+                placeholder="Jouw naam"
+                className="w-full rounded-[var(--radius-md)] border border-border bg-transparent px-4 py-3 text-sm font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
+              />
+              {state.fieldErrors?.naam && (
+                <p className="mt-1 text-xs text-red-500">{state.fieldErrors.naam[0]}</p>
+              )}
+            </div>
 
-          {/* Telefoon */}
-          <div>
-            <label htmlFor="contact-telefoon" className="block text-xs font-body uppercase tracking-widest text-muted-foreground mb-2">
-              Telefoon
-            </label>
-            <input
-              id="contact-telefoon"
-              type="tel"
-              placeholder="+31 6 12 34 56 78"
-              className="w-full rounded-[var(--radius-md)] border border-border bg-transparent px-4 py-3 text-sm font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
-            />
-          </div>
+            {/* Telefoon */}
+            <div>
+              <label htmlFor="contact-telefoon" className="block text-xs font-body uppercase tracking-widest text-muted-foreground mb-2">
+                Telefoon
+              </label>
+              <input
+                id="contact-telefoon"
+                name="telefoon"
+                type="tel"
+                placeholder="+31 6 12 34 56 78"
+                className="w-full rounded-[var(--radius-md)] border border-border bg-transparent px-4 py-3 text-sm font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
+              />
+              {state.fieldErrors?.telefoon && (
+                <p className="mt-1 text-xs text-red-500">{state.fieldErrors.telefoon[0]}</p>
+              )}
+            </div>
 
-          {/* E-mail */}
-          <div>
-            <label htmlFor="contact-email" className="block text-xs font-body uppercase tracking-widest text-muted-foreground mb-2">
-              E-mail
-            </label>
-            <input
-              id="contact-email"
-              type="email"
-              placeholder="jouw@email.nl"
-              className="w-full rounded-[var(--radius-md)] border border-border bg-transparent px-4 py-3 text-sm font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
-            />
-          </div>
+            {/* E-mail */}
+            <div>
+              <label htmlFor="contact-email" className="block text-xs font-body uppercase tracking-widest text-muted-foreground mb-2">
+                E-mail
+              </label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                required
+                placeholder="jouw@email.nl"
+                className="w-full rounded-[var(--radius-md)] border border-border bg-transparent px-4 py-3 text-sm font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
+              />
+              {state.fieldErrors?.email && (
+                <p className="mt-1 text-xs text-red-500">{state.fieldErrors.email[0]}</p>
+              )}
+            </div>
 
-          {/* Behandeling */}
-          <div>
-            <label htmlFor="contact-behandeling" className="block text-xs font-body uppercase tracking-widest text-muted-foreground mb-2">
-              Behandeling
-            </label>
-            <select
-              id="contact-behandeling"
-              defaultValue=""
-              className="w-full rounded-[var(--radius-md)] border border-border bg-transparent px-4 py-3 text-sm font-body text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors appearance-none"
-            >
-              <option value="" disabled>
-                Kies een behandeling
-              </option>
-              <option value="microblading">Microblading</option>
-              <option value="powder-brows">Powder Brows</option>
-              <option value="combi-brows">Combi Brows</option>
-              <option value="consult">Vrijblijvend Consult</option>
-            </select>
-          </div>
+            {/* Behandeling */}
+            <div>
+              <label htmlFor="contact-behandeling" className="block text-xs font-body uppercase tracking-widest text-muted-foreground mb-2">
+                Behandeling
+              </label>
+              <select
+                id="contact-behandeling"
+                name="behandeling"
+                defaultValue=""
+                className="w-full rounded-[var(--radius-md)] border border-border bg-transparent px-4 py-3 text-sm font-body text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors appearance-none"
+              >
+                <option value="" disabled>
+                  Kies een behandeling
+                </option>
+                <option value="microblading">Microblading</option>
+                <option value="powder-brows">Powder Brows</option>
+                <option value="combi-brows">Combi Brows</option>
+                <option value="consult">Vrijblijvend Consult</option>
+              </select>
+              {state.fieldErrors?.behandeling && (
+                <p className="mt-1 text-xs text-red-500">{state.fieldErrors.behandeling[0]}</p>
+              )}
+            </div>
 
-          {/* Bericht */}
-          <div>
-            <label htmlFor="contact-bericht" className="block text-xs font-body uppercase tracking-widest text-muted-foreground mb-2">
-              Bericht
-            </label>
-            <textarea
-              id="contact-bericht"
-              rows={4}
-              placeholder="Vertel iets over je wensen..."
-              className="w-full resize-none rounded-[var(--radius-md)] border border-border bg-transparent px-4 py-3 text-sm font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
-            />
-          </div>
+            {/* Bericht */}
+            <div>
+              <label htmlFor="contact-bericht" className="block text-xs font-body uppercase tracking-widest text-muted-foreground mb-2">
+                Bericht
+              </label>
+              <textarea
+                id="contact-bericht"
+                name="bericht"
+                required
+                rows={4}
+                placeholder="Vertel iets over je wensen..."
+                className="w-full resize-none rounded-[var(--radius-md)] border border-border bg-transparent px-4 py-3 text-sm font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
+              />
+              {state.fieldErrors?.bericht && (
+                <p className="mt-1 text-xs text-red-500">{state.fieldErrors.bericht[0]}</p>
+              )}
+            </div>
 
-          <Button type="submit" className="w-full" size="lg">
-            Verstuur Bericht
-          </Button>
-        </form>
+            {state.error && (
+              <p className="text-sm text-red-500">{state.error}</p>
+            )}
+
+            <Button type="submit" className="w-full" size="lg" disabled={isPending}>
+              {isPending ? "Versturen..." : "Verstuur Bericht"}
+            </Button>
+          </form>
+        )}
       </motion.div>
     </Section>
   );
