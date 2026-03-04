@@ -17,8 +17,17 @@ export function CalEmbed({ calLink, className }: CalEmbedProps) {
     (async function () {
       const cal = await getCalApi();
       cal("ui", {
-        styles: {
-          branding: { brandColor: "#A0845C" },
+        cssVarsPerTheme: {
+          light: {
+            "cal-brand": "#A0845C",
+            "cal-brand-emphasis": "#8A7045",
+            "cal-brand-text": "#FFFFFF",
+          },
+          dark: {
+            "cal-brand": "#B89B6E",
+            "cal-brand-emphasis": "#A0845C",
+            "cal-brand-text": "#FFFFFF",
+          },
         },
         hideEventTypeDetails: false,
         layout: "month_view",
@@ -26,9 +35,13 @@ export function CalEmbed({ calLink, className }: CalEmbedProps) {
     })();
   }, []);
 
+  // If calLink looks like an event type slug, construct full path;
+  // otherwise just use the username to show all event types
+  const fullCalLink = calLink ? `${username}/${calLink}` : username;
+
   return (
     <Cal
-      calLink={`${username}/${calLink}`}
+      calLink={fullCalLink}
       style={{ width: "100%", height: "100%", overflow: "scroll" }}
       config={{ layout: "month_view" }}
       className={className}

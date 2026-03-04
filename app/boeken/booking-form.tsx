@@ -71,7 +71,7 @@ export function BookingFormSection() {
         {selectedTreatment ? (
           <>
             <div className="min-h-[500px]">
-              <CalEmbed calLink={selectedTreatment} />
+              <CalEmbed calLink="" />
             </div>
             <p className="text-center mt-6">
               <a
