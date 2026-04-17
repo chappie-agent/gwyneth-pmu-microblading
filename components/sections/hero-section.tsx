@@ -285,6 +285,7 @@ export function HeroSection({
                 {primaryCta && (
                   <Link
                     href={primaryCta.href}
+                    {...(primaryCta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className={cn(
                       "inline-flex items-center gap-2 px-7 py-3",
                       "bg-accent text-warm-white",
@@ -313,6 +314,7 @@ export function HeroSection({
                 {secondaryCta && (
                   <Link
                     href={secondaryCta.href}
+                    {...(secondaryCta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className={cn(
                       "inline-flex items-center gap-2 px-7 py-3",
                       "border border-taupe text-grey-warm dark:border-grey-warm dark:text-taupe",
@@ -335,7 +337,7 @@ export function HeroSection({
           style={{ y: backgroundY }}
         >
           <Image
-            src={heroImage ?? "/hero-portrait-v4.png"}
+            src={heroImage ?? "/hero-portrait-v4.webp"}
             alt="Permanente make-up resultaat, natuurlijke wenkbrauwen"
             fill
             priority
@@ -430,7 +432,7 @@ export function HeroSection({
             >
               {primaryCta && (
                 <Button asChild size="lg" className="rounded-[var(--radius-sm)] px-8">
-                  <Link href={primaryCta.href}>{primaryCta.label}</Link>
+                  <Link href={primaryCta.href} {...(primaryCta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{primaryCta.label}</Link>
                 </Button>
               )}
               {secondaryCta && (
@@ -440,7 +442,7 @@ export function HeroSection({
                   size="lg"
                   className="rounded-[var(--radius-sm)] px-8"
                 >
-                  <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
+                  <Link href={secondaryCta.href} {...(secondaryCta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{secondaryCta.label}</Link>
                 </Button>
               )}
             </motion.div>

@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Check, ArrowRight } from "lucide-react";
 import type { PricingTier } from "@/data/pricing";
+import { siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 const staggerItem = {
@@ -151,7 +152,7 @@ export function PricingSection({
 
               <CardFooter className="mt-auto">
                 <Button asChild className="w-full">
-                  <Link href="/boeken">Boek Nu</Link>
+                  <Link href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer">Boek Nu</Link>
                 </Button>
               </CardFooter>
             </Card>

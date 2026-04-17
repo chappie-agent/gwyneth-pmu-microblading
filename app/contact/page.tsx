@@ -27,7 +27,7 @@ export default function ContactPage() {
         padding="md"
         title="Boek Je Afspraak Nu"
         description="Klaar om te starten? Plan direct je intake gesprek online."
-        cta={{ label: "Boek Nu", href: "/boeken" }}
+        cta={{ label: "Boek Nu", href: siteConfig.bookingUrl }}
       />
     </>
   );

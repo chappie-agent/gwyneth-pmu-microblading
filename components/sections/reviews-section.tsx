@@ -108,7 +108,9 @@ export function ReviewsSection({
   id,
 }: ReviewsSectionProps) {
   const [perPage, setPerPage] = useState(3);
-  const [activePage, setActivePage] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [animate, setAnimate] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 768px)");
@@ -119,20 +121,26 @@ export function ReviewsSection({
   }, []);
 
   const useCarousel = reviews.length > 3;
-  const totalPages = useCarousel ? Math.ceil(reviews.length / perPage) : 1;
 
   useEffect(() => {
-    if (activePage > totalPages - 1) setActivePage(0);
-  }, [activePage, totalPages]);
+    if (!useCarousel || isPaused) return;
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+    const id = window.setInterval(() => {
+      setAnimate(true);
+      setActiveIndex((i) => i + 1);
+    }, 4500);
+    return () => window.clearInterval(id);
+  }, [useCarousel, isPaused]);
 
-  const pages = useMemo(() => {
-    if (!useCarousel) return [reviews];
-    const result: Review[][] = [];
-    for (let i = 0; i < reviews.length; i += perPage) {
-      result.push(reviews.slice(i, i + perPage));
-    }
-    return result;
-  }, [reviews, perPage, useCarousel]);
+  const slides = useMemo(
+    () => (useCarousel ? [...reviews, ...reviews.slice(0, perPage)] : reviews),
+    [reviews, perPage, useCarousel],
+  );
+
+  const slideWidthPct = 100 / perPage;
 
   return (
     <Section
@@ -162,40 +170,59 @@ export function ReviewsSection({
           ))}
         </div>
       ) : (
-        <div>
+        <div
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onFocusCapture={() => setIsPaused(true)}
+          onBlurCapture={() => setIsPaused(false)}
+        >
           <div
-            className="overflow-hidden"
+            className="overflow-hidden -mx-3"
             role="region"
             aria-roledescription="carousel"
             aria-label="Klantreviews"
           >
-            <div
-              className="flex transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(-${activePage * 100}%)` }}
+            <motion.div
+              className="flex"
+              animate={{ x: `-${activeIndex * slideWidthPct}%` }}
+              transition={
+                animate
+                  ? { duration: 1.1, ease: [0.45, 0, 0.25, 1] }
+                  : { duration: 0 }
+              }
+              onAnimationComplete={() => {
+                if (activeIndex >= reviews.length) {
+                  setAnimate(false);
+                  setActiveIndex(0);
+                } else if (!animate) {
+                  setAnimate(true);
+                }
+              }}
             >
-              {pages.map((page, pageIndex) => (
+              {slides.map((review, slideIndex) => (
                 <div
-                  key={pageIndex}
-                  className="w-full shrink-0 grid grid-cols-1 md:grid-cols-3 gap-6"
-                  aria-hidden={pageIndex !== activePage}
+                  key={`${review.name}-${slideIndex}`}
+                  className="shrink-0 px-3"
+                  style={{ width: `${slideWidthPct}%` }}
                 >
-                  {page.map((review) => (
-                    <ReviewCard key={review.name} review={review} />
-                  ))}
+                  <ReviewCard review={review} />
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           <div className="flex justify-center items-center gap-2 mt-10">
-            {Array.from({ length: totalPages }).map((_, i) => {
-              const isActive = i === activePage;
+            {reviews.map((_, i) => {
+              const isActive = i === activeIndex % reviews.length;
               return (
                 <button
                   key={i}
                   type="button"
-                  onClick={() => setActivePage(i)}
-                  aria-label={`Ga naar pagina ${i + 1} van ${totalPages}`}
+                  onClick={() => {
+                    setAnimate(true);
+                    setActiveIndex(i);
+                  }}
+                  aria-label={`Ga naar review ${i + 1} van ${reviews.length}`}
                   aria-current={isActive ? "true" : undefined}
                   className={`h-[6px] rounded-full transition-all duration-300 ${
                     isActive

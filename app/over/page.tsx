@@ -4,6 +4,7 @@ import { AboutSection } from "@/components/sections/about-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { Section } from "@/components/layout/section";
 import { Card, CardContent } from "@/components/ui/card";
+import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Over Mij | Gwyneth PMU",
@@ -18,9 +19,9 @@ const trustCards = [
       "Internationale certificering in permanente make-up technieken. Jaarlijkse opfriscoursen verplicht.",
   },
   {
-    title: "500+ Gelukkige Clienten",
+    title: "1000+ Gelukkige Clienten",
     description:
-      "Vertrouwd door honderden clienten die hun perfecte look hebben bereikt.",
+      "Vertrouwd door duizend+ clienten die hun perfecte look hebben bereikt.",
   },
   {
     title: "Jarenlange Ervaring",
@@ -82,7 +83,7 @@ export default function OverPage() {
         padding="md"
         title="Laten We Samenwerken"
         description="Klaar om jouw natuurlijke schoonheid te versterken? Neem vandaag nog contact op."
-        cta={{ label: "Plan Jouw Intake", href: "/boeken" }}
+        cta={{ label: "Plan Jouw Intake", href: siteConfig.bookingUrl }}
       />
     </>
   );

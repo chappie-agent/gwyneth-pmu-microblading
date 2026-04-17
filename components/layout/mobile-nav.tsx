@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import type { NavItem } from "@/types/navigation";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/data/site";
 import {
   Sheet,
   SheetContent,
@@ -46,13 +47,14 @@ export function MobileNav({ mainNav }: MobileNavProps) {
             <Link
               href="/"
               onClick={handleLinkClick}
-              className="flex flex-col"
+              className="flex items-center"
             >
               <span className="font-display text-xl font-semibold tracking-wide">
-                Gwyneth PMU
+                Gwyneth
               </span>
-              <span className="font-body text-xs uppercase tracking-widest text-muted-foreground">
-                Microblading
+              <span aria-hidden="true" className="mx-3 h-6 w-px bg-foreground/40" />
+              <span className="font-display text-xl font-semibold tracking-wide">
+                PMU
               </span>
             </Link>
           </SheetTitle>
@@ -124,7 +126,7 @@ export function MobileNav({ mainNav }: MobileNavProps) {
             asChild
             className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-body text-sm uppercase tracking-wider"
           >
-            <Link href="/boeken" onClick={handleLinkClick}>
+            <Link href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={handleLinkClick}>
               Boek Nu
             </Link>
           </Button>

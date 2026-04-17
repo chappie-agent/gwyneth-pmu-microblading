@@ -1,5 +1,6 @@
 export const siteConfig = {
   name: "Gwyneth // PMU & Microblading",
+  bookingUrl: "https://gwyneth-slash-slash-pmu-en-microblading-1.salonized.com/widget_bookings/new",
   tagline: "Microblading + powderbrow",
   subtitle: "Permanente Make-up Specialist",
   description: "Verfijnde permanente make-up in een ontspannen sfeer. Jouw natuurlijke schoonheid, subtiel versterkt!",
@@ -17,13 +18,13 @@ export const siteConfig = {
     email: "info@pmu-microblading.nl",
   },
   hours: {
-    weekdays: "Ma \u2014 Vr: 09:00 \u2014 18:00",
-    saturday: "Za: Op afspraak",
+    weekdays: "Op afspraak, maandag t/m vrijdag",
+    saturday: "Ook enkele avondplekken beschikbaar",
   },
   social: {
     instagram: "https://instagram.com/gwynethpmu",
     facebook: "https://facebook.com/gwynethpmu",
     tiktok: "https://tiktok.com/@gwynethpmu",
   },
-  trustItems: ["Gecertificeerd", "5.0 Google Reviews", "500+ klanten"],
+  trustItems: ["Gecertificeerd", "4.8 Google Reviews", "1000+ klanten"],
 };

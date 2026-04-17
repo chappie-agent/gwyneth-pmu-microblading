@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { HeroSection } from "@/components/sections/hero-section";
 import { TreatmentsSection } from "@/components/sections/treatments-section";
 import { ProcessSection } from "@/components/sections/process-section";
-import { ResultsSection } from "@/components/sections/results-section";
+// HIDDEN until real client photos are available — restore when ready
+// import { ResultsSection } from "@/components/sections/results-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { Section } from "@/components/layout/section";
@@ -13,6 +14,7 @@ import {
   comparisonLabels,
 } from "@/data/treatments";
 import { behandelingenFAQ } from "@/data/faq";
+import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Behandelingen | Gwyneth PMU",
@@ -101,7 +103,8 @@ export default function BehandelingenPage() {
       />
       <ComparisonTable coreItems={coreItems} />
       <ProcessSection variant="default" padding="lg" steps={homeProcessSteps} />
-      <ResultsSection variant="dark" padding="lg" />
+      {/* HIDDEN until real client photos are available — restore when ready */}
+      {/* <ResultsSection variant="dark" padding="lg" /> */}
       <FAQSection
         items={faqItems}
         variant="default"
@@ -113,7 +116,7 @@ export default function BehandelingenPage() {
         padding="md"
         title="Laten We Jouw Perfecte Look Cre\u00EBren"
         description="Boek een vrijblijvend consult en ontdek welke behandeling het beste bij jou past."
-        cta={{ label: "Plan Jouw Intake", href: "/boeken" }}
+        cta={{ label: "Plan Jouw Intake", href: siteConfig.bookingUrl }}
       />
     </>
   );

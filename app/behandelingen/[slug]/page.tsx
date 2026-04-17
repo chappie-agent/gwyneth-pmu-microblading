@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { Check, X, Clock } from "lucide-react";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ProcessSection } from "@/components/sections/process-section";
-import { ResultsSection } from "@/components/sections/results-section";
+// HIDDEN until real client photos are available — restore when ready
+// import { ResultsSection } from "@/components/sections/results-section";
 import { PricingSection } from "@/components/sections/pricing-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { CTASection } from "@/components/sections/cta-section";
@@ -11,6 +12,7 @@ import { Section } from "@/components/layout/section";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { treatments } from "@/data/treatments";
 import { pricingTiers } from "@/data/pricing";
+import { siteConfig } from "@/data/site";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -38,7 +40,8 @@ export default async function TreatmentPage({ params }: PageProps) {
 
   const pricingItems = pricingTiers;
 
-  const isCore = (treatment.category ?? "core") === "core";
+  // HIDDEN: used by ResultsSection gate (currently hidden) — restore when ready
+  // const isCore = (treatment.category ?? "core") === "core";
 
   return (
     <>
@@ -155,7 +158,8 @@ export default async function TreatmentPage({ params }: PageProps) {
       />
 
       {/* Results, only for core PMU treatments */}
-      {isCore && <ResultsSection variant="dark" padding="lg" />}
+      {/* HIDDEN until real client photos are available — restore when ready */}
+      {/* {isCore && <ResultsSection variant="dark" padding="lg" />} */}
 
       {/* Aftercare Timeline */}
       <Section variant="sage" padding="lg">
@@ -285,7 +289,7 @@ export default async function TreatmentPage({ params }: PageProps) {
         padding="md"
         title={`Klaar Voor Jouw ${treatment.name}?`}
         description={`Boek een vrijblijvend consult en ontdek wat ${treatment.name.toLowerCase()} voor jou kan betekenen.`}
-        cta={{ label: "Plan Jouw Intake", href: "/boeken" }}
+        cta={{ label: "Plan Jouw Intake", href: siteConfig.bookingUrl }}
       />
     </>
   );

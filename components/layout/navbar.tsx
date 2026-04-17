@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import type { NavItem } from "@/types/navigation";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/data/site";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -107,22 +108,29 @@ export function Navbar({ mainNav }: NavbarProps) {
     >
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex flex-col">
+        <Link href="/" className="flex items-center">
           <span
             className={cn(
               "font-display text-xl font-semibold tracking-wide transition-colors duration-300",
               colors.logo
             )}
           >
-            Gwyneth PMU
+            Gwyneth
           </span>
           <span
+            aria-hidden="true"
             className={cn(
-              "font-body text-xs uppercase tracking-widest transition-colors duration-300",
-              colors.subtitle
+              "mx-3 h-6 w-px transition-colors duration-300",
+              colors.logo === "text-foreground" ? "bg-foreground/40" : "bg-current opacity-40"
+            )}
+          />
+          <span
+            className={cn(
+              "font-display text-xl font-semibold tracking-wide transition-colors duration-300",
+              colors.logo
             )}
           >
-            Microblading
+            PMU
           </span>
         </Link>
 
@@ -195,7 +203,7 @@ export function Navbar({ mainNav }: NavbarProps) {
             size="sm"
             className="hidden lg:inline-flex bg-accent text-accent-foreground hover:bg-accent/90 font-body text-xs uppercase tracking-wider"
           >
-            <Link href="/boeken">Boek Nu</Link>
+            <Link href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer">Boek Nu</Link>
           </Button>
           <div className="lg:hidden">
             <MobileNav mainNav={mainNav} />

@@ -4,6 +4,7 @@ import { ResultsSection } from "@/components/sections/results-section";
 import { ReviewsSection } from "@/components/sections/reviews-section";
 import { CTASection } from "@/components/sections/cta-section";
 import { reviews } from "@/data/reviews";
+import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Resultaten | Gwyneth PMU",
@@ -27,7 +28,7 @@ export default function ResultatenPage() {
         padding="md"
         title="Jij Bent De Volgende Success Story"
         description="Laten we samen werken aan jouw perfecte look. Plan je gratis consult vandaag."
-        cta={{ label: "Boek Nu", href: "/boeken" }}
+        cta={{ label: "Boek Nu", href: siteConfig.bookingUrl }}
       />
     </>
   );

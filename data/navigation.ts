@@ -1,3 +1,5 @@
+import { siteConfig } from "./site";
+
 export interface NavItem {
   label: string;
   href: string;
@@ -19,7 +21,8 @@ export const mainNav: NavItem[] = [
       { label: "Brow Lamination", href: "/behandelingen/brow-lamination" },
     ],
   },
-  { label: "Resultaten", href: "/resultaten" },
+  // HIDDEN until real client photos are available — restore when ready
+  // { label: "Resultaten", href: "/resultaten" },
   { label: "Over Mij", href: "/over" },
   { label: "Prijzen", href: "/prijzen" },
   { label: "Contact", href: "/contact" },
@@ -36,12 +39,13 @@ export const footerNav = {
   ],
   info: [
     { label: "Over Mij", href: "/over" },
-    { label: "Resultaten", href: "/resultaten" },
+    // HIDDEN until real client photos are available — restore when ready
+    // { label: "Resultaten", href: "/resultaten" },
     { label: "FAQ", href: "/faq" },
     { label: "Nazorg", href: "/nazorg" },
   ],
   contact: [
-    { label: "Afspraak Maken", href: "/boeken" },
+    { label: "Afspraak Maken", href: siteConfig.bookingUrl },
   ],
   legal: [
     { label: "Privacy", href: "/privacy" },

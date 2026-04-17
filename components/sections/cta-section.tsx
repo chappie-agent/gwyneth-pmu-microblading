@@ -99,6 +99,7 @@ export function CTASection({
         <motion.div variants={fadeUp}>
           <Link
             href={cta.href}
+            {...(cta.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             className="inline-flex items-center gap-[0.6rem] px-[2.4rem] py-4 bg-accent text-warm-white text-[0.73rem] font-body font-normal tracking-[0.2em] uppercase border-none rounded-[var(--radius-sm)] relative overflow-hidden transition-all duration-400 ease hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(171,139,103,0.25)]"
           >
             {cta.label}

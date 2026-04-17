@@ -7,6 +7,7 @@ import { Section } from "@/components/layout/section";
 import { pricingTiers, whatsIncluded } from "@/data/pricing";
 import { paymentFAQ } from "@/data/faq";
 import { Check } from "lucide-react";
+import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Prijzen | Gwyneth PMU",
@@ -137,7 +138,7 @@ export default function PrijzenPage() {
         padding="md"
         title="Boek Je Afspraak Vandaag"
         description="Klaar om de stap te zetten? Plan je intake gesprek en ontdek wat PMU voor jou kan betekenen."
-        cta={{ label: "Plan Jouw Intake", href: "/boeken" }}
+        cta={{ label: "Plan Jouw Intake", href: siteConfig.bookingUrl }}
       />
     </>
   );

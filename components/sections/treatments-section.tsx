@@ -14,13 +14,13 @@ import {
 import { ArrowRight } from "lucide-react";
 import type { Treatment } from "@/data/treatments";
 /** Fallback images per treatment slug */
-const fallbackImages: Record<string, string> = {
-  microblading: "/microblading-behandeling.png",
-  "powder-brows": "/powder-brows-portrait-v1.png",
-  "combi-brows": "/combi-brows-detail.png",
+const fallbackImages: Record<string, { src: string; position?: string; inset?: string }> = {
+  microblading: { src: "/microblading-behandeling-v1.webp", position: "20% 30%", inset: "-35%" },
+  "powder-brows": { src: "/powder-brows-portrait-v1.webp" },
+  "combi-brows": { src: "/combi-brows-detail-v1.webp", position: "left center" },
 };
 
-function treatmentImageSrc(treatment: Treatment): string | null {
+function treatmentImage(treatment: Treatment): { src: string; position?: string; inset?: string } | null {
   return fallbackImages[treatment.slug] ?? null;
 }
 
@@ -76,15 +76,21 @@ function TreatmentCard({ treatment }: { treatment: Treatment }) {
     >
       {/* Full-bleed background image */}
       {(() => {
-        const src = treatmentImageSrc(treatment);
-        return src ? (
-          <Image
-            src={src}
-            alt={treatment.name}
-            fill
-            className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.03] group-data-[in-view]:scale-[1.03]"
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          />
+        const image = treatmentImage(treatment);
+        return image ? (
+          <div
+            className="absolute transition-transform duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.03] group-data-[in-view]:scale-[1.03]"
+            style={{ inset: image.inset ?? "0" }}
+          >
+            <Image
+              src={image.src}
+              alt={treatment.name}
+              fill
+              className="object-cover"
+              style={image.position ? { objectPosition: image.position } : undefined}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          </div>
         ) : (
           <div
             className="absolute inset-0 transition-transform duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.03] group-data-[in-view]:scale-[1.03]"
@@ -166,7 +172,7 @@ function TreatmentCard({ treatment }: { treatment: Treatment }) {
 /* ─── Compact treatment card, half height, for overview page ─── */
 function CompactTreatmentCard({ treatment }: { treatment: Treatment }) {
   const { ref, active } = useScrollActivate<HTMLAnchorElement>();
-  const imgSrc = treatmentImageSrc(treatment);
+  const imgSrc = treatmentImage(treatment)?.src ?? null;
 
   return (
     <Link
