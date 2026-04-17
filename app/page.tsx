@@ -12,7 +12,7 @@ import { ContactSection } from "@/components/sections/contact-section";
 import { coreTreatments, homeProcessSteps, uspItems } from "@/data/treatments";
 import { pricingTiers } from "@/data/pricing";
 import { homeFAQ } from "@/data/faq";
-import { reviews } from "@/data/reviews";
+import { reviews, placeholderReviewImages } from "@/data/reviews";
 import { siteConfig } from "@/data/site";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
@@ -34,9 +34,19 @@ export default async function Home() {
 
   // Dual-source fallbacks: use Sanity data if available, otherwise fall back to static data
   const treatmentsItems = treatmentsData?.length ? treatmentsData : coreTreatments;
-  const pricingItems = pricingData?.length ? pricingData : pricingTiers;
+  const flagshipSlugs = ["microblading", "powder-brows", "combi-brows"];
+  const allPricing = pricingData?.length ? pricingData : pricingTiers;
+  const pricingItems = flagshipSlugs
+    .map((slug) => allPricing.find((t: any) => t.slug === slug))
+    .filter((t: any): t is NonNullable<typeof t> => Boolean(t));
   const faqItems = faqData?.length ? faqData : homeFAQ;
-  const reviewsItems = reviewsData?.length ? reviewsData : reviews;
+  const rawReviews = reviewsData?.length ? reviewsData : reviews;
+  // TODO: vervang placeholder-foto's door echte klantfoto's (via Sanity `image`-veld)
+  const reviewsItems = rawReviews.map((r: any, i: number) => ({
+    ...r,
+    treatment: r.treatment ?? r.treatmentName,
+    image: r.image ?? placeholderReviewImages[i % placeholderReviewImages.length],
+  }));
   const settings = settingsData ?? siteConfig;
 
   return (

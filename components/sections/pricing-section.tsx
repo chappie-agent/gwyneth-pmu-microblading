@@ -19,7 +19,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Check } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import type { PricingTier } from "@/data/pricing";
 import { cn } from "@/lib/utils";
 
@@ -158,6 +158,18 @@ export function PricingSection({
           </motion.div>
         ))}
       </div>
+
+      {!single && (
+        <motion.div variants={staggerItem} className="text-center mt-12">
+          <Link
+            href="/prijzen"
+            className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-border/50 bg-background px-8 py-3 text-sm font-body uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:border-accent hover:text-accent"
+          >
+            Bekijk alle tarieven
+            <ArrowRight className="size-4" />
+          </Link>
+        </motion.div>
+      )}
     </Section>
   );
 }

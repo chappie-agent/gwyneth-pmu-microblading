@@ -49,7 +49,7 @@
   --color-linen: hsl(31 20% 91%);
   --color-beige: hsl(31 22% 85%);
   --color-taupe: hsl(31 14% 65%);
-  --color-taupe-dark: hsl(32 16% 48%);
+  --color-taupe-dark: hsl(32 16% 36%);
   --color-grey-warm: hsl(30 12% 36%);
   --color-charcoal: hsl(28 12% 20%);
   --color-dark: hsl(25 12% 13%);
@@ -90,7 +90,7 @@
     --secondary: hsl(31 20% 91%);
     --secondary-foreground: hsl(28 12% 20%);
     --muted: hsl(31 22% 85%);
-    --muted-foreground: hsl(32 16% 48%);
+    --muted-foreground: hsl(32 16% 36%);
     --accent: hsl(32 29% 54%);
     --accent-foreground: hsl(33 20% 97%);
     --destructive: hsl(0 84% 60%);

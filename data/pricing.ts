@@ -57,48 +57,6 @@ export const pricingTiers: PricingTier[] = [
       "Nabehandeling na 6 weken inbegrepen",
     ],
   },
-  {
-    slug: "eyeliner",
-    name: "Eyeliner PMU",
-    label: "Permanente Make-up",
-    price: 200,
-    priceLabel: "\u20AC200",
-    includes: [
-      "Vrijblijvend consult",
-      "Vorm tekening & goedkeuring",
-      "Volledige behandeling (ca. 1,5 uur)",
-      "Premium pigmenten",
-      "Aftercare gel & instructies",
-    ],
-  },
-  {
-    slug: "lashlift",
-    name: "Lashlift",
-    label: "Wimperbehandeling",
-    price: 55,
-    priceLabel: "\u20AC55",
-    includes: [
-      "Reiniging & voorbereiding",
-      "Professionele liftbehandeling",
-      "Setting & fixering",
-      "Optioneel wimperverf",
-      "Nazorginstructies",
-    ],
-  },
-  {
-    slug: "brow-styling",
-    name: "Brow Styling",
-    label: "Wenkbrauw Styling",
-    price: 60,
-    priceLabel: "\u20AC60",
-    includes: [
-      "Wenkbrauw analyse & advies",
-      "Browlamination behandeling",
-      "Verven in de perfecte kleur",
-      "Epileren voor strakke vorm",
-      "Nazorginstructies",
-    ],
-  },
 ];
 
 export const touchUpPrice = "\u20AC100-150";

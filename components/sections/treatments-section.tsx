@@ -306,6 +306,18 @@ export function TreatmentsSection({
           </motion.div>
         ))}
       </div>
+
+      {!compact && (
+        <motion.div variants={staggerItem} className="text-center mt-12">
+          <Link
+            href="/behandelingen"
+            className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-border/50 bg-background px-8 py-3 text-sm font-body uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:border-accent hover:text-accent"
+          >
+            Bekijk alle behandelingen
+            <ArrowRight className="size-4" />
+          </Link>
+        </motion.div>
+      )}
     </Section>
   );
 }
