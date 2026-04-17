@@ -25,7 +25,7 @@ export async function generateMetadata({
   const treatment = treatments.find((t) => t.slug === slug);
   if (!treatment) return {};
   return {
-    title: `${treatment.name} — Gwyneth PMU`,
+    title: `${treatment.name} | Gwyneth PMU`,
     description: treatment.heroDescription,
   };
 }
@@ -151,10 +151,10 @@ export default async function TreatmentPage({ params }: PageProps) {
         padding="lg"
         steps={treatment.process}
         title={`Het ${treatment.name} Proces`}
-        description={`Van intake tot eindresultaat — zo verloopt jouw ${treatment.name.toLowerCase()} behandeling.`}
+        description={`Van intake tot eindresultaat, zo verloopt jouw ${treatment.name.toLowerCase()} behandeling.`}
       />
 
-      {/* Results — only for core PMU treatments */}
+      {/* Results, only for core PMU treatments */}
       {isCore && <ResultsSection variant="dark" padding="lg" />}
 
       {/* Aftercare Timeline */}

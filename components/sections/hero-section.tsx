@@ -62,7 +62,7 @@ const variantStyles: Record<HeroVariant, string> = {
   sage: "bg-sage-wash text-charcoal dark:bg-grey-warm dark:text-cream",
 };
 
-/** Description text colors per variant — avoids muted-foreground clashing with bg */
+/** Description text colors per variant, avoids muted-foreground clashing with bg */
 const descriptionStyles: Record<HeroVariant, string> = {
   default: "text-taupe-dark dark:text-taupe",
   static: "text-muted-foreground",
@@ -71,7 +71,7 @@ const descriptionStyles: Record<HeroVariant, string> = {
   sage: "text-muted-foreground",
 };
 
-/* Trust item icons — inline SVGs matching the original design */
+/* Trust item icons, inline SVGs matching the original design */
 const trustIcons: Record<string, React.ReactNode> = {
   Gecertificeerd: (
     <svg
@@ -87,7 +87,7 @@ const trustIcons: Record<string, React.ReactNode> = {
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
     </svg>
   ),
-  "5.0 Google Reviews": (
+  "4.8 Google Reviews": (
     <svg
       width="16"
       height="16"
@@ -101,7 +101,7 @@ const trustIcons: Record<string, React.ReactNode> = {
       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
     </svg>
   ),
-  "500+ klanten": (
+  "1000+ klanten": (
     <svg
       width="16"
       height="16"
@@ -218,7 +218,7 @@ export function HeroSection({
         {/* Left content */}
         <Container className="relative z-10">
           <div className="flex flex-col items-start gap-5 max-w-[600px] py-24">
-            {/* Eyebrow — plain text, not a Badge */}
+            {/* Eyebrow, plain text, not a Badge */}
             {eyebrow && (
               <motion.span
                 variants={fadeIn(0)}
@@ -335,11 +335,11 @@ export function HeroSection({
           style={{ y: backgroundY }}
         >
           <Image
-            src={heroImage ?? "/hero-portrait.png"}
-            alt="Permanente make-up resultaat — natuurlijke wenkbrauwen"
+            src={heroImage ?? "/hero-portrait-v4.png"}
+            alt="Permanente make-up resultaat, natuurlijke wenkbrauwen"
             fill
             priority
-            className="object-cover object-[calc(50%-150px)_center] h-[120%] w-full"
+            className="object-cover object-[calc(50%+0px)_center]"
             sizes="55vw"
           />
           {/* Light mode: linen gradient fade from left */}
@@ -347,7 +347,7 @@ export function HeroSection({
             className="absolute inset-0 z-[1] dark:opacity-0 transition-opacity"
             style={{
               background:
-                "linear-gradient(to right, hsl(31 20% 91%) 0%, hsl(31 20% 91% / 0.6) 30%, transparent 70%)",
+                "linear-gradient(to right, hsl(31 20% 91%) 0%, hsl(31 20% 91%) 25%, hsl(31 20% 91% / 0.85) 35%, hsl(31 20% 91% / 0.5) 45%, hsl(31 20% 91% / 0.2) 55%, transparent 65%)",
             }}
           />
           {/* Dark mode: dark tint over entire image + gradient fade from left and bottom */}
@@ -355,7 +355,7 @@ export function HeroSection({
             className="absolute inset-0 z-[1] opacity-0 dark:opacity-100 transition-opacity"
             style={{
               background: [
-                "linear-gradient(to right, hsl(25 10% 11%) 0%, hsl(25 10% 11% / 0.9) 25%, hsl(25 10% 11% / 0.55) 65%, hsl(25 10% 11% / 0.45) 100%)",
+                "linear-gradient(to right, hsl(25 10% 11%) 0%, hsl(25 10% 11%) 25%, hsl(25 10% 11% / 0.8) 35%, hsl(25 10% 11% / 0.5) 45%, hsl(25 10% 11% / 0.3) 55%, hsl(25 10% 11% / 0.3) 100%)",
                 "linear-gradient(to top, hsl(25 10% 11%) 0%, hsl(25 10% 11% / 0.6) 15%, transparent 40%)",
               ].join(", "),
             }}

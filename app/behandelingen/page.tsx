@@ -15,7 +15,7 @@ import {
 import { behandelingenFAQ } from "@/data/faq";
 
 export const metadata: Metadata = {
-  title: "Behandelingen — Gwyneth PMU",
+  title: "Behandelingen | Gwyneth PMU",
   description:
     "Permanente make-up en beauty behandelingen: Microblading, Powder Brows, Combi Brows, Eyeliner PMU, Lashlift en Brow Styling.",
 };

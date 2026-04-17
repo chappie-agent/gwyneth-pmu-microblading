@@ -6,7 +6,7 @@ import { CTASection } from "@/components/sections/cta-section";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Contact — Gwyneth PMU",
+  title: "Contact | Gwyneth PMU",
   description:
     "Neem contact op voor vragen of om een afspraak te maken.",
 };

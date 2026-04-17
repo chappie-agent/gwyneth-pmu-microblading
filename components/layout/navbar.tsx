@@ -35,7 +35,7 @@ import { useNavbarTheme } from "@/contexts/navbar-theme";
 function useHeroAwareColors(scrolled: boolean) {
   const { heroBg } = useNavbarTheme();
 
-  // When scrolled the navbar has its own bg — use default theme colours.
+  // When scrolled the navbar has its own bg, use default theme colours.
   if (scrolled) {
     return {
       logo: "text-foreground",

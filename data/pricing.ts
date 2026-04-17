@@ -14,10 +14,10 @@ export const pricingTiers: PricingTier[] = [
     slug: "microblading",
     name: "Microblading",
     label: "Hairstroke",
-    price: 340,
-    priceLabel: "\u20AC340",
+    price: 430,
+    priceLabel: "\u20AC430",
     includes: [
-      "Gratis intake consult",
+      "Start met consult",
       "Vorm & kleur mapping",
       "Volledige behandeling (ca. 2 uur)",
       "Premium pigmenten",
@@ -29,12 +29,12 @@ export const pricingTiers: PricingTier[] = [
     slug: "powder-brows",
     name: "Powder Brows",
     label: "Meest Populair",
-    price: 340,
-    priceLabel: "\u20AC340",
+    price: 430,
+    priceLabel: "\u20AC430",
     featured: true,
     featuredLabel: "Meest Gekozen",
     includes: [
-      "Gratis intake consult",
+      "Start met consult",
       "Vorm & kleur mapping",
       "Volledige behandeling (ca. 2 uur)",
       "Premium pigmenten",
@@ -46,20 +46,62 @@ export const pricingTiers: PricingTier[] = [
     slug: "combi-brows",
     name: "Combi Brows",
     label: "Premium",
-    price: 375,
-    priceLabel: "\u20AC375",
+    price: 475,
+    priceLabel: "\u20AC475",
     includes: [
-      "Gratis intake consult",
-      "Vorm & kleur mapping",
+      "Start met consult",
+      "Vorm & kleur bepaling",
       "Volledige behandeling (ca. 2,5 uur)",
       "Premium pigmenten",
       "Complete aftercare kit",
       "Nabehandeling na 6 weken inbegrepen",
     ],
   },
+  {
+    slug: "eyeliner",
+    name: "Eyeliner PMU",
+    label: "Permanente Make-up",
+    price: 300,
+    priceLabel: "vanaf \u20AC300",
+    includes: [
+      "inclusief intake consult",
+      "Vorm tekening & goedkeuring",
+      "Volledige behandeling (ca. 2 uur)",
+      "Premium pigmenten",
+      "Aftercare gel & instructies",
+      "inclusief nabehandeling",
+    ],
+  },
+  {
+    slug: "lashlift",
+    name: "Lashlift",
+    label: "Wimperbehandeling",
+    price: 55,
+    priceLabel: "\u20AC55",
+    includes: [
+      "Reiniging & voorbereiding",
+      "Professionele liftbehandeling",
+      "Setting & fixering",
+      "Optioneel wimperverf",
+      "Nazorginstructies",
+    ],
+  },
+  {
+    slug: "brow-lamination",
+    name: "Brow Lamination",
+    label: "Wenkbrauw lamineren",
+    price: 50,
+    priceLabel: "\u20AC50",
+    includes: [
+      "Wenkbrauw analyse & advies",
+      "Browlamination behandeling",
+      "Epileren voor strakke vorm",
+      "Nazorginstructies",
+    ],
+  },
 ];
 
-export const touchUpPrice = "\u20AC100-150";
+export const touchUpPrice = "\u20AC120";
 
 export const whatsIncluded = {
   consult: {
@@ -86,7 +128,7 @@ export const whatsIncluded = {
     ],
   },
   touchUp: {
-    title: "Nabehandeling (6 Weken)",
+    title: "Nabehandeling (6-8 Weken)",
     description: "Na volledige genezing plan je een nabehandeling. Dit is het perfecte moment om kleine aanpassingen te maken. Inbegrepen bij PMU wenkbrauwbehandelingen.",
   },
   noExtraCosts: [

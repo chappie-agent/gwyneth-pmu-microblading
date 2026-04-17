@@ -43,7 +43,7 @@
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
 
-  /* Brand colors — derived from #AB8B67 + #D5C6B6 */
+  /* Brand colors, derived from #AB8B67 + #D5C6B6 */
   --color-cream: hsl(33 28% 95%);
   --color-warm-white: hsl(33 20% 97%);
   --color-linen: hsl(31 20% 91%);

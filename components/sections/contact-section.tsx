@@ -164,7 +164,7 @@ export function ContactSection({
           </a>
         </div>
 
-        {/* Map — desktop only, below contact info */}
+        {/* Map, desktop only, below contact info */}
         <div className="relative mt-6 hidden lg:block w-full h-[300px] overflow-hidden rounded-[var(--radius-lg)] border border-border/50">
           <div className="absolute inset-0 z-10 pointer-events-none mix-blend-multiply bg-accent/[0.08]" />
           <iframe

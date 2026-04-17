@@ -55,7 +55,7 @@ export function EmailLayout({ preview, children }: EmailLayoutProps) {
             <Section style={{ textAlign: "center" as const, paddingTop: "32px" }}>
               <Hr style={{ borderColor: "#E0D8CE", margin: "0 0 24px" }} />
               <Text style={{ fontSize: "13px", color: colors.taupe, margin: "0 0 4px" }}>
-                Gwyneth PMU — Permanente Make-up Specialist
+                Gwyneth PMU, Permanente Make-up Specialist
               </Text>
               <Text style={{ fontSize: "12px", color: colors.taupe, margin: "0 0 4px" }}>
                 Hekendorpstraat 54, 2727 CL Zoetermeer

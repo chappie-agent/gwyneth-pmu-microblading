@@ -3,31 +3,27 @@ export interface Review {
   treatment: string;
   rating: number;
   text: string;
-  /** Optional portrait photo URL. Falls back to initials when absent. */
   image?: string;
 }
 
 export const reviews: Review[] = [
   {
-    name: "Sophie B.",
+    name: "D. Broshka",
     treatment: "Microblading",
     rating: 5,
-    text: "Ik voelde me zo op mijn gemak bij Gwyneth. Ze nam alle tijd om mijn wensen te begrijpen. Het resultaat is ongelooflijk natuurlijk \u2014 ik krijg constant complimenten.",
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    text: "Gwyneth is een vakvrouw! Ze neemt de tijd voor je, werkt heel nauwgezet en luistert goed naar je wensen. Daarnaast is ze een warm en fijn mens waarbij je je snel op je gemak voelt. Het resultaat is ontzettend mooi!",
   },
   {
-    name: "Laura M.",
+    name: "Baan",
     treatment: "Powder Brows",
     rating: 5,
-    text: "Precies de zachte kleur die ik wilde. De studio is prachtig en de sfeer heel rustgevend.",
-    image: "https://randomuser.me/api/portraits/women/68.jpg",
+    text: "Wat ben ik blij met mijn 'nieuwe' wenkbrauwen! Ik ben heel ziek geweest en door de behandelingen had ik praktisch geen wenkbrauwen meer, ook niet na een paar jaar. Maar nu, door Gwyneth, heb ik supermooi en natuurlijke wenkbrauwen! Ze zijn nog nooit zo mooi geweest. Ik ben er ontzettend blij mee en Gwyneth heel dankbaar!",
   },
   {
-    name: "Nina K.",
-    treatment: "Combi Brows",
+    name: "Nienke",
+    treatment: "Microblading",
     rating: 5,
-    text: "Na jaren twijfelen ben ik zo blij dat ik voor Gwyneth heb gekozen. Professioneel en prachtig resultaat!",
-    image: "https://randomuser.me/api/portraits/women/32.jpg",
+    text: "Ik heb recentelijk mijn wenkbrauwen laten microbladen bij Gwyneth en ben ontzettend blij met het resultaat. Super professioneel en veel mooier en natuurlijker dan ik het zelf met normale make-up kan krijgen. Aanrader!",
   },
 ];
 
@@ -35,7 +31,4 @@ export const placeholderReviewImages = [
   "https://randomuser.me/api/portraits/women/44.jpg",
   "https://randomuser.me/api/portraits/women/68.jpg",
   "https://randomuser.me/api/portraits/women/32.jpg",
-  "https://randomuser.me/api/portraits/women/65.jpg",
-  "https://randomuser.me/api/portraits/women/12.jpg",
-  "https://randomuser.me/api/portraits/women/90.jpg",
 ];

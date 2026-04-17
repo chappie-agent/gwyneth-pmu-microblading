@@ -16,7 +16,7 @@ import type { Treatment } from "@/data/treatments";
 /** Fallback images per treatment slug */
 const fallbackImages: Record<string, string> = {
   microblading: "/microblading-behandeling.png",
-  "powder-brows": "/powder-brows-portrait.png",
+  "powder-brows": "/powder-brows-portrait-v1.png",
   "combi-brows": "/combi-brows-detail.png",
 };
 
@@ -163,7 +163,7 @@ function TreatmentCard({ treatment }: { treatment: Treatment }) {
   );
 }
 
-/* ─── Compact treatment card — half height, for overview page ─── */
+/* ─── Compact treatment card, half height, for overview page ─── */
 function CompactTreatmentCard({ treatment }: { treatment: Treatment }) {
   const { ref, active } = useScrollActivate<HTMLAnchorElement>();
   const imgSrc = treatmentImageSrc(treatment);

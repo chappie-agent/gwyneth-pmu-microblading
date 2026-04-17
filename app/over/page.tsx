@@ -6,7 +6,7 @@ import { Section } from "@/components/layout/section";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Over Mij — Gwyneth PMU",
+  title: "Over Mij | Gwyneth PMU",
   description:
     "Leer meer over Gwyneth, gecertificeerd PMU specialist met jarenlange ervaring.",
 };

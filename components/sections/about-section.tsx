@@ -57,7 +57,7 @@ export function AboutSection({
             {aboutImage ? (
               <Image
                 src={aboutImage}
-                alt="Gwyneth — PMU specialist"
+                alt="Gwyneth, PMU specialist"
                 width={800}
                 height={1000}
                 className="w-full h-[580px] max-lg:h-[400px] object-cover"
@@ -89,7 +89,7 @@ export function AboutSection({
           <div className="space-y-6 mb-8 max-w-[440px]">
             <p className="font-body text-[0.95rem] text-grey-warm dark:text-taupe leading-relaxed">
               Met passie en precisie creëer ik permanente make-up die naadloos aansluit bij jouw
-              natuurlijke uitstraling. Elk gezicht vertelt een verhaal — ik help dat verhaal nog
+              natuurlijke uitstraling. Elk gezicht vertelt een verhaal, en ik help dat verhaal nog
               mooier te maken.
             </p>
             <p className="font-body text-[0.95rem] text-grey-warm dark:text-taupe leading-relaxed">
@@ -97,7 +97,7 @@ export function AboutSection({
               hoogste niveau. Mijn studio is jouw plek van rust, vertrouwen en transformatie.
             </p>
           </div>
-          <p className="font-display italic text-[1.8rem] text-accent mt-[1.5rem]">— Gwyneth</p>
+          <p className="font-display italic text-[1.8rem] text-accent mt-[1.5rem]">Gwyneth</p>
         </motion.div>
       </div>
     </Section>

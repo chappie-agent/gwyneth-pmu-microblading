@@ -48,7 +48,7 @@ export function ContactConfirmationEmail({ naam, behandeling, bericht }: Contact
         Heb je ondertussen vragen? Je kunt ons altijd bereiken via telefoon of e-mail.
       </Text>
       <Text style={{ fontSize: "16px", fontStyle: "italic", color: accent, margin: "24px 0 0" }}>
-        — Gwyneth
+        Gwyneth
       </Text>
     </EmailLayout>
   );

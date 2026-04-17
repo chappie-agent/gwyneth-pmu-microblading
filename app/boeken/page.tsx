@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { BookingFormSection } from "./booking-form";
 
 export const metadata: Metadata = {
-  title: "Boeken — Gwyneth PMU",
+  title: "Boeken | Gwyneth PMU",
   description:
     "Boek je PMU behandeling online. Kies je behandeling, datum en tijd.",
 };
@@ -23,7 +23,7 @@ const voorbereidingErvoor = [
 const voorbereidingDag = [
   "Kom met een schoon gezicht (geen make-up op de wenkbrauwen)",
   "Neem je favoriete wenkbrauwproducten mee als referentie",
-  "Eet goed voor je komt — de behandeling duurt 2-3 uur",
+  "Eet goed voor je komt, want de behandeling duurt 2 tot 3 uur",
   "Neem eventueel een hoofdtelefoon mee voor ontspanning",
 ];
 

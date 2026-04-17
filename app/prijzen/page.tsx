@@ -9,7 +9,7 @@ import { paymentFAQ } from "@/data/faq";
 import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Prijzen — Gwyneth PMU",
+  title: "Prijzen | Gwyneth PMU",
   description:
     "Transparante prijzen voor alle PMU behandelingen. Geen verborgen kosten.",
 };

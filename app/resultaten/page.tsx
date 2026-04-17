@@ -6,7 +6,7 @@ import { CTASection } from "@/components/sections/cta-section";
 import { reviews } from "@/data/reviews";
 
 export const metadata: Metadata = {
-  title: "Resultaten — Gwyneth PMU",
+  title: "Resultaten | Gwyneth PMU",
   description:
     "Bekijk echte resultaten van permanente make-up behandelingen.",
 };
