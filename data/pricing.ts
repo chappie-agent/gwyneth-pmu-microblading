@@ -46,8 +46,8 @@ export const pricingTiers: PricingTier[] = [
     slug: "combi-brows",
     name: "Combi Brows",
     label: "Premium",
-    price: 395,
-    priceLabel: "\u20AC395",
+    price: 375,
+    priceLabel: "\u20AC375",
     includes: [
       "Gratis intake consult",
       "Vorm & kleur mapping",
