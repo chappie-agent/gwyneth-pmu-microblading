@@ -1,36 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Check, X, Clock } from "lucide-react";
-import { PortableText } from "@portabletext/react";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ProcessSection } from "@/components/sections/process-section";
 import { ResultsSection } from "@/components/sections/results-section";
 import { PricingSection } from "@/components/sections/pricing-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { CTASection } from "@/components/sections/cta-section";
-import Image from "next/image";
 import { Section } from "@/components/layout/section";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
-import { urlFor } from "@/sanity/lib/image";
 import { treatments } from "@/data/treatments";
 import { pricingTiers } from "@/data/pricing";
-import { sanityFetch } from "@/sanity/lib/live";
-import { client } from "@/sanity/lib/client";
-import {
-  TREATMENT_BY_SLUG_QUERY,
-  TREATMENT_SLUGS_QUERY,
-  PRICING_BY_SLUG_QUERY,
-  ALL_PRICING_QUERY,
-  RESULT_GALLERY_QUERY,
-} from "@/sanity/lib/queries";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  // Use client directly instead of sanityFetch (which requires request scope for draftMode)
-  const data = await client.fetch(TREATMENT_SLUGS_QUERY);
-  if (data?.length) return data.map((t: { slug: string }) => ({ slug: t.slug }));
-  // Fallback to static data
   return treatments.map((t) => ({ slug: t.slug }));
 }
 
@@ -38,14 +22,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-
-  // Try Sanity first
-  const { data: sanityTreatment } = await sanityFetch({
-    query: TREATMENT_BY_SLUG_QUERY,
-    params: { slug },
-  });
-
-  const treatment = sanityTreatment ?? treatments.find((t) => t.slug === slug);
+  const treatment = treatments.find((t) => t.slug === slug);
   if (!treatment) return {};
   return {
     title: `${treatment.name} — Gwyneth PMU`,
@@ -56,20 +33,10 @@ export async function generateMetadata({
 export default async function TreatmentPage({ params }: PageProps) {
   const { slug } = await params;
 
-  // Fetch treatment data from Sanity with static fallback
-  const { data: sanityTreatment } = await sanityFetch({
-    query: TREATMENT_BY_SLUG_QUERY,
-    params: { slug },
-  });
-  const treatment = sanityTreatment ?? treatments.find((t) => t.slug === slug);
+  const treatment = treatments.find((t) => t.slug === slug);
   if (!treatment) notFound();
 
-  // Fetch pricing data from Sanity with static fallback
-  const { data: sanityPricing } = await sanityFetch({ query: ALL_PRICING_QUERY });
-  const pricingItems = sanityPricing?.length ? sanityPricing : pricingTiers;
-
-  // Fetch gallery data for results section
-  const { data: galleryData } = await sanityFetch({ query: RESULT_GALLERY_QUERY });
+  const pricingItems = pricingTiers;
 
   const isCore = (treatment.category ?? "core") === "core";
 
@@ -85,22 +52,12 @@ export default async function TreatmentPage({ params }: PageProps) {
 
       {/* What Is Section */}
       <Section variant="default" layout="split" padding="lg">
-        {treatment.image ? (
-          <Image
-            src={urlFor(treatment.image).width(700).height(900).quality(85).url()}
-            alt={treatment.name}
-            width={700}
-            height={900}
-            className="w-full rounded-[var(--radius-lg)] object-cover"
-          />
-        ) : (
-          <ImagePlaceholder
-            aspect="portrait"
-            gradient="warm"
-            label={treatment.name}
-            className="w-full"
-          />
-        )}
+        <ImagePlaceholder
+          aspect="portrait"
+          gradient="warm"
+          label={treatment.name}
+          className="w-full"
+        />
         <div>
           <span className="text-xs font-body uppercase tracking-[0.3em] text-muted-foreground mb-3 block">
             {treatment.whatIs.subtitle}
@@ -109,14 +66,9 @@ export default async function TreatmentPage({ params }: PageProps) {
             {treatment.whatIs.title}
           </h2>
           <div className="space-y-4 mb-8 font-body text-base text-muted-foreground leading-relaxed">
-            {Array.isArray(treatment.whatIs.content) &&
-            typeof treatment.whatIs.content[0] === "string" ? (
-              treatment.whatIs.content.map((paragraph: string, i: number) => (
-                <p key={i}>{paragraph}</p>
-              ))
-            ) : (
-              <PortableText value={treatment.whatIs.content as any} />
-            )}
+            {treatment.whatIs.content.map((paragraph: string, i: number) => (
+              <p key={i}>{paragraph}</p>
+            ))}
           </div>
           <ul className="space-y-3">
             {treatment.whatIs.benefits.map((benefit: string) => (
@@ -203,7 +155,7 @@ export default async function TreatmentPage({ params }: PageProps) {
       />
 
       {/* Results — only for core PMU treatments */}
-      {isCore && <ResultsSection variant="dark" padding="lg" galleryItems={galleryData?.items} />}
+      {isCore && <ResultsSection variant="dark" padding="lg" />}
 
       {/* Aftercare Timeline */}
       <Section variant="sage" padding="lg">
