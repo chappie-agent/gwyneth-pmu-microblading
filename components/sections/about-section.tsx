@@ -8,7 +8,6 @@ import {
   type SectionPadding,
 } from "@/components/layout/section";
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 
 interface AboutSectionProps {
@@ -16,9 +15,8 @@ interface AboutSectionProps {
   padding?: SectionPadding;
   className?: string;
   id?: string;
-  /** Sanity image for the about portrait */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  aboutImage?: any;
+  /** About portrait image URL */
+  aboutImage?: string;
 }
 
 export function AboutSection({
@@ -58,7 +56,7 @@ export function AboutSection({
           >
             {aboutImage ? (
               <Image
-                src={urlFor(aboutImage).width(800).height(1000).quality(85).url()}
+                src={aboutImage}
                 alt="Gwyneth — PMU specialist"
                 width={800}
                 height={1000}

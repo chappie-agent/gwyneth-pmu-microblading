@@ -13,18 +13,14 @@ import {
 } from "@/components/layout/section";
 import { ArrowRight } from "lucide-react";
 import type { Treatment } from "@/data/treatments";
-import { urlFor } from "@/sanity/lib/image";
-
-/** Static fallback images for when no Sanity image is available */
+/** Fallback images per treatment slug */
 const fallbackImages: Record<string, string> = {
   microblading: "/microblading-behandeling.png",
   "powder-brows": "/powder-brows-portrait.png",
   "combi-brows": "/combi-brows-detail.png",
 };
 
-/** Resolve the image src for a treatment: Sanity image > static fallback > empty */
 function treatmentImageSrc(treatment: Treatment): string | null {
-  if (treatment.image) return urlFor(treatment.image).width(800).quality(80).url();
   return fallbackImages[treatment.slug] ?? null;
 }
 

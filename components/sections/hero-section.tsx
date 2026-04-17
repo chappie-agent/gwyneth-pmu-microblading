@@ -8,7 +8,6 @@ import { Container } from "@/components/layout/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { BreadcrumbNav } from "@/components/layout/breadcrumb-nav";
 import { breadcrumbLabels as defaultBreadcrumbLabels } from "@/data/navigation";
@@ -38,9 +37,8 @@ interface HeroSectionProps {
   showScrollIndicator?: boolean;
   breadcrumb?: boolean;
   breadcrumbLabels?: Record<string, string>;
-  /** Sanity image for the hero portrait (default variant only) */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  heroImage?: any;
+  /** Hero portrait image URL (default variant only) */
+  heroImage?: string;
 }
 
 const fadeIn = (delay: number) => ({
@@ -337,7 +335,7 @@ export function HeroSection({
           style={{ y: backgroundY }}
         >
           <Image
-            src={heroImage ? urlFor(heroImage).width(1200).quality(85).url() : "/hero-portrait.png"}
+            src={heroImage ?? "/hero-portrait.png"}
             alt="Permanente make-up resultaat — natuurlijke wenkbrauwen"
             fill
             priority

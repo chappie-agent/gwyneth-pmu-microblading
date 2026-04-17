@@ -10,7 +10,6 @@ import {
   type PresetKey,
 } from "@/components/layout/section";
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { cn } from "@/lib/utils";
 
@@ -24,8 +23,7 @@ const fallbackGalleryItems = [
   { label: "Healed Result", gradient: "gold" as const, aspect: "landscape" as const },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-interface GalleryItem { image?: any; label?: string; layout?: string }
+interface GalleryItem { image?: string; label?: string; layout?: string }
 
 const staggerItem = {
   hidden: { opacity: 0, y: 24 },
@@ -42,7 +40,7 @@ interface ResultsSectionProps {
   padding?: SectionPadding;
   preset?: PresetKey;
   showFilters?: boolean;
-  /** Gallery items from Sanity CMS */
+  /** Gallery items (image URL + label + layout) */
   galleryItems?: GalleryItem[];
   className?: string;
   id?: string;
@@ -123,7 +121,7 @@ export function ResultsSection({
               <div key={i} className={cell.colSpan}>
                 {sanityItem?.image ? (
                   <Image
-                    src={urlFor(sanityItem.image).width(i === 0 ? 800 : 600).quality(80).url()}
+                    src={sanityItem.image}
                     alt={sanityItem.label ?? `Resultaat ${i + 1}`}
                     width={i === 0 ? 800 : 600}
                     height={i === 0 ? 800 : 400}
