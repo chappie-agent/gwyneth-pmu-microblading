@@ -68,8 +68,8 @@ export const treatments: Treatment[] = [
     name: "Microblading",
     label: "Hairstroke Techniek",
     tagline: "Haarscharpe, natuurlijke lijntjes",
-    price: 350,
-    priceLabel: "\u20AC350",
+    price: 340,
+    priceLabel: "\u20AC340",
     heroTitle: "Haarscharpe Wenkbrauwen Met Microblading",
     heroDescription: "De meest natuurlijke permanente make-up techniek. Perfecte haartjes, geen schade aan bestaande haartjes, resultaten die jaren meegaan.",
     whatIs: {
@@ -172,7 +172,7 @@ export const treatments: Treatment[] = [
     usps: [
       "Haarscharpe, natuurlijke lijntjes",
       "Handmatige precisietechniek",
-      "Inclusief gratis touch-up",
+      "Inclusief gratis nabehandeling",
       "Resultaat 1-3 jaar",
     ],
   },
@@ -181,8 +181,8 @@ export const treatments: Treatment[] = [
     name: "Powder Brows",
     label: "Soft Shading",
     tagline: "Zachte, poederachtige finish",
-    price: 375,
-    priceLabel: "\u20AC375",
+    price: 340,
+    priceLabel: "\u20AC340",
     featured: true,
     featuredLabel: "Meest Populair",
     heroTitle: "Volle Wenkbrauwen Met Powder Brows",
@@ -287,7 +287,7 @@ export const treatments: Treatment[] = [
     usps: [
       "Zachte, poederachtige finish",
       "Voller en gedefinieerder",
-      "Inclusief gratis touch-up",
+      "Inclusief gratis nabehandeling",
       "Geschikt voor elk huidtype",
     ],
   },
@@ -401,7 +401,7 @@ export const treatments: Treatment[] = [
     usps: [
       "Microblading + powder shading",
       "Maximale dimensie & definitie",
-      "Inclusief gratis touch-up",
+      "Inclusief gratis nabehandeling",
       "Meest veelzijdige optie",
     ],
   },

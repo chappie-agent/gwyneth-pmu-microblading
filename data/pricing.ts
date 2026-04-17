@@ -14,8 +14,8 @@ export const pricingTiers: PricingTier[] = [
     slug: "microblading",
     name: "Microblading",
     label: "Hairstroke",
-    price: 350,
-    priceLabel: "\u20AC350",
+    price: 340,
+    priceLabel: "\u20AC340",
     includes: [
       "Gratis intake consult",
       "Vorm & kleur mapping",
@@ -29,8 +29,8 @@ export const pricingTiers: PricingTier[] = [
     slug: "powder-brows",
     name: "Powder Brows",
     label: "Meest Populair",
-    price: 375,
-    priceLabel: "\u20AC375",
+    price: 340,
+    priceLabel: "\u20AC340",
     featured: true,
     featuredLabel: "Meest Gekozen",
     includes: [
