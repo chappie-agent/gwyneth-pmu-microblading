@@ -47,7 +47,7 @@ export const footerNav = {
     { label: "Privacy", href: "/privacy" },
     { label: "Voorwaarden", href: "/voorwaarden" },
   ],
-} as const;
+};
 
 export const breadcrumbLabels: Record<string, string> = {
   behandelingen: "Behandelingen",

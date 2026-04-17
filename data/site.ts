@@ -26,4 +26,4 @@ export const siteConfig = {
     tiktok: "https://tiktok.com/@gwynethpmu",
   },
   trustItems: ["Gecertificeerd", "5.0 Google Reviews", "500+ klanten"],
-} as const;
+};
