@@ -21,7 +21,6 @@ export default function Home() {
     .map((slug) => pricingTiers.find((t) => t.slug === slug))
     .filter((t): t is NonNullable<typeof t> => Boolean(t));
 
-  // TODO: vervang placeholder-foto's door echte klantfoto's
   const reviewsItems = reviews.map((r, i) => ({
     ...r,
     image: r.image ?? placeholderReviewImages[i % placeholderReviewImages.length],
@@ -35,11 +34,7 @@ export default function Home() {
         title={siteConfig.heroTitle ?? "Word elke dag wakker met perfect gevormde wenkbrauwen"}
         titleAccent="perfect gevormde"
         description={siteConfig.heroDescription ?? "Verfijnde PMU die jouw natuurlijke schoonheid versterkt. Subtiel, persoonlijk, en op maat gemaakt voor jou."}
-        trustItems={
-          siteConfig.trustItems?.map((item: any) =>
-            typeof item === "string" ? item : item.label ?? item.value
-          ) ?? ["Gecertificeerd", "5.0 Google Reviews", "500+ klanten"]
-        }
+        trustItems={siteConfig.trustItems}
         primaryCta={{ label: "Plan Intake Gesprek", href: "/boeken" }}
         secondaryCta={{ label: "Bekijk Behandelingen", href: "/behandelingen" }}
         showScrollIndicator
