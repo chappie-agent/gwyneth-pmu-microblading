@@ -13,12 +13,6 @@ import {
   comparisonLabels,
 } from "@/data/treatments";
 import { behandelingenFAQ } from "@/data/faq";
-import { sanityFetch } from "@/sanity/lib/live";
-import {
-  ALL_TREATMENTS_QUERY,
-  CORE_TREATMENTS_QUERY,
-  FAQ_BY_PAGE_QUERY,
-} from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Behandelingen — Gwyneth PMU",
@@ -85,15 +79,10 @@ function ComparisonTable({ coreItems }: { coreItems: typeof coreTreatments }) {
   );
 }
 
-export default async function BehandelingenPage() {
-  const { data: allTreatmentsData } = await sanityFetch({ query: ALL_TREATMENTS_QUERY });
-  const { data: coreData } = await sanityFetch({ query: CORE_TREATMENTS_QUERY });
-  const { data: faqData } = await sanityFetch({ query: FAQ_BY_PAGE_QUERY, params: { page: "behandelingen" } });
-
-  // Dual-source fallbacks
-  const allItems = allTreatmentsData?.length ? allTreatmentsData : treatments;
-  const coreItems = coreData?.length ? coreData : coreTreatments;
-  const faqItems = faqData?.length ? faqData : behandelingenFAQ;
+export default function BehandelingenPage() {
+  const allItems = treatments;
+  const coreItems = coreTreatments;
+  const faqItems = behandelingenFAQ;
 
   return (
     <>

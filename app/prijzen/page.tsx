@@ -7,8 +7,6 @@ import { Section } from "@/components/layout/section";
 import { pricingTiers, whatsIncluded } from "@/data/pricing";
 import { paymentFAQ } from "@/data/faq";
 import { Check } from "lucide-react";
-import { sanityFetch } from "@/sanity/lib/live";
-import { ALL_PRICING_QUERY, FAQ_BY_PAGE_QUERY } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Prijzen — Gwyneth PMU",
@@ -112,13 +110,9 @@ function WhatsIncludedSection() {
   );
 }
 
-export default async function PrijzenPage() {
-  const { data: pricingData } = await sanityFetch({ query: ALL_PRICING_QUERY });
-  const { data: faqData } = await sanityFetch({ query: FAQ_BY_PAGE_QUERY, params: { page: "prijzen" } });
-
-  // Dual-source fallbacks
-  const pricingItems = pricingData?.length ? pricingData : pricingTiers;
-  const faqItems = faqData?.length ? faqData : paymentFAQ;
+export default function PrijzenPage() {
+  const pricingItems = pricingTiers;
+  const faqItems = paymentFAQ;
 
   return (
     <>

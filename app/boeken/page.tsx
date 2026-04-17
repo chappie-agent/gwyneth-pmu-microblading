@@ -6,8 +6,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Clock, AlertTriangle, Check, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BookingFormSection } from "./booking-form";
-import { sanityFetch } from "@/sanity/lib/live";
-import { PAGE_CONTENT_QUERY } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Boeken — Gwyneth PMU",
@@ -167,16 +165,9 @@ function CancellationPolicySection() {
   );
 }
 
-export default async function BoekenPage() {
-  const { data: pageContent } = await sanityFetch({
-    query: PAGE_CONTENT_QUERY,
-    params: { pageId: "boeken" },
-  });
-
-  // Use Sanity page content for hero if available, otherwise use static defaults
-  const heroTitle = pageContent?.heroTitle ?? "Boek Je Afspraak";
+export default function BoekenPage() {
+  const heroTitle = "Boek Je Afspraak";
   const heroDescription =
-    pageContent?.heroDescription ??
     "Stap een naar je perfecte wenkbrauwen. Kies je behandeling en datum.";
 
   return (
