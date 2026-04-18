@@ -1,15 +1,32 @@
+import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/hero-section";
 import { TreatmentsSection } from "@/components/sections/treatments-section";
-// HIDDEN until real client photos are available — restore when ready
-// import { ResultsSection } from "@/components/sections/results-section";
-import { ProcessSection } from "@/components/sections/process-section";
-import { AboutSection } from "@/components/sections/about-section";
-import { USPSection } from "@/components/sections/usp-section";
-import { ReviewsSection } from "@/components/sections/reviews-section";
-import { PricingSection } from "@/components/sections/pricing-section";
-import { FAQSection } from "@/components/sections/faq-section";
-import { CTASection } from "@/components/sections/cta-section";
-import { ContactSection } from "@/components/sections/contact-section";
+
+const ProcessSection = dynamic(() =>
+  import("@/components/sections/process-section").then((m) => m.ProcessSection)
+);
+const AboutSection = dynamic(() =>
+  import("@/components/sections/about-section").then((m) => m.AboutSection)
+);
+const USPSection = dynamic(() =>
+  import("@/components/sections/usp-section").then((m) => m.USPSection)
+);
+const ReviewsSection = dynamic(() =>
+  import("@/components/sections/reviews-section").then((m) => m.ReviewsSection)
+);
+const PricingSection = dynamic(() =>
+  import("@/components/sections/pricing-section").then((m) => m.PricingSection)
+);
+const FAQSection = dynamic(() =>
+  import("@/components/sections/faq-section").then((m) => m.FAQSection)
+);
+const CTASection = dynamic(() =>
+  import("@/components/sections/cta-section").then((m) => m.CTASection)
+);
+const ContactSection = dynamic(() =>
+  import("@/components/sections/contact-section").then((m) => m.ContactSection)
+);
+
 import { coreTreatments, homeProcessSteps, uspItems } from "@/data/treatments";
 import { pricingTiers } from "@/data/pricing";
 import { homeFAQ } from "@/data/faq";

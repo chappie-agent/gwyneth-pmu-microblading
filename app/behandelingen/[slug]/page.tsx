@@ -8,9 +8,10 @@ import { ProcessSection } from "@/components/sections/process-section";
 import { PricingSection } from "@/components/sections/pricing-section";
 import { FAQSection } from "@/components/sections/faq-section";
 import { CTASection } from "@/components/sections/cta-section";
+import Image from "next/image";
 import { Section } from "@/components/layout/section";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
-import { treatments } from "@/data/treatments";
+import { treatments, treatmentImages } from "@/data/treatments";
 import { pricingTiers } from "@/data/pricing";
 import { siteConfig } from "@/data/site";
 
@@ -55,12 +56,28 @@ export default async function TreatmentPage({ params }: PageProps) {
 
       {/* What Is Section */}
       <Section variant="default" layout="split" padding="lg">
-        <ImagePlaceholder
-          aspect="portrait"
-          gradient="warm"
-          label={treatment.name}
-          className="w-full"
-        />
+        {(() => {
+          const image = treatmentImages[treatment.slug];
+          return image ? (
+            <div className="relative w-full aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)]">
+              <Image
+                src={image.src}
+                alt={treatment.name}
+                fill
+                className="object-cover"
+                style={image.position ? { objectPosition: image.position } : undefined}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          ) : (
+            <ImagePlaceholder
+              aspect="portrait"
+              gradient="warm"
+              label={treatment.name}
+              className="w-full"
+            />
+          );
+        })()}
         <div>
           <span className="text-xs font-body uppercase tracking-[0.3em] text-muted-foreground mb-3 block">
             {treatment.whatIs.subtitle}

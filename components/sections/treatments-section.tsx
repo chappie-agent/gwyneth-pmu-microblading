@@ -12,19 +12,10 @@ import {
   type PresetKey,
 } from "@/components/layout/section";
 import { ArrowRight } from "lucide-react";
-import type { Treatment } from "@/data/treatments";
-/** Fallback images per treatment slug */
-const fallbackImages: Record<string, { src: string; position?: string; inset?: string }> = {
-  microblading: { src: "/microblading-behandeling-v1.webp", position: "20% 30%", inset: "-35%" },
-  "powder-brows": { src: "/powder-brows-portrait-v1.webp" },
-  "combi-brows": { src: "/combi-brows-detail-v1.webp", position: "left center" },
-  eyeliner: { src: "/eyeliner-pmu.webp", position: "center" },
-  lashlift: { src: "/lashlift.webp", position: "center" },
-  "brow-lamination": { src: "/brow-lamination.webp", position: "center" },
-};
+import { treatmentImages, type Treatment } from "@/data/treatments";
 
 function treatmentImage(treatment: Treatment): { src: string; position?: string; inset?: string } | null {
-  return fallbackImages[treatment.slug] ?? null;
+  return treatmentImages[treatment.slug] ?? null;
 }
 
 /**

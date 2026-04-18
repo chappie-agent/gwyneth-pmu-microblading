@@ -44,12 +44,12 @@ export function AboutSection({
       >
         {/* Left: Image with decorative square and clip-path reveal */}
         <div className="relative">
-          {/* Decorative accent square */}
+          {/* Decorative offset frame — surrounds the whole image */}
           <div
-            className="absolute -top-4 -left-4 w-[100px] h-[100px] border border-sage dark:border-grey-warm opacity-50 rounded-[var(--radius-sm)] z-[2] pointer-events-none"
+            className="absolute -top-4 -left-4 -right-4 -bottom-4 border border-taupe dark:border-grey-warm opacity-70 rounded-[var(--radius-lg)] z-0 pointer-events-none"
           />
           <motion.div
-            className="relative overflow-hidden rounded-[var(--radius-lg)]"
+            className="relative z-10 overflow-hidden rounded-[var(--radius-lg)]"
             initial={{ clipPath: "inset(0 100% 0 0)" }}
             animate={isInView ? { clipPath: "inset(0 0% 0 0)" } : { clipPath: "inset(0 100% 0 0)" }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
@@ -60,6 +60,7 @@ export function AboutSection({
                 alt="Gwyneth, PMU specialist"
                 width={800}
                 height={1000}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="w-full h-[580px] max-lg:h-[400px] object-cover object-top"
               />
             ) : (
