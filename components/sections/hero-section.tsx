@@ -342,6 +342,7 @@ export function HeroSection({
             alt="Microblading resultaat, natuurlijke wenkbrauwen — Gwyneth PMU Zoetermeer"
             fill
             priority
+            fetchPriority="high"
             className="object-cover object-[calc(50%+0px)_center] dark:opacity-0 transition-opacity"
             sizes="(max-width: 767px) 1px, 55vw"
           />
@@ -352,6 +353,7 @@ export function HeroSection({
             aria-hidden
             fill
             priority
+            fetchPriority="high"
             className="object-cover opacity-0 dark:opacity-100 transition-opacity"
             style={{
               objectPosition: "35% center",

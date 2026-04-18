@@ -97,7 +97,7 @@ export function ProcessSection({
             <span className="block font-display text-[2.8rem] leading-none text-accent opacity-20 group-hover:opacity-50 transition-opacity duration-300 mb-4">
               {String(i + 1).padStart(2, "0")}
             </span>
-            <h4 className="font-display text-[1.25rem] mb-2">{step.title}</h4>
+            <h3 className="font-display text-[1.25rem] mb-2">{step.title}</h3>
             <p className="font-body text-[0.85rem] text-taupe-dark dark:text-taupe leading-relaxed">
               {step.description}
             </p>

@@ -24,6 +24,14 @@
     "tailwind-merge": "^3.5.0",
     "zod": "^4.3.6"
   },
+  "browserslist": [
+    "chrome >= 100",
+    "edge >= 100",
+    "firefox >= 100",
+    "safari >= 15",
+    "ios_saf >= 15",
+    "samsung >= 17"
+  ],
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
