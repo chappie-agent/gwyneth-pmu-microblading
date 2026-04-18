@@ -60,7 +60,7 @@ export function AboutSection({
                 alt="Gwyneth, PMU specialist"
                 width={800}
                 height={1000}
-                className="w-full h-[580px] max-lg:h-[400px] object-cover"
+                className="w-full h-[580px] max-lg:h-[400px] object-cover object-top"
               />
             ) : (
               <ImagePlaceholder

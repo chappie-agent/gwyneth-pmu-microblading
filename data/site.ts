@@ -14,8 +14,8 @@ export const siteConfig = {
       country: "Nederland",
       full: "Hekendorpstraat 54, 2729 BC Zoetermeer",
     },
-    phone: "+31 6 42 01 32 77",
-    email: "info@pmu-microblading.nl",
+    phone: "+31 6 83 15 68 60",
+    email: "info@gwynethpmu.nl",
   },
   hours: {
     weekdays: "Op afspraak, maandag t/m vrijdag",

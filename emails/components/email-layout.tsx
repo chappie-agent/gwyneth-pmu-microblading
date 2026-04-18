@@ -61,7 +61,7 @@ export function EmailLayout({ preview, children }: EmailLayoutProps) {
                 Hekendorpstraat 54, 2727 CL Zoetermeer
               </Text>
               <Text style={{ fontSize: "12px", color: colors.taupe, margin: "0 0 16px" }}>
-                +31 6 12 34 56 78
+                +31 6 83 15 68 60
               </Text>
               <Section>
                 <Link href="https://instagram.com/gwynethpmu" style={{ fontSize: "12px", color: colors.accent, textDecoration: "none", marginRight: "16px" }}>

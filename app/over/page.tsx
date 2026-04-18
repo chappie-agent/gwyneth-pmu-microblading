@@ -76,12 +76,12 @@ export default function OverPage() {
         title={heroTitle}
         description={heroDescription}
       />
-      <AboutSection />
+      <AboutSection aboutImage="/gwyneth-v2.webp" />
       <TrustCardsSection />
       <CTASection
         variant="accent"
         padding="md"
-        title="Laten We Samenwerken"
+        title="Jouw Nieuwe Look Begint Hier"
         description="Klaar om jouw natuurlijke schoonheid te versterken? Neem vandaag nog contact op."
         cta={{ label: "Plan Jouw Intake", href: siteConfig.bookingUrl }}
       />

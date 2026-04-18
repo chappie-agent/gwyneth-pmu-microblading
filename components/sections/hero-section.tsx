@@ -336,12 +336,30 @@ export function HeroSection({
           className="absolute top-0 right-0 bottom-0 w-[55%] z-0 hidden md:block"
           style={{ y: backgroundY }}
         >
+          {/* Light mode portrait */}
           <Image
             src={heroImage ?? "/hero-portrait-v4.webp"}
             alt="Permanente make-up resultaat, natuurlijke wenkbrauwen"
             fill
             priority
-            className="object-cover object-[calc(50%+0px)_center]"
+            className="object-cover object-[calc(50%+0px)_center] dark:opacity-0 transition-opacity"
+            sizes="55vw"
+          />
+          {/* Dark mode portrait (masked on left so it fades into bg) */}
+          <Image
+            src="/hero-portrait-v3-dark.webp"
+            alt=""
+            aria-hidden
+            fill
+            priority
+            className="object-cover opacity-0 dark:opacity-100 transition-opacity"
+            style={{
+              objectPosition: "35% center",
+              maskImage:
+                "linear-gradient(to right, transparent 0%, transparent 10%, rgba(0,0,0,0.4) 22%, rgba(0,0,0,0.85) 34%, black 45%)",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0%, transparent 10%, rgba(0,0,0,0.4) 22%, rgba(0,0,0,0.85) 34%, black 45%)",
+            }}
             sizes="55vw"
           />
           {/* Light mode: linen gradient fade from left */}
@@ -350,16 +368,6 @@ export function HeroSection({
             style={{
               background:
                 "linear-gradient(to right, hsl(31 20% 91%) 0%, hsl(31 20% 91%) 25%, hsl(31 20% 91% / 0.85) 35%, hsl(31 20% 91% / 0.5) 45%, hsl(31 20% 91% / 0.2) 55%, transparent 65%)",
-            }}
-          />
-          {/* Dark mode: dark tint over entire image + gradient fade from left and bottom */}
-          <div
-            className="absolute inset-0 z-[1] opacity-0 dark:opacity-100 transition-opacity"
-            style={{
-              background: [
-                "linear-gradient(to right, hsl(25 10% 11%) 0%, hsl(25 10% 11%) 25%, hsl(25 10% 11% / 0.8) 35%, hsl(25 10% 11% / 0.5) 45%, hsl(25 10% 11% / 0.3) 55%, hsl(25 10% 11% / 0.3) 100%)",
-                "linear-gradient(to top, hsl(25 10% 11%) 0%, hsl(25 10% 11% / 0.6) 15%, transparent 40%)",
-              ].join(", "),
             }}
           />
         </motion.div>

@@ -57,8 +57,8 @@ export async function sendContactEmail(
     ? treatmentLabels[data.behandeling] ?? data.behandeling
     : undefined;
 
-  const emailFrom = process.env.EMAIL_FROM ?? "Gwyneth PMU <info@socialsprint.nl>";
-  const emailTo = process.env.EMAIL_TO ?? "info@socialsprint.nl";
+  const emailFrom = process.env.EMAIL_FROM ?? "Gwyneth PMU <info@gwynethpmu.nl>";
+  const emailTo = process.env.EMAIL_TO ?? "info@gwynethpmu.nl";
 
   const timestamp = new Date().toLocaleDateString("nl-NL", {
     day: "numeric",
