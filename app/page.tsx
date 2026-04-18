@@ -56,7 +56,7 @@ export default function Home() {
       {/* HIDDEN until real client photos are available — restore when ready */}
       {/* <ResultsSection variant="dark" padding="lg" /> */}
       <ProcessSection variant="light" padding="xl" steps={homeProcessSteps} />
-      <AboutSection aboutImage="/gwyneth-v2.webp" />
+      <AboutSection aboutImage="/gwyneth.webp" />
       <USPSection variant="light" padding="lg" items={uspItems} />
       <ReviewsSection variant="dark" padding="lg" reviews={reviews} />
       <PricingSection variant="default" padding="lg" tiers={pricingItems} />
