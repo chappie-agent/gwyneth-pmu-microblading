@@ -78,7 +78,7 @@ function TreatmentCard({ treatment }: { treatment: Treatment }) {
           >
             <Image
               src={image.src}
-              alt={treatment.name}
+              alt={`${treatment.name} wenkbrauwen resultaat — Gwyneth PMU Zoetermeer`}
               fill
               className="object-cover"
               style={image.position ? { objectPosition: image.position } : undefined}

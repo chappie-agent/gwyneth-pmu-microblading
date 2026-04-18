@@ -7,9 +7,10 @@ import { reviews } from "@/data/reviews";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Resultaten | Gwyneth PMU",
+  title: "Resultaten Microblading & PMU Zoetermeer | Voor & Na",
   description:
-    "Bekijk echte resultaten van permanente make-up behandelingen.",
+    "Bekijk echte resultaten van Microblading, Powder Brows en Combi Brows bij Gwyneth PMU Zoetermeer. Voor- en na-foto's van tevreden klanten.",
+  alternates: { canonical: "/resultaten" },
 };
 
 export default function ResultatenPage() {

@@ -10,9 +10,10 @@ import { Check } from "lucide-react";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Prijzen | Gwyneth PMU",
+  title: "PMU Prijzen Zoetermeer | Microblading vanaf €430 | Gwyneth",
   description:
-    "Transparante prijzen voor alle PMU behandelingen. Geen verborgen kosten.",
+    "Transparante prijzen voor Microblading, Powder Brows en Combi Brows in Zoetermeer. Alles inclusief consult, pigmenten en gratis nabehandeling.",
+  alternates: { canonical: "/prijzen" },
 };
 
 function WhatsIncludedSection() {

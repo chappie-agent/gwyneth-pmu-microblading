@@ -6,9 +6,10 @@ import { CTASection } from "@/components/sections/cta-section";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Contact | Gwyneth PMU",
+  title: "Contact Gwyneth PMU Zoetermeer | Maak een Afspraak",
   description:
-    "Neem contact op voor vragen of om een afspraak te maken.",
+    "Plan je gratis intake bij Gwyneth PMU in Zoetermeer (Hekendorpstraat 54). Bel +31 6 83 15 68 60 of boek direct online.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

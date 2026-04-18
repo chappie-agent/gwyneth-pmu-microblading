@@ -27,9 +27,45 @@ export async function generateMetadata({
   const { slug } = await params;
   const treatment = treatments.find((t) => t.slug === slug);
   if (!treatment) return {};
+
+  const seoMeta: Record<string, { title: string; description: string }> = {
+    microblading: {
+      title: "Microblading Zoetermeer | Natuurlijke Wenkbrauwen vanaf €430",
+      description:
+        "Haarscharpe, natuurlijke wenkbrauwen met microblading in Zoetermeer. Gratis touch-up, resultaat 1 tot 3 jaar. Boek je vrijblijvende intake bij Gwyneth PMU.",
+    },
+    "powder-brows": {
+      title: "Powder Brows Zoetermeer | Volle Wenkbrauwen vanaf €430",
+      description:
+        "Zachte, poederachtige wenkbrauwen met Powder Brows in Zoetermeer. Perfect voor elk huidtype, inclusief gratis nabehandeling. Plan je intake.",
+    },
+    "combi-brows": {
+      title: "Combi Brows Zoetermeer | Microblading + Shading vanaf €475",
+      description:
+        "Het beste van twee technieken: microblading lijntjes en powder shading. Maximale dimensie en definitie in Zoetermeer. Boek je Combi Brows consult.",
+    },
+    eyeliner: {
+      title: "Permanente Eyeliner Zoetermeer | PMU Eyeliner | Gwyneth",
+      description:
+        "Permanente eyeliner in Zoetermeer voor een subtiele of opvallende definitie. Geen uitgelopen make-up meer. Plan je vrijblijvende intake bij Gwyneth PMU.",
+    },
+    lashlift: {
+      title: "Lashlift Zoetermeer | Natuurlijke Wimperlift | Gwyneth PMU",
+      description:
+        "Lashlift in Zoetermeer voor een prachtige krul en lift van je eigen wimpers. Zonder extensions, natuurlijk resultaat. Plan je afspraak.",
+    },
+    "brow-lamination": {
+      title: "Brow Lamination Zoetermeer | Vollere Wenkbrauwen | Gwyneth",
+      description:
+        "Brow Lamination in Zoetermeer voor vollere, strakkere en mooi gevormde wenkbrauwen. Ideaal bij warrige of dunne brows. Boek je afspraak.",
+    },
+  };
+
+  const override = seoMeta[treatment.slug];
   return {
-    title: `${treatment.name} | Gwyneth PMU`,
-    description: treatment.heroDescription,
+    title: override?.title ?? `${treatment.name} Zoetermeer | Gwyneth PMU`,
+    description: override?.description ?? treatment.heroDescription,
+    alternates: { canonical: `/behandelingen/${treatment.slug}` },
   };
 }
 

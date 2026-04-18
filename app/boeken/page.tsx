@@ -8,9 +8,10 @@ import { cn } from "@/lib/utils";
 import { BookingFormSection } from "./booking-form";
 
 export const metadata: Metadata = {
-  title: "Boeken | Gwyneth PMU",
+  title: "Afspraak Boeken PMU Zoetermeer | Online Plannen",
   description:
-    "Boek je PMU behandeling online. Kies je behandeling, datum en tijd.",
+    "Boek je PMU behandeling in Zoetermeer direct online. Kies uit Microblading, Powder Brows, Combi Brows of Eyeliner en plan jouw gratis intake.",
+  alternates: { canonical: "/boeken" },
 };
 
 const voorbereidingErvoor = [

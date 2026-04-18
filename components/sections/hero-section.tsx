@@ -338,16 +338,16 @@ export function HeroSection({
         >
           {/* Light mode portrait */}
           <Image
-            src={heroImage ?? "/hero-portrait-v4.webp"}
-            alt="Permanente make-up resultaat, natuurlijke wenkbrauwen"
+            src={heroImage ?? "/hero-portrait.webp"}
+            alt="Microblading resultaat, natuurlijke wenkbrauwen — Gwyneth PMU Zoetermeer"
             fill
             priority
             className="object-cover object-[calc(50%+0px)_center] dark:opacity-0 transition-opacity"
-            sizes="55vw"
+            sizes="(max-width: 767px) 1px, 55vw"
           />
           {/* Dark mode portrait (masked on left so it fades into bg) */}
           <Image
-            src="/hero-portrait-v3-dark.webp"
+            src="/hero-portrait-dark.webp"
             alt=""
             aria-hidden
             fill
@@ -360,7 +360,7 @@ export function HeroSection({
               WebkitMaskImage:
                 "linear-gradient(to right, transparent 0%, transparent 10%, rgba(0,0,0,0.4) 22%, rgba(0,0,0,0.85) 34%, black 45%)",
             }}
-            sizes="55vw"
+            sizes="(max-width: 767px) 1px, 55vw"
           />
           {/* Light mode: linen gradient fade from left */}
           <div

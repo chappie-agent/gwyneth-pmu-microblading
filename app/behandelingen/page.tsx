@@ -17,9 +17,10 @@ import { behandelingenFAQ } from "@/data/faq";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Behandelingen | Gwyneth PMU",
+  title: "PMU Behandelingen Zoetermeer | Wenkbrauwen, Eyeliner, Lashlift",
   description:
-    "Permanente make-up en beauty behandelingen: Microblading, Powder Brows, Combi Brows, Eyeliner PMU, Lashlift en Brow Styling.",
+    "Alle permanente make-up behandelingen in Zoetermeer: Microblading, Powder Brows, Combi Brows, Eyeliner, Lashlift en Brow Lamination. Bekijk het aanbod.",
+  alternates: { canonical: "/behandelingen" },
 };
 
 function ComparisonTable({ coreItems }: { coreItems: typeof coreTreatments }) {

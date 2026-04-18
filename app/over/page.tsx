@@ -7,9 +7,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Over Mij | Gwyneth PMU",
+  title: "Over Gwyneth | Gecertificeerd PMU Specialist Zoetermeer",
   description:
-    "Leer meer over Gwyneth, gecertificeerd PMU specialist met jarenlange ervaring.",
+    "Gecertificeerd PMU specialist in Zoetermeer met jarenlange ervaring en internationale masterclasses. Ontdek mijn werkwijze en visie.",
+  alternates: { canonical: "/over" },
 };
 
 const trustCards = [
@@ -76,7 +77,7 @@ export default function OverPage() {
         title={heroTitle}
         description={heroDescription}
       />
-      <AboutSection aboutImage="/gwyneth-v2.webp" />
+      <AboutSection aboutImage="/gwyneth.webp" />
       <TrustCardsSection />
       <CTASection
         variant="accent"

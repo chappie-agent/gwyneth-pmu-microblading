@@ -57,7 +57,7 @@ export function AboutSection({
             {aboutImage ? (
               <Image
                 src={aboutImage}
-                alt="Gwyneth, PMU specialist"
+                alt="Gwyneth — gecertificeerd PMU specialist in Zoetermeer"
                 width={800}
                 height={1000}
                 sizes="(max-width: 1024px) 100vw, 50vw"
